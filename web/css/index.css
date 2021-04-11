@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+    font-family: Inter, sans-serif;
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: white;
+}
+
+.dl4csr-header {
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.dl4csr-header ul {
+    padding: 0 15%;
+    list-style-type: none;
+}
+
+.dl4csr-header ul li {
+    float: right;
+}
+
+.dl4csr-header ul li a {
+    display: block;
+    padding: 12px;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.dl4csr-header ul li a:hover {
+    color: #555555;
+}
+
+.dl4csr-main {
+    padding: 84px 15% 0;
+}
+
+.dl4csr-main--search {
+    text-align: center;
+}
+
+.dl4csr-main--search form {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.dl4csr-main--search--option label {
+    width: 20%;
+}
+
+.dl4csr-main--search--option input {
+    width: 80%;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
