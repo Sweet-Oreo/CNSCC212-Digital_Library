@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MajorDaoImpl implements MajorDao {
+
     private final JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
     @Override
@@ -21,4 +22,5 @@ public class MajorDaoImpl implements MajorDao {
         }
         return majors;
     }
+
 }

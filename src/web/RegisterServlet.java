@@ -9,6 +9,7 @@ import service.UniversityService;
 import service.impl.ReaderServiceImpl;
 import service.impl.ReviewerServiceImpl;
 import service.impl.UniversityServiceImpl;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import java.io.PrintWriter;
 
 @WebServlet("/servlet/registerServlet")
 public class RegisterServlet extends HttpServlet {
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         // Get the parameters from request object
@@ -84,4 +86,5 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         this.doPost(req, resp);
     }
+
 }

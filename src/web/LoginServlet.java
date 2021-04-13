@@ -21,6 +21,7 @@ import java.io.PrintWriter;
 
 @WebServlet("/servlet/loginServlet")
 public class LoginServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Set encoding
@@ -43,7 +44,6 @@ public class LoginServlet extends HttpServlet {
             req.getRequestDispatcher("/servlet/registerServlet").forward(req, resp);
             return;
         }
-
 
         switch (identity) {
             case "reader": // If user is a reader, login as reader
@@ -108,4 +108,5 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);
     }
+
 }

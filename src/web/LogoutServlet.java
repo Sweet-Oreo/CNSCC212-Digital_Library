@@ -9,6 +9,7 @@ import java.io.IOException;
 
 @WebServlet("/servlet/logoutServlet")
 public class LogoutServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Object user_session = req.getSession().getAttribute("USER_SESSION");
@@ -20,6 +21,7 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        this.doPost(req, resp);
     }
+
 }

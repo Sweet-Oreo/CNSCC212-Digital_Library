@@ -40,6 +40,12 @@
                     <label for="name"></label>
                     <input type="text" id="name" name="name" placeholder="Enter the user name">
                 </p>
+                <p>
+                    <label for="raw_password"></label>
+                    <input type="password" id="raw_password" placeholder="Enter the password">
+                    <input type="hidden" id="password" name="password">
+                    <span class="material-icons vis" id="show_password">visibility</span>
+                </p>
                 <p id="input_major" style="display: none;">
                     <label for="major"></label>
                     <input type="text" list="selectable_majors" id="major" name="major" placeholder="Select a major">
@@ -60,12 +66,6 @@
                         <option value="Security and Cryptography"></option>
                         <option value="Software Engineering"></option>
                     </datalist>
-                </p>
-                <p>
-                    <label for="raw_password"></label>
-                    <input type="password" id="raw_password" placeholder="Enter the password">
-                    <input type="hidden" id="password" name="password">
-                    <span class="material-icons vis" id="show_password">visibility</span>
                 </p>
                 <p>
                     <button type="submit" id="submit">SIGN IN</button>
