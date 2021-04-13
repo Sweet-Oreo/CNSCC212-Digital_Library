@@ -30,7 +30,7 @@ public class ReaderDaoImpl implements ReaderDao {
     public boolean checkEmail(String email) {
         try {
             String sql = "SELECT `id` FROM `reader` WHERE `email` = ?;";
-            return template.queryForList(sql) == null;
+            return template.queryForList(sql, email).isEmpty();
         } catch (Exception e) {
             return false;
         }
@@ -45,7 +45,7 @@ public class ReaderDaoImpl implements ReaderDao {
             // If the registered reader already exists in database, return true
             if (result.get("email") != null) return true;
         } catch (DataAccessException e) {
-            String sql = "INSERT INTO `reader` VALUES (NULL, ?, ?, ?);";
+            String sql = "INSERT INTO `reader` (`email`, `password`, `name`) VALUES (?, ?, ?);";
             // Add new registered reader into database
             template.update(sql, reader.getEmail(), reader.getPassword(), reader.getName());
             return false;

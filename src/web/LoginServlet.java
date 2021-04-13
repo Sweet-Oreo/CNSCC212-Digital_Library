@@ -61,6 +61,7 @@ public class LoginServlet extends HttpServlet {
                     PrintWriter writer = resp.getWriter();
                     writer.write("<script>alert('Invalid email or incorrect password');history.go(-1)</script>");
                 }
+                break;
             }
             case "university": {  // If user is a university, login as university
                 University loginUniversity = new University(); // University from login browser
@@ -75,6 +76,7 @@ public class LoginServlet extends HttpServlet {
                     PrintWriter writer = resp.getWriter();
                     writer.write("<script>alert('Invalid email or incorrect password');history.go(-1)</script>");
                 }
+                break;
             }
             case "reviewer": {  // If user is a reviewer, login as reviewer
                 Reviewer loginReviewer = new Reviewer(); // Reviewer from login browser
@@ -89,6 +91,7 @@ public class LoginServlet extends HttpServlet {
                     PrintWriter writer = resp.getWriter();
                     writer.write("<script>alert('Invalid email or incorrect password');history.go(-1)</script>");
                 }
+                break;
             }
         }
     }

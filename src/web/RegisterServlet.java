@@ -23,7 +23,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         // Get the parameters from request object
-        String username = (String) req.getAttribute("username");
+        String username = (String) req.getAttribute("name");
         String email = (String) req.getAttribute("email");
         String password = (String) req.getAttribute("password");
         String identity = (String) req.getAttribute("identity");
@@ -44,6 +44,7 @@ public class RegisterServlet extends HttpServlet {
                     writer.write("<script>alert('This email already exists');history.go(-1)</script>");
                     return;
                 }
+                break;
             }
             case "reader": { // If login user is a reader
                 Reader reader = new Reader();
@@ -58,6 +59,7 @@ public class RegisterServlet extends HttpServlet {
                     writer.write("<script>alert('This email already exists');history.go(-1)</script>");
                     return;
                 }
+                break;
             }
             case "reviewer": { // If login user is a reviewer
                 Reviewer reviewer = new Reviewer();
@@ -73,6 +75,7 @@ public class RegisterServlet extends HttpServlet {
                     writer.write("<script>alert('This email already exists');history.go(-1)</script>");
                     return;
                 }
+                break;
             }
         }
         // Redirect to login page after registration

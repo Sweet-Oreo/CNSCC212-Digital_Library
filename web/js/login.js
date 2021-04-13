@@ -111,39 +111,24 @@ function checkSubmit() {
     let major = document.getElementById("major")
 
     if (action.value === "sign_in") {
-        if (email.value === "") {
-            timeoutContent = snackbarAlert("Please enter the email!", timeoutContent)
-            email.style.borderBottomColor = "red"
-            return false
+        if (checkSignInEmail(email) && checkRawPassword(rawPassword)) {
+            password.value = md5(rawPassword.value)
+            return true
         }
-        if (rawPassword.value === "") {
-            timeoutContent = snackbarAlert("Please enter the password!", timeoutContent)
-            rawPassword.style.borderBottomColor = "red"
-            return false
-        }
-        password.value = md5(rawPassword.value)
-        return true
+        return false
     } else {
-        if (!checkEmail(identity, email)) return false
-        if (name.value === "") {
-            timeoutContent = snackbarAlert("Please enter the user name!", timeoutContent)
-            name.style.borderBottomColor = "red"
-            return false
-        }
-        if (identity.value === "reviewer") {
-            if (major.value === "") {
-                timeoutContent = snackbarAlert("Please select a major!", timeoutContent)
-                major.style.borderBottomColor = "red"
+        if (checkSignUpEmail(email, identity) && checkName(name) && checkRawPassword(rawPassword)) {
+            if (identity.value === "reviewer") {
+                if (checkMajor(major)) {
+                    password.value = md5(rawPassword.value)
+                    return true
+                }
                 return false
             }
+            password.value = md5(rawPassword.value)
+            return true
         }
-        if (rawPassword.value === "") {
-            timeoutContent = snackbarAlert("Please enter the password!", timeoutContent)
-            rawPassword.style.borderBottomColor = "red"
-            return false
-        }
-        password.value = md5(rawPassword.value)
-        return true
+        return false
     }
 
 }
@@ -161,26 +146,77 @@ function snackbarAlert(content, timeoutContent) {
 }
 
 
-function checkEmail(identity, email) {
+function checkSignInEmail(email) {
     if (email.value === "") {
         timeoutContent = snackbarAlert("Please enter the email!", timeoutContent)
+        email.style.color = "red"
+        email.style.borderBottomColor = "red"
+        return false
+    }
+    return true
+}
+
+
+function checkSignUpEmail(email, identity) {
+    if (email.value === "") {
+        timeoutContent = snackbarAlert("Please enter the email", timeoutContent)
+        email.style.color = "red"
         email.style.borderBottomColor = "red"
         return false
     } else {
-        let xmlHttp
-        if (window.XMLHttpRequest) {
-            xmlHttp = new XMLHttpRequest()
-        } else {
-            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP")
-        }
-        xmlHttp.open("POST", "/register_ajax", true)
-        xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
+        xmlHttp.open("POST", "/register_ajax", false)
+        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
         xmlHttp.send("identity=" + identity.value + "&email=" + email.value)
-        if (xmlHttp.responseText !== "succeed") {
-            timeoutContent = snackbarAlert("This email has been used!", timeoutContent)
+        while (xmlHttp.readyState !== 4) {
+        }
+        if (xmlHttp.status === 200) {
+            if (xmlHttp.responseText !== "succeed") {
+                timeoutContent = snackbarAlert("This email has been used", timeoutContent)
+                email.style.color = "red"
+                email.style.borderBottomColor = "red"
+                return false
+            }
+        } else {
+            timeoutContent = snackbarAlert("Failed to connect to server", timeoutContent)
+            email.style.color = "red"
             email.style.borderBottomColor = "red"
             return false
         }
+    }
+    return true
+}
+
+
+function checkName(name) {
+    if (name.value === "") {
+        timeoutContent = snackbarAlert("Please enter the user name!", timeoutContent)
+        name.style.color = "red"
+        name.style.borderBottomColor = "red"
+        return false
+    }
+    return true
+}
+
+
+// TODO: Use AJAX to check availability major
+function checkMajor(major) {
+    if (major.value === "") {
+        timeoutContent = snackbarAlert("Please select a major!", timeoutContent)
+        major.style.color = "red"
+        major.style.borderBottomColor = "red"
+        return false
+    }
+    return true
+}
+
+
+function checkRawPassword(rawPassword) {
+    if (rawPassword.value === "") {
+        timeoutContent = snackbarAlert("Please enter the password!", timeoutContent)
+        rawPassword.style.color = "red"
+        rawPassword.style.borderBottomColor = "red"
+        return false
     }
     return true
 }

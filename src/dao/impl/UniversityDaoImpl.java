@@ -30,7 +30,7 @@ public class UniversityDaoImpl implements UniversityDao {
     public boolean checkEmail(String email) {
         try {
             String sql = "SELECT `id` FROM `university` WHERE `email` = ?;";
-            return template.queryForList(sql) == null;
+            return template.queryForList(sql, email).isEmpty();
         } catch (Exception e) {
             return false;
         }
@@ -45,7 +45,7 @@ public class UniversityDaoImpl implements UniversityDao {
             // If the registered university already exists in database, return true
             if (result.get("email") != null) return true;
         } catch (DataAccessException e) {
-            String sql = "INSERT INTO `university` VALUES (NULL, ?, ?, ?)";
+            String sql = "INSERT INTO `university` (`email`, `password`, `name`) VALUES (?, ?, ?)";
             // Add new registered university into database
             template.update(sql, university.getEmail(), university.getPassword(), university.getName());
             return false;

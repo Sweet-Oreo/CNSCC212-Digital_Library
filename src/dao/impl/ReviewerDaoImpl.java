@@ -30,7 +30,7 @@ public class ReviewerDaoImpl implements ReviewerDao {
     public boolean checkEmail(String email) {
         try {
             String sql = "SELECT `id` FROM `reviewer` WHERE `email` = ?;";
-            return template.queryForList(sql) == null;
+            return template.queryForList(sql, email).isEmpty();
         } catch (Exception e) {
             return false;
         }
@@ -45,7 +45,7 @@ public class ReviewerDaoImpl implements ReviewerDao {
             // If the registered reviewer already exists in database, return true
             if (result.get("email") != null) return true;
         } catch (DataAccessException e) {
-            String sql = "INSERT INTO `reviewer` VALUE (NULL, ?, ?, ?, ?)";
+            String sql = "INSERT INTO `reviewer` (`email`, `password`, `name`, `major`) VALUE (?, ?, ?, ?)";
             // Add new registered reviewer into database
             template.update(sql, reviewer.getEmail(), reviewer.getPassword(), reviewer.getName(), reviewer.getMajor());
             return false;
