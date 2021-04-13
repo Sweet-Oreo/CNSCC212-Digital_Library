@@ -50,7 +50,6 @@
                     <label for="major"></label>
                     <input type="text" list="selectable_majors" id="major" name="major" placeholder="Select a major">
                     <datalist id="selectable_majors" style="height: 200px">
-                        <option value="Artificial Intelligence"></option>
                     </datalist>
                 </p>
                 <p>

@@ -1,3 +1,4 @@
+let majorListNotLoaded = true
 let timeoutContent
 
 window.onload = () => {
@@ -19,6 +20,7 @@ window.onload = () => {
     let email = document.getElementById("email")
     let major = document.getElementById("major")
     let name = document.getElementById("name")
+    let majorList = document.getElementById("selectable_majors")
 
     snackbar.style.bottom = -snackbar.offsetHeight + "px"
 
@@ -40,6 +42,9 @@ window.onload = () => {
         uniSelector.style.borderBottomColor = reaSelector.style.borderBottomColor = "white"
         if (action.value === "sign_up") {
             inputMajor.style.display = "inherit"
+            if (majorListNotLoaded) {
+                getMajorList(majorList)
+            }
         }
     }
 
@@ -59,6 +64,9 @@ window.onload = () => {
             inputName.style.display = "inherit"
             if (identity.value === "reviewer") {
                 inputMajor.style.display = "inherit"
+                if (majorListNotLoaded) {
+                    getMajorList(majorList)
+                }
             } else {
                 inputMajor.style.display = "none"
             }
@@ -97,6 +105,19 @@ window.onload = () => {
         major.style = null
     }
 
+}
+
+
+function getMajorList(majorList) {
+    let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
+    xmlHttp.onreadystatechange = () => {
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            majorList.innerHTML = xmlHttp.responseText
+            majorListNotLoaded = false
+        }
+    }
+    xmlHttp.open("POST", "/servlet/AjaxGetMajors", true)
+    xmlHttp.send()
 }
 
 
@@ -214,7 +235,7 @@ function checkMajor(major) {
         }
         if (xmlHttp.status === 200) {
             if (xmlHttp.responseText !== "succeed") {
-                timeoutContent = snackbarAlert("Invalid major for reviewer", timeoutContent)
+                timeoutContent = snackbarAlert("This major is invalid", timeoutContent)
                 major.style.color = "red"
                 major.style.borderBottomColor = "red"
                 return false

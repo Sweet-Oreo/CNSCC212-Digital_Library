@@ -2,7 +2,6 @@ package dao.impl;
 
 import dao.ReviewerDao;
 import domain.Reviewer;
-import domain.University;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -42,7 +41,7 @@ public class ReviewerDaoImpl implements ReviewerDao {
     public boolean checkReviewerMajor(String major) {
         try {
             String sql = "SELECT `id` FROM `major` WHERE `name` = ?;";
-            return template.queryForList(sql, major).isEmpty();
+            return !template.queryForList(sql, major).isEmpty();
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -53,7 +52,7 @@ public class ReviewerDaoImpl implements ReviewerDao {
     public boolean addReviewer(Reviewer reviewer) {
         try {
             // Query if registered reviewer already exists in database
-            String querySql = "select email from reviewer where email = ?";
+            String querySql = "SELECT `email` FROM `reviewer` WHERE `email` = ?;";
             Map<String, Object> result = template.queryForMap(querySql, reviewer.getEmail());
             // If the registered reviewer already exists in database, return true
             if (result.get("email") != null) return true;
