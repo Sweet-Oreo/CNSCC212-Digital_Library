@@ -20,7 +20,8 @@ public class ReviewerDaoImpl implements ReviewerDao {
             // If there is matching reviewer in the database, return it
             return template.queryForObject(sql, new BeanPropertyRowMapper<>(Reviewer.class), email, password);
         } catch (Exception e) {
-            e.printStackTrace();
+            // It will print the error if no matched result found, it should not be printed (by Li, Qi)
+            // e.printStackTrace();
             // If there's no matching reviewer in the database, return null
             return null;
         }

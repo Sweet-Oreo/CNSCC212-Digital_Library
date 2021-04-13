@@ -132,13 +132,13 @@ function checkSubmit() {
     let major = document.getElementById("major")
 
     if (action.value === "sign_in") {
-        if (checkSignInEmail(email) && checkRawPassword(rawPassword)) {
+        if (checkSignInEmail(email, identity) && checkSignInPassword(identity, email, rawPassword)) {
             password.value = md5(rawPassword.value)
             return true
         }
         return false
     } else {
-        if (checkSignUpEmail(email, identity) && checkName(name) && checkRawPassword(rawPassword)) {
+        if (checkSignUpEmail(email) && checkName(name) && checkRawPassword(rawPassword)) {
             if (identity.value === "reviewer") {
                 if (checkMajor(major)) {
                     password.value = md5(rawPassword.value)
@@ -244,6 +244,37 @@ function checkMajor(major) {
             timeoutContent = snackbarAlert("Failed to connect to server", timeoutContent)
             major.style.color = "red"
             major.style.borderBottomColor = "red"
+            return false
+        }
+    }
+    return true
+}
+
+
+function checkSignInPassword(identity, email, rawPassword) {
+    if (rawPassword.value === "") {
+        timeoutContent = snackbarAlert("Please enter the password", timeoutContent)
+        rawPassword.style.color = "red"
+        rawPassword.style.borderBottomColor = "red"
+        return false
+    } else {
+        let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
+        xmlHttp.open("POST", "/servlet/AjaxCheckPassword", false)
+        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xmlHttp.send("identity=" + identity.value + "&email=" + email.value + "&password=" + md5(rawPassword.value))
+        while (xmlHttp.readyState !== 4) {
+        }
+        if (xmlHttp.status === 200) {
+            if (xmlHttp.responseText !== "succeed") {
+                timeoutContent = snackbarAlert("User not exist or wrong password", timeoutContent)
+                rawPassword.style.color = "red"
+                rawPassword.style.borderBottomColor = "red"
+                return false
+            }
+        } else {
+            timeoutContent = snackbarAlert("Failed to connect to server", timeoutContent)
+            rawPassword.style.color = "red"
+            rawPassword.style.borderBottomColor = "red"
             return false
         }
     }
