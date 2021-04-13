@@ -24,6 +24,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         // Set encoding
         req.setCharacterEncoding("utf-8");
         // Get the parameters from user's browser
@@ -34,8 +35,9 @@ public class LoginServlet extends HttpServlet {
 
         // If user is signing up, forward to registerServlet
         if (action.equals("sign_up")) {
-            if (identity.equals("reviewer"))
+            if (identity.equals("reviewer")) {
                 req.setAttribute("major", req.getParameter("major"));
+            }
             // Store the parameters from browser into request object
             req.setAttribute("identity", identity);
             req.setAttribute("email", email);
@@ -102,6 +104,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 break;
         }
+
     }
 
     @Override

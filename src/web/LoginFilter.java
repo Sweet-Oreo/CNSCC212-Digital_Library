@@ -8,8 +8,7 @@ import java.io.IOException;
 public class LoginFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
+    public void init(FilterConfig filterConfig) {
     }
 
     @Override
@@ -18,16 +17,13 @@ public class LoginFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         Object user_session = request.getSession().getAttribute("USER_SESSION");
         if (user_session == null) {
-            response.sendRedirect(request.getContextPath() + "/library/login.jsp ");
+            response.sendRedirect(request.getContextPath() + "/library/login.jsp");
         }
-
         filterChain.doFilter(servletRequest, servletResponse);
-
     }
 
     @Override
     public void destroy() {
-
     }
 
 }

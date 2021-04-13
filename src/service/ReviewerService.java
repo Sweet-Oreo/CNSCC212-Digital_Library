@@ -3,7 +3,8 @@ package service;
 import domain.Reviewer;
 
 public interface ReviewerService {
-    Reviewer login(Reviewer reviewer);
-
     boolean addReviewer(Reviewer reviewer);
+    boolean checkReviewerEmail(String email);
+    boolean checkReviewerMajor(String major);
+    Reviewer login(Reviewer reviewer);
 }

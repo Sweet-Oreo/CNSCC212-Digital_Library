@@ -14,11 +14,11 @@ public class MajorDaoImpl implements MajorDao {
 
     @Override
     public List<String> findMajors() {
-        List<String> majors = new ArrayList<String>();
-        String sql = "select name from major";
+        List<String> majors = new ArrayList<>();
+        String sql = "SELECT `name` FROM `major`;";
         List<Map<String, Object>> majorMaps = template.queryForList(sql);
         for (Map<String, Object> majorMap : majorMaps) {
-            majors.add((String)majorMap.get("name"));
+            majors.add((String) majorMap.get("name"));
         }
         return majors;
     }

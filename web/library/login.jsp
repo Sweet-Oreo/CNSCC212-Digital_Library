@@ -44,27 +44,13 @@
                     <label for="raw_password"></label>
                     <input type="password" id="raw_password" placeholder="Enter the password">
                     <input type="hidden" id="password" name="password">
-                    <span class="material-icons vis" id="show_password">visibility</span>
+                    <span class="material-icons vis" id="show_password">visibility_off</span>
                 </p>
                 <p id="input_major" style="display: none;">
                     <label for="major"></label>
                     <input type="text" list="selectable_majors" id="major" name="major" placeholder="Select a major">
                     <datalist id="selectable_majors" style="height: 200px">
                         <option value="Artificial Intelligence"></option>
-                        <option value="Computer Algorithms and Theories"></option>
-                        <option value="Biosystems and Computational Biology"></option>
-                        <option value="Big Data"></option>
-                        <option value="Computer Architecture"></option>
-                        <option value="Computer Graphics and Visualization"></option>
-                        <option value="Database System"></option>
-                        <option value="Distributed Systems"></option>
-                        <option value="High-Performance Computing"></option>
-                        <option value="Human-Computer Interaction"></option>
-                        <option value="Networking and Systems"></option>
-                        <option value="Programming Language"></option>
-                        <option value="Scientific Computing and Numerical Analysis"></option>
-                        <option value="Security and Cryptography"></option>
-                        <option value="Software Engineering"></option>
                     </datalist>
                 </p>
                 <p>

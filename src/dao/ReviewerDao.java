@@ -3,7 +3,8 @@ package dao;
 import domain.Reviewer;
 
 public interface ReviewerDao {
-    Reviewer findReviewerByEmailAndPassword(String email, String password);
-
     boolean addReviewer(Reviewer reviewer);
+    boolean checkReviewerEmail(String email);
+    boolean checkReviewerMajor(String major);
+    Reviewer findReviewerByEmailAndPassword(String email, String password);
 }

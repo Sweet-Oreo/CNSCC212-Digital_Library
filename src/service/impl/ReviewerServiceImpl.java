@@ -6,6 +6,7 @@ import domain.Reviewer;
 import service.ReviewerService;
 
 public class ReviewerServiceImpl implements ReviewerService {
+
     private final ReviewerDao dao = new ReviewerDaoImpl();
 
     @Override
@@ -14,7 +15,18 @@ public class ReviewerServiceImpl implements ReviewerService {
     }
 
     @Override
+    public boolean checkReviewerEmail(String email) {
+        return dao.checkReviewerEmail(email);
+    }
+
+    @Override
+    public boolean checkReviewerMajor(String major) {
+        return dao.checkReviewerMajor(major);
+    }
+
+    @Override
     public boolean addReviewer(Reviewer reviewer) {
         return dao.addReviewer(reviewer);
     }
+
 }

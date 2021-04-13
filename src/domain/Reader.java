@@ -1,6 +1,7 @@
 package domain;
 
 public class Reader {
+
     private int id;
     private String email;
     private String password;
@@ -38,11 +39,7 @@ public class Reader {
 
     @Override
     public String toString() {
-        return "Reader{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return "Reader{" + "id=" + id + ", email='" + email + '\'' + ", password='" + password + '\'' + ", name='" + name + '\'' + '}';
     }
+
 }

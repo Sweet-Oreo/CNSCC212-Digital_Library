@@ -6,6 +6,7 @@ import domain.Reader;
 import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
+
     private final ReaderDao dao = new ReaderDaoImpl();
 
     @Override
@@ -14,7 +15,13 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     @Override
+    public boolean checkReaderEmail(String email) {
+        return dao.checkReaderEmail(email);
+    }
+
+    @Override
     public boolean addReader(Reader reader) {
         return dao.addReader(reader);
     }
+
 }

@@ -19,9 +19,10 @@ import java.io.PrintWriter;
 
 @WebServlet("/servlet/registerServlet")
 public class RegisterServlet extends HttpServlet {
-    
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
         // Get the parameters from request object
         String username = (String) req.getAttribute("name");
         String email = (String) req.getAttribute("email");
@@ -78,13 +79,15 @@ public class RegisterServlet extends HttpServlet {
                 break;
             }
         }
+
         // Redirect to login page after registration
         resp.sendRedirect(req.getContextPath() + "/library/login.jsp");
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         this.doPost(req, resp);
     }
-
+    
 }

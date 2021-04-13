@@ -74,10 +74,10 @@ window.onload = () => {
     showPassword.onclick = () => {
         if (rawPassword.getAttribute("type") === "password") {
             rawPassword.setAttribute("type", "text")
-            showPassword.innerHTML = "visibility_off"
+            showPassword.innerHTML = "visibility"
         } else {
             rawPassword.setAttribute("type", "password")
-            showPassword.innerHTML = "visibility"
+            showPassword.innerHTML = "visibility_off"
         }
     }
 

@@ -1,6 +1,7 @@
 package domain;
 
 public class University {
+
     private int id;
     private String email;
     private String password;
@@ -40,11 +41,7 @@ public class University {
 
     @Override
     public String toString() {
-        return "University{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return "University{" + "id=" + id + ", email='" + email + '\'' + ", password='" + password + '\'' + ", name='" + name + '\'' + '}';
     }
+
 }
