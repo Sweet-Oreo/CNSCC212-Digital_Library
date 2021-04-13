@@ -27,6 +27,16 @@ public class ReviewerDaoImpl implements ReviewerDao {
     }
 
     @Override
+    public boolean checkEmail(String email) {
+        try {
+            String sql = "SELECT `id` FROM `reviewer` WHERE `email` = ?;";
+            return template.queryForList(sql) == null;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
     public boolean addReviewer(Reviewer reviewer) {
         try {
             // Query if registered reviewer already exists in database

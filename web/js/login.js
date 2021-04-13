@@ -124,11 +124,7 @@ function checkSubmit() {
         password.value = md5(rawPassword.value)
         return true
     } else {
-        if (email.value === "") {
-            timeoutContent = snackbarAlert("Please enter the email!", timeoutContent)
-            email.style.borderBottomColor = "red"
-            return false
-        }
+        if (!checkEmail(identity, email)) return false
         if (name.value === "") {
             timeoutContent = snackbarAlert("Please enter the user name!", timeoutContent)
             name.style.borderBottomColor = "red"
@@ -162,4 +158,29 @@ function snackbarAlert(content, timeoutContent) {
     return setTimeout(() => {
         snackbar.style.bottom = -snackbar.offsetHeight + "px"
     }, 4000)
+}
+
+
+function checkEmail(identity, email) {
+    if (email.value === "") {
+        timeoutContent = snackbarAlert("Please enter the email!", timeoutContent)
+        email.style.borderBottomColor = "red"
+        return false
+    } else {
+        let xmlHttp
+        if (window.XMLHttpRequest) {
+            xmlHttp = new XMLHttpRequest()
+        } else {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP")
+        }
+        xmlHttp.open("POST", "/register_ajax", true)
+        xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+        xmlHttp.send("identity=" + identity.value + "&email=" + email.value)
+        if (xmlHttp.responseText !== "succeed") {
+            timeoutContent = snackbarAlert("This email has been used!", timeoutContent)
+            email.style.borderBottomColor = "red"
+            return false
+        }
+    }
+    return true
 }

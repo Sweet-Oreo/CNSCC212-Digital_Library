@@ -27,6 +27,16 @@ public class ReaderDaoImpl implements ReaderDao {
     }
 
     @Override
+    public boolean checkEmail(String email) {
+        try {
+            String sql = "SELECT `id` FROM `reader` WHERE `email` = ?;";
+            return template.queryForList(sql) == null;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
     public boolean addReader(Reader reader) {
         try {
             // Query if registered reader already exists in database

@@ -15,6 +15,11 @@ public class UniversityServiceImpl implements UniversityService {
     }
 
     @Override
+    public boolean checkEmail(String email) {
+        return dao.checkEmail(email);
+    }
+
+    @Override
     public boolean addUniversity(University university) {
         return dao.addUniversity(university);
     }

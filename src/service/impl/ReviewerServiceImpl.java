@@ -15,6 +15,11 @@ public class ReviewerServiceImpl implements ReviewerService {
     }
 
     @Override
+    public boolean checkEmail(String email) {
+        return dao.checkEmail(email);
+    }
+
+    @Override
     public boolean addReviewer(Reviewer reviewer) {
         return dao.addReviewer(reviewer);
     }

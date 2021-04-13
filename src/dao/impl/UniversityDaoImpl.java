@@ -27,6 +27,16 @@ public class UniversityDaoImpl implements UniversityDao {
     }
 
     @Override
+    public boolean checkEmail(String email) {
+        try {
+            String sql = "SELECT `id` FROM `university` WHERE `email` = ?;";
+            return template.queryForList(sql) == null;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
     public boolean addUniversity(University university) {
         try {
             // Query if registered university already exists in database

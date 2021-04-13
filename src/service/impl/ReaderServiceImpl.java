@@ -15,6 +15,11 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     @Override
+    public boolean checkEmail(String email) {
+        return dao.checkEmail(email);
+    }
+
+    @Override
     public boolean addReader(Reader reader) {
         return dao.addReader(reader);
     }
