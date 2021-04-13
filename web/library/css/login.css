@@ -89,7 +89,7 @@ body {
 .dl4csr-main--selector {
     padding-top: 24px;
     display: grid;
-    grid-template-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);
+    grid-template-columns: calc(100%/3) calc(100%/3) calc(100%/3);
 }
 
 .dl4csr-main--selector button {
@@ -147,3 +147,5 @@ body {
     border: deepskyblue;
     cursor: pointer;
 }
+
+

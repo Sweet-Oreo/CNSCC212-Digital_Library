@@ -1,7 +1,6 @@
 package domain;
 
 public class Reviewer {
-
     private int id;
     private String email;
     private String password;
@@ -50,7 +49,12 @@ public class Reviewer {
 
     @Override
     public String toString() {
-        return "Reviewer{" + "id=" + id + ", email='" + email + '\'' + ", password='" + password + '\'' + ", name='" + name + '\'' + ", major='" + major + '\'' + '}';
+        return "Reviewer{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", major='" + major + '\'' +
+                '}';
     }
-
 }

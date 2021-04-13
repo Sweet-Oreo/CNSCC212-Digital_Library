@@ -15,12 +15,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/loginServlet")
+@WebServlet("/servlet/loginServlet")
 public class LoginServlet extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Set encoding
@@ -33,21 +33,20 @@ public class LoginServlet extends HttpServlet {
 
         // If user is signing up, forward to registerServlet
         if (action.equals("sign_up")) {
-            if (identity.equals("reviewer")) {
+            if (identity.equals("reviewer"))
                 req.setAttribute("major", req.getParameter("major"));
-            }
             // Store the parameters from browser into request object
             req.setAttribute("identity", identity);
             req.setAttribute("email", email);
             req.setAttribute("password", password);
             req.setAttribute("name", req.getParameter("name"));
-            req.getRequestDispatcher("/registerServlet").forward(req, resp);
+            req.getRequestDispatcher("/servlet/registerServlet").forward(req, resp);
             return;
         }
 
-        // If user is a reader, login as reader and redirect to corresponding page
+
         switch (identity) {
-            case "reader": {
+            case "reader": // If user is a reader, login as reader
                 Reader loginReader = new Reader(); // Reader from login browser
                 loginReader.setEmail(email);
                 loginReader.setPassword(password);
@@ -55,15 +54,18 @@ public class LoginServlet extends HttpServlet {
                 // Reader from database that may match the login reader
                 Reader reader = readerService.login(loginReader);
                 if (reader != null) { // User inputs correct email and password
-                    resp.sendRedirect(req.getContextPath() + "/index.jsp");
+                    // Set session for login reader
+                    HttpSession httpSession = req.getSession();
+                    httpSession.setAttribute("USER_SESSION", httpSession.getId());
+                    // Redirect to reader's webpage
+                    resp.sendRedirect(req.getContextPath() + "/library/index.jsp");
                 } else {
                     // If user inputs incorrect email or password, send the alert
                     PrintWriter writer = resp.getWriter();
                     writer.write("<script>alert('Invalid email or incorrect password');history.go(-1)</script>");
                 }
                 break;
-            }
-            case "university": {  // If user is a university, login as university
+            case "university": // If user is a university, login as university
                 University loginUniversity = new University(); // University from login browser
                 loginUniversity.setEmail(email);
                 loginUniversity.setPassword(password);
@@ -71,14 +73,17 @@ public class LoginServlet extends HttpServlet {
                 // University from database that may match the login university
                 University university = universityService.login(loginUniversity);
                 if (university != null) {
-                    resp.sendRedirect(req.getContextPath() + "/index.jsp");
+                    // Set session for login university
+                    HttpSession httpSession = req.getSession();
+                    httpSession.setAttribute("USER_SESSION", httpSession.getId());
+                    // Redirect to university's webpage
+                    resp.sendRedirect(req.getContextPath() + "/library/index.jsp");
                 } else {
                     PrintWriter writer = resp.getWriter();
                     writer.write("<script>alert('Invalid email or incorrect password');history.go(-1)</script>");
                 }
                 break;
-            }
-            case "reviewer": {  // If user is a reviewer, login as reviewer
+            case "reviewer": // If user is a reviewer, login as reviewer
                 Reviewer loginReviewer = new Reviewer(); // Reviewer from login browser
                 loginReviewer.setEmail(email);
                 loginReviewer.setPassword(password);
@@ -86,13 +91,16 @@ public class LoginServlet extends HttpServlet {
                 // Reviewer from database that may match the login reviewer
                 Reviewer reviewer = reviewerService.login(loginReviewer);
                 if (reviewer != null) {
-                    resp.sendRedirect(req.getContextPath() + "/index.jsp");
+                    // Set session for login reviewer
+                    HttpSession httpSession = req.getSession();
+                    httpSession.setAttribute("USER_SESSION", httpSession.getId());
+                    // Redirect to reviewer's webpage
+                    resp.sendRedirect(req.getContextPath() + "/library/index.jsp");
                 } else {
                     PrintWriter writer = resp.getWriter();
                     writer.write("<script>alert('Invalid email or incorrect password');history.go(-1)</script>");
                 }
                 break;
-            }
         }
     }
 
@@ -100,5 +108,4 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);
     }
-
 }

@@ -10,15 +10,15 @@ import util.JDBCUtils;
 import java.util.Map;
 
 public class ReaderDaoImpl implements ReaderDao {
-
     private final JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
     @Override
     public Reader findReaderByEmailAndPassword(String email, String password) {
         try {
-            String sql = "SELECT * FROM `reader` WHERE `email` = ? AND `password` = ?;";
+            String sql = "select * from reader where email= ? and `password` = ?";
+            Reader reader = template.queryForObject(sql, new BeanPropertyRowMapper<Reader>(Reader.class), email, password);
             // If there is matching reviewer in the database, return it
-            return template.queryForObject(sql, new BeanPropertyRowMapper<>(Reader.class), email, password);
+            return reader ;
         } catch (Exception e) {
             e.printStackTrace();
             // If there's no matching reader in the database, return null
@@ -27,30 +27,19 @@ public class ReaderDaoImpl implements ReaderDao {
     }
 
     @Override
-    public boolean checkEmail(String email) {
-        try {
-            String sql = "SELECT `id` FROM `reader` WHERE `email` = ?;";
-            return template.queryForList(sql, email).isEmpty();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    @Override
     public boolean addReader(Reader reader) {
         try {
             // Query if registered reader already exists in database
-            String querySql = "SELECT `email` FROM `reader` WHERE `email` = ?;";
+            String querySql = "select email from reader where email = ?";
             Map<String, Object> result = template.queryForMap(querySql, reader.getEmail());
             // If the registered reader already exists in database, return true
             if (result.get("email") != null) return true;
         } catch (DataAccessException e) {
-            String sql = "INSERT INTO `reader` (`email`, `password`, `name`) VALUES (?, ?, ?);";
+            String sql = "insert into reader values(null, ?, ?, ?)";
             // Add new registered reader into database
             template.update(sql, reader.getEmail(), reader.getPassword(), reader.getName());
             return false;
         }
         return false;
     }
-
 }

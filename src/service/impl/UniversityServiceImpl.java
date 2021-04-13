@@ -6,7 +6,6 @@ import domain.University;
 import service.UniversityService;
 
 public class UniversityServiceImpl implements UniversityService {
-
     private final UniversityDao dao = new UniversityDaoImpl();
 
     @Override
@@ -15,13 +14,7 @@ public class UniversityServiceImpl implements UniversityService {
     }
 
     @Override
-    public boolean checkEmail(String email) {
-        return dao.checkEmail(email);
-    }
-
-    @Override
     public boolean addUniversity(University university) {
         return dao.addUniversity(university);
     }
-
 }

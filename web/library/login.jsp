@@ -29,7 +29,7 @@
                 <button id="reviewer_selector">As Reviewer</button>
                 <button id="reader_selector">As Reader</button>
             </div>
-            <form action="${pageContext.request.contextPath}/loginServlet" method="post" onsubmit="return checkSubmit();">
+            <form action="${pageContext.request.contextPath}/servlet/loginServlet" method="post" onsubmit="return checkSubmit();">
                 <input type="hidden" id="action" name="action" value="sign_in">
                 <input type="hidden" id="identity" name="identity" value="university">
                 <p>

@@ -9,7 +9,6 @@ import service.UniversityService;
 import service.impl.ReaderServiceImpl;
 import service.impl.ReviewerServiceImpl;
 import service.impl.UniversityServiceImpl;
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/registerServlet")
+@WebServlet("/servlet/registerServlet")
 public class RegisterServlet extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         // Get the parameters from request object
@@ -28,9 +26,9 @@ public class RegisterServlet extends HttpServlet {
         String password = (String) req.getAttribute("password");
         String identity = (String) req.getAttribute("identity");
 
-        // If login user is a university
+        // Recognize the identity of the login user
         switch (identity) {
-            case "university": {
+            case "university": { // If login user is a university
                 University university = new University();
                 university.setEmail(email);
                 university.setPassword(password);
@@ -79,12 +77,11 @@ public class RegisterServlet extends HttpServlet {
             }
         }
         // Redirect to login page after registration
-        resp.sendRedirect(req.getContextPath() + "/login.jsp");
+        resp.sendRedirect(req.getContextPath() + "/library/login.jsp");
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         this.doPost(req, resp);
     }
-
 }
