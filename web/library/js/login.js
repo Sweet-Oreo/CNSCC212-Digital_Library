@@ -148,7 +148,7 @@ function snackbarAlert(content, timeoutContent) {
 
 function checkSignInEmail(email) {
     if (email.value === "") {
-        timeoutContent = snackbarAlert("Please enter the email!", timeoutContent)
+        timeoutContent = snackbarAlert("Please enter the email", timeoutContent)
         email.style.color = "red"
         email.style.borderBottomColor = "red"
         return false
@@ -190,7 +190,7 @@ function checkSignUpEmail(email, identity) {
 
 function checkName(name) {
     if (name.value === "") {
-        timeoutContent = snackbarAlert("Please enter the user name!", timeoutContent)
+        timeoutContent = snackbarAlert("Please enter the user name", timeoutContent)
         name.style.color = "red"
         name.style.borderBottomColor = "red"
         return false
@@ -199,13 +199,32 @@ function checkName(name) {
 }
 
 
-// TODO: Use AJAX to check availability major
 function checkMajor(major) {
     if (major.value === "") {
-        timeoutContent = snackbarAlert("Please select a major!", timeoutContent)
+        timeoutContent = snackbarAlert("Please select a major", timeoutContent)
         major.style.color = "red"
         major.style.borderBottomColor = "red"
         return false
+    } else {
+        let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
+        xmlHttp.open("POST", "/servlet/AjaxCheckMajor", false)
+        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        xmlHttp.send("major=" + major.value)
+        while (xmlHttp.readyState !== 4) {
+        }
+        if (xmlHttp.status === 200) {
+            if (xmlHttp.responseText !== "succeed") {
+                timeoutContent = snackbarAlert("Invalid major for reviewer", timeoutContent)
+                major.style.color = "red"
+                major.style.borderBottomColor = "red"
+                return false
+            }
+        } else {
+            timeoutContent = snackbarAlert("Failed to connect to server", timeoutContent)
+            major.style.color = "red"
+            major.style.borderBottomColor = "red"
+            return false
+        }
     }
     return true
 }
@@ -213,7 +232,7 @@ function checkMajor(major) {
 
 function checkRawPassword(rawPassword) {
     if (rawPassword.value === "") {
-        timeoutContent = snackbarAlert("Please enter the password!", timeoutContent)
+        timeoutContent = snackbarAlert("Please enter the password", timeoutContent)
         rawPassword.style.color = "red"
         rawPassword.style.borderBottomColor = "red"
         return false
