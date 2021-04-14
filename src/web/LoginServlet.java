@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 @WebServlet("/servlet/loginServlet")
@@ -108,10 +106,10 @@ public class LoginServlet extends HttpServlet {
     private void startSession(HttpServletRequest req, HttpServletResponse resp, String time, String identity, String email) throws ServletException, IOException {
         new UserLogServiceImpl().logSignIn(time, identity, email, req.getRemoteAddr());
         // Set session for login reviewer
-        HttpSession httpSession = req.getSession();
-        httpSession.setAttribute("USER_SESSION", httpSession.getId());
-        httpSession.setAttribute("identity", identity);
-        httpSession.setAttribute("email", email);
+        HttpSession session = req.getSession();
+        session.setAttribute("USER_SESSION", session.getId());
+        session.setAttribute("identity", identity);
+        session.setAttribute("email", email);
         // Forward to servlet displaying papers
         req.getRequestDispatcher("/servlet/paperListServlet").forward(req, resp);
     }
