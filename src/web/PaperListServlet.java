@@ -14,6 +14,7 @@ import java.util.List;
 
 @WebServlet("/servlet/paperListServlet")
 public class PaperListServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PaperService paperService = new PaperServiceImpl();
@@ -24,6 +25,7 @@ public class PaperListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        this.doPost(req, resp);
     }
+
 }

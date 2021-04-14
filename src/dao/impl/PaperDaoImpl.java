@@ -9,12 +9,13 @@ import util.JDBCUtils;
 import java.util.List;
 
 public class PaperDaoImpl implements PaperDao {
-    private JdbcTemplate template = new JdbcTemplate((JDBCUtils.getDataSource()));
+
+    private final JdbcTemplate template = new JdbcTemplate((JDBCUtils.getDataSource()));
 
     @Override
     public List<Paper> findAll() {
-        String sql = "select * from paper";
-        List<Paper> papers = template.query(sql, new BeanPropertyRowMapper<Paper>(Paper.class));
-        return papers;
+        String sql = "SELECT * FROM `paper`;";
+        return template.query(sql, new BeanPropertyRowMapper<>(Paper.class));
     }
+
 }

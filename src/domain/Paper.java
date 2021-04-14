@@ -3,6 +3,7 @@ package domain;
 import java.util.Date;
 
 public class Paper {
+
     private int id;
     private String title;
     private String author;
@@ -174,4 +175,5 @@ public class Paper {
     public void setPublish_date(Date publish_date) {
         this.publish_date = publish_date;
     }
+
 }

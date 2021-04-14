@@ -8,11 +8,12 @@ import service.PaperService;
 import java.util.List;
 
 public class PaperServiceImpl implements PaperService {
-    private PaperDao paperDao = new PaperDaoImpl();
+
+    private final PaperDao paperDao = new PaperDaoImpl();
 
     @Override
     public List<Paper> findAll() {
-
         return paperDao.findAll();
     }
+    
 }

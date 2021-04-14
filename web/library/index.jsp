@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
@@ -28,6 +28,7 @@
 <main class="dl4csr-main">
     <div class="dl4csr-main--search">
         <h1>Search papers</h1>
+
         <form action="${pageContext.request.contextPath}/library/search.jsp" method="get" onsubmit="return false;">
             <div class="dl4csr-main--search--option">
                 <label for="title">Title</label>
@@ -44,11 +45,8 @@
             <button type="submit" class="material-icons">search</button>
         </form>
 
-
-
-
         <!-- Display papers-->
-        <form id="form" action="${pageContext.request.contextPath}/downloadServlet", method="post">
+        <form id="form" action="${pageContext.request.contextPath}/servlet/downloadServlet" method="post">
             <table border="1" class="table table-bordered table-hover">
                 <tr class="success">
                     <th>No.</th>
@@ -57,29 +55,18 @@
                     <th>keywords</th>
                     <th>Operation</th>
                 </tr>
-
                 <c:forEach items="${papers}" var="paper" varStatus="s">
                     <tr>
                         <td>${s.count}</td>
                         <td>${paper.title}</td>
                         <td>${paper.author}</td>
                         <td>${paper.keyword}</td>
-                        <td><a href="">Download</a> </td>
+                        <td><a href="">Download</a></td>
                     </tr>
                 </c:forEach>
-
-
             </table>
-
         </form>
 
-
-
-
-
-
-    </div>
-    <div class="dl4csr-main--latest">
     </div>
 </main>
 
