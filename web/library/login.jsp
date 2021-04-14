@@ -30,7 +30,7 @@
                 <button id="reader_selector">As Reader</button>
             </div>
             <form action="${pageContext.request.contextPath}/servlet/loginServlet" method="post" onsubmit="return checkSubmit();">
-                <input type="hidden" id="action" name="action" value="sign_in">
+                <input type="hidden" id="action" value="sign_in">
                 <input type="hidden" id="identity" name="identity" value="university">
                 <p>
                     <label for="email"></label>

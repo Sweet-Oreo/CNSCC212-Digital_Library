@@ -132,22 +132,14 @@ function checkSubmit() {
     let major = document.getElementById("major")
 
     if (action.value === "sign_in") {
-        if (checkSignInEmail(email, identity) && checkSignInPassword(identity, email, rawPassword)) {
+        if (checkEmail(email, identity) && checkPassword(identity, email, rawPassword)) {
             password.value = md5(rawPassword.value)
             return true
         }
         return false
     } else {
-        if (checkSignUpEmail(email, identity) && checkName(name) && checkRawPassword(rawPassword)) {
-            if (identity.value === "reviewer") {
-                if (checkMajor(major)) {
-                    password.value = md5(rawPassword.value)
-                    return true
-                }
-                return false
-            }
-            password.value = md5(rawPassword.value)
-            return true
+        if (checkEmail(email) && checkName(name) && checkRawPassword(rawPassword) && checkMajor(identity, major)) {
+            signUp(identity, email, name, rawPassword, major)
         }
         return false
     }
@@ -167,43 +159,12 @@ function snackbarAlert(content, timeoutContent) {
 }
 
 
-function checkSignInEmail(email) {
+function checkEmail(email) {
     if (email.value === "") {
         timeoutContent = snackbarAlert("Please enter the email", timeoutContent)
         email.style.color = "red"
         email.style.borderBottomColor = "red"
         return false
-    }
-    return true
-}
-
-
-function checkSignUpEmail(email, identity) {
-    if (email.value === "") {
-        timeoutContent = snackbarAlert("Please enter the email", timeoutContent)
-        email.style.color = "red"
-        email.style.borderBottomColor = "red"
-        return false
-    } else {
-        let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
-        xmlHttp.open("POST", "/servlet/AjaxCheckEmail", false)
-        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xmlHttp.send("identity=" + identity.value + "&email=" + email.value)
-        while (xmlHttp.readyState !== 4) {
-        }
-        if (xmlHttp.status === 200) {
-            if (xmlHttp.responseText !== "succeed") {
-                timeoutContent = snackbarAlert("This email has been used", timeoutContent)
-                email.style.color = "red"
-                email.style.borderBottomColor = "red"
-                return false
-            }
-        } else {
-            timeoutContent = snackbarAlert("Failed to connect to server", timeoutContent)
-            email.style.color = "red"
-            email.style.borderBottomColor = "red"
-            return false
-        }
     }
     return true
 }
@@ -220,38 +181,18 @@ function checkName(name) {
 }
 
 
-function checkMajor(major) {
-    if (major.value === "") {
+function checkMajor(identity, major) {
+    if (identity.value === "reviewer" && major.value === "") {
         timeoutContent = snackbarAlert("Please select a major", timeoutContent)
         major.style.color = "red"
         major.style.borderBottomColor = "red"
         return false
-    } else {
-        let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
-        xmlHttp.open("POST", "/servlet/AjaxCheckMajor", false)
-        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xmlHttp.send("major=" + major.value)
-        while (xmlHttp.readyState !== 4) {
-        }
-        if (xmlHttp.status === 200) {
-            if (xmlHttp.responseText !== "succeed") {
-                timeoutContent = snackbarAlert("This major is invalid", timeoutContent)
-                major.style.color = "red"
-                major.style.borderBottomColor = "red"
-                return false
-            }
-        } else {
-            timeoutContent = snackbarAlert("Failed to connect to server", timeoutContent)
-            major.style.color = "red"
-            major.style.borderBottomColor = "red"
-            return false
-        }
     }
     return true
 }
 
 
-function checkSignInPassword(identity, email, rawPassword) {
+function checkPassword(identity, email, rawPassword) {
     if (rawPassword.value === "") {
         timeoutContent = snackbarAlert("Please enter the password", timeoutContent)
         rawPassword.style.color = "red"
@@ -290,4 +231,47 @@ function checkRawPassword(rawPassword) {
         return false
     }
     return true
+}
+
+
+function signUp(identity, email, name, rawPassword, major) {
+    let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
+    xmlHttp.open("POST", "/servlet/AjaxSignUp", false)
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    xmlHttp.send(
+        "identity=" + identity.value +
+        "&email=" + email.value +
+        "&name=" + name.value +
+        "&password=" + md5(rawPassword.value) +
+        "&major=" + major.value
+    )
+    while (xmlHttp.readyState !== 4) {
+    }
+    if (xmlHttp.status === 200) {
+        switch (xmlHttp.responseText) {
+            case "succeed": {
+                snackbarAlert("User has been created successfully", timeoutContent)
+                document.getElementById("switch_sign").click()
+                break
+            }
+            case "emailError": {
+                timeoutContent = snackbarAlert("Email " + email.value + " has been registered", timeoutContent)
+                email.style.color = "red"
+                email.style.borderBottomColor = "red"
+                break
+            }
+            case "majorError": {
+                timeoutContent = snackbarAlert("The major \"" + major.value + "\" is invalid", timeoutContent)
+                major.style.color = "red"
+                major.style.borderBottomColor = "red"
+                break
+            }
+            default: {
+                timeoutContent = snackbarAlert("An unexpected error occurred", timeoutContent)
+                break
+            }
+        }
+    } else {
+        timeoutContent = snackbarAlert("Error on connecting to server", timeoutContent)
+    }
 }

@@ -30,25 +30,10 @@ public class LoginServlet extends HttpServlet {
         // Set encoding
         req.setCharacterEncoding("utf-8");
         // Get the parameters from user's browser
-        String action = req.getParameter("action");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String identity = req.getParameter("identity");
         String time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(System.currentTimeMillis());
-
-        // If user is signing up, forward to registerServlet
-        if (action.equals("sign_up")) {
-            if (identity.equals("reviewer")) {
-                req.setAttribute("major", req.getParameter("major"));
-            }
-            // Store the parameters from browser into request object
-            req.setAttribute("identity", identity);
-            req.setAttribute("email", email);
-            req.setAttribute("password", password);
-            req.setAttribute("name", req.getParameter("name"));
-            req.getRequestDispatcher("/servlet/registerServlet").forward(req, resp);
-            return;
-        }
 
         switch (identity) {
             case "reader": // If user is a reader, login as reader
