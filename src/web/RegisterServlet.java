@@ -9,6 +9,7 @@ import service.UniversityService;
 import service.impl.ReaderServiceImpl;
 import service.impl.ReviewerServiceImpl;
 import service.impl.UniversityServiceImpl;
+import service.impl.UserLogServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 
 @WebServlet("/servlet/registerServlet")
 public class RegisterServlet extends HttpServlet {
@@ -28,6 +30,7 @@ public class RegisterServlet extends HttpServlet {
         String email = (String) req.getAttribute("email");
         String password = (String) req.getAttribute("password");
         String identity = (String) req.getAttribute("identity");
+        Date time = new Date(System.currentTimeMillis());
 
         // Recognize the identity of the login user
         switch (identity) {
@@ -45,6 +48,7 @@ public class RegisterServlet extends HttpServlet {
                     writer.write("<script>alert('This email already exists');history.go(-1)</script>");
                     return;
                 }
+                new UserLogServiceImpl().logSignUp(time, identity, email);
                 break;
             }
             case "reader": { // If login user is a reader
@@ -60,6 +64,7 @@ public class RegisterServlet extends HttpServlet {
                     writer.write("<script>alert('This email already exists');history.go(-1)</script>");
                     return;
                 }
+                new UserLogServiceImpl().logSignUp(time, identity, email);
                 break;
             }
             case "reviewer": { // If login user is a reviewer
@@ -76,6 +81,7 @@ public class RegisterServlet extends HttpServlet {
                     writer.write("<script>alert('This email already exists');history.go(-1)</script>");
                     return;
                 }
+                new UserLogServiceImpl().logSignUp(time, identity, email);
                 break;
             }
         }

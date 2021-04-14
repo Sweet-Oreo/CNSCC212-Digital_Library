@@ -6,9 +6,11 @@ import domain.University;
 import service.ReaderService;
 import service.ReviewerService;
 import service.UniversityService;
+import service.UserLogService;
 import service.impl.ReaderServiceImpl;
 import service.impl.ReviewerServiceImpl;
 import service.impl.UniversityServiceImpl;
+import service.impl.UserLogServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 
 @WebServlet("/servlet/loginServlet")
 public class LoginServlet extends HttpServlet {
@@ -32,6 +35,7 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String identity = req.getParameter("identity");
+        Date time = new Date(System.currentTimeMillis());
 
         // If user is signing up, forward to registerServlet
         if (action.equals("sign_up")) {
@@ -56,11 +60,7 @@ public class LoginServlet extends HttpServlet {
                 // Reader from database that may match the login reader
                 Reader reader = readerService.login(loginReader);
                 if (reader != null) { // User inputs correct email and password
-                    // Set session for login reader
-                    HttpSession httpSession = req.getSession();
-                    httpSession.setAttribute("USER_SESSION", httpSession.getId());
-                    // Forward to servlet displaying papers
-                    req.getRequestDispatcher("/servlet/paperListServlet").forward(req, resp);
+                    startSession(req, resp, time, identity, email);
                 } else {
                     // If user inputs incorrect email or password, send the alert
                     PrintWriter writer = resp.getWriter();
@@ -75,11 +75,7 @@ public class LoginServlet extends HttpServlet {
                 // University from database that may match the login university
                 University university = universityService.login(loginUniversity);
                 if (university != null) {
-                    // Set session for login university
-                    HttpSession httpSession = req.getSession();
-                    httpSession.setAttribute("USER_SESSION", httpSession.getId());
-                    // Forward to servlet displaying papers
-                    req.getRequestDispatcher("/servlet/paperListServlet").forward(req, resp);
+                    startSession(req, resp, time, identity, email);
                 } else {
                     PrintWriter writer = resp.getWriter();
                     writer.write("<script>alert('Invalid email or incorrect password');history.go(-1)</script>");
@@ -93,11 +89,7 @@ public class LoginServlet extends HttpServlet {
                 // Reviewer from database that may match the login reviewer
                 Reviewer reviewer = reviewerService.login(loginReviewer);
                 if (reviewer != null) {
-                    // Set session for login reviewer
-                    HttpSession httpSession = req.getSession();
-                    httpSession.setAttribute("USER_SESSION", httpSession.getId());
-                    // Forward to servlet displaying papers
-                    req.getRequestDispatcher("/servlet/paperListServlet").forward(req, resp);
+                    startSession(req, resp, time, identity, email);
                 } else {
                     PrintWriter writer = resp.getWriter();
                     writer.write("<script>alert('Invalid email or incorrect password');history.go(-1)</script>");
@@ -110,6 +102,17 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);
+    }
+
+    private void startSession(HttpServletRequest req, HttpServletResponse resp, Date time, String identity, String email) throws ServletException, IOException {
+        new UserLogServiceImpl().logSignIn(time, identity, email);
+        // Set session for login reviewer
+        HttpSession httpSession = req.getSession();
+        httpSession.setAttribute("USER_SESSION", httpSession.getId());
+        httpSession.setAttribute("identity", identity);
+        httpSession.setAttribute("email", email);
+        // Forward to servlet displaying papers
+        req.getRequestDispatcher("/servlet/paperListServlet").forward(req, resp);
     }
 
 }
