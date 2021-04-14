@@ -138,7 +138,7 @@ function checkSubmit() {
         }
         return false
     } else {
-        if (checkSignUpEmail(email) && checkName(name) && checkRawPassword(rawPassword)) {
+        if (checkSignUpEmail(email, identity) && checkName(name) && checkRawPassword(rawPassword)) {
             if (identity.value === "reviewer") {
                 if (checkMajor(major)) {
                     password.value = md5(rawPassword.value)
