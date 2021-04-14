@@ -47,6 +47,7 @@
 
 
 
+        <!-- Display papers-->
         <form id="form" action="${pageContext.request.contextPath}/downloadServlet", method="post">
             <table border="1" class="table table-bordered table-hover">
                 <tr class="success">
