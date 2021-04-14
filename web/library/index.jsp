@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
@@ -42,6 +43,40 @@
             </div>
             <button type="submit" class="material-icons">search</button>
         </form>
+
+
+
+
+        <form id="form" action="${pageContext.request.contextPath}/downloadServlet", method="post">
+            <table border="1" class="table table-bordered table-hover">
+                <tr class="success">
+                    <th>No.</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>keywords</th>
+                    <th>Operation</th>
+                </tr>
+
+                <c:forEach items="${papers}" var="paper" varStatus="s">
+                    <tr>
+                        <td>${s.count}</td>
+                        <td>${paper.title}</td>
+                        <td>${paper.author}</td>
+                        <td>${paper.keyword}</td>
+                        <td><a href="">Download</a> </td>
+                    </tr>
+                </c:forEach>
+
+
+            </table>
+
+        </form>
+
+
+
+
+
+
     </div>
     <div class="dl4csr-main--latest">
     </div>

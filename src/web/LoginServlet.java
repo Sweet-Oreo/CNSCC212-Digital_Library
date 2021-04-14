@@ -59,8 +59,8 @@ public class LoginServlet extends HttpServlet {
                     // Set session for login reader
                     HttpSession httpSession = req.getSession();
                     httpSession.setAttribute("USER_SESSION", httpSession.getId());
-                    // Redirect to reader's webpage
-                    resp.sendRedirect(req.getContextPath() + "/library/index.jsp");
+                    // Forward to servlet displaying papers
+                    req.getRequestDispatcher("/servlet/paperListServlet").forward(req, resp);
                 } else {
                     // If user inputs incorrect email or password, send the alert
                     PrintWriter writer = resp.getWriter();
@@ -78,8 +78,8 @@ public class LoginServlet extends HttpServlet {
                     // Set session for login university
                     HttpSession httpSession = req.getSession();
                     httpSession.setAttribute("USER_SESSION", httpSession.getId());
-                    // Redirect to university's webpage
-                    resp.sendRedirect(req.getContextPath() + "/library/index.jsp");
+                    // Forward to servlet displaying papers
+                    req.getRequestDispatcher("/servlet/paperListServlet").forward(req, resp);
                 } else {
                     PrintWriter writer = resp.getWriter();
                     writer.write("<script>alert('Invalid email or incorrect password');history.go(-1)</script>");
@@ -96,8 +96,8 @@ public class LoginServlet extends HttpServlet {
                     // Set session for login reviewer
                     HttpSession httpSession = req.getSession();
                     httpSession.setAttribute("USER_SESSION", httpSession.getId());
-                    // Redirect to reviewer's webpage
-                    resp.sendRedirect(req.getContextPath() + "/library/index.jsp");
+                    // Forward to servlet displaying papers
+                    req.getRequestDispatcher("/servlet/paperListServlet").forward(req, resp);
                 } else {
                     PrintWriter writer = resp.getWriter();
                     writer.write("<script>alert('Invalid email or incorrect password');history.go(-1)</script>");
