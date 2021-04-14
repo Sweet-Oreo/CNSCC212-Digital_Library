@@ -236,7 +236,7 @@ function checkRawPassword(rawPassword) {
 
 function signUp(identity, email, name, rawPassword, major) {
     let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
-    xmlHttp.open("POST", "/servlet/AjaxSignUp", false)
+    xmlHttp.open("POST", "/servlet/AjaxSignUp", true)
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     xmlHttp.send(
         "identity=" + identity.value +
@@ -245,33 +245,35 @@ function signUp(identity, email, name, rawPassword, major) {
         "&password=" + md5(rawPassword.value) +
         "&major=" + major.value
     )
-    while (xmlHttp.readyState !== 4) {
-    }
-    if (xmlHttp.status === 200) {
-        switch (xmlHttp.responseText) {
-            case "succeed": {
-                snackbarAlert("User has been created successfully", timeoutContent)
-                document.getElementById("switch_sign").click()
-                break
-            }
-            case "emailError": {
-                timeoutContent = snackbarAlert("Email " + email.value + " has been registered", timeoutContent)
-                email.style.color = "red"
-                email.style.borderBottomColor = "red"
-                break
-            }
-            case "majorError": {
-                timeoutContent = snackbarAlert("The major \"" + major.value + "\" is invalid", timeoutContent)
-                major.style.color = "red"
-                major.style.borderBottomColor = "red"
-                break
-            }
-            default: {
-                timeoutContent = snackbarAlert("An unexpected error occurred", timeoutContent)
-                break
+    xmlHttp.onreadystatechange = () => {
+        if (xmlHttp.readyState === 4) {
+            if (xmlHttp.status === 200) {
+                switch (xmlHttp.responseText) {
+                    case "succeed": {
+                        snackbarAlert("User has been created successfully", timeoutContent)
+                        document.getElementById("switch_sign").click()
+                        break
+                    }
+                    case "emailError": {
+                        timeoutContent = snackbarAlert("Email " + email.value + " has been registered", timeoutContent)
+                        email.style.color = "red"
+                        email.style.borderBottomColor = "red"
+                        break
+                    }
+                    case "majorError": {
+                        timeoutContent = snackbarAlert("The major \"" + major.value + "\" is invalid", timeoutContent)
+                        major.style.color = "red"
+                        major.style.borderBottomColor = "red"
+                        break
+                    }
+                    default: {
+                        timeoutContent = snackbarAlert("An unexpected error occurred", timeoutContent)
+                        break
+                    }
+                }
+            } else {
+                timeoutContent = snackbarAlert("Error on connecting to server", timeoutContent)
             }
         }
-    } else {
-        timeoutContent = snackbarAlert("Error on connecting to server", timeoutContent)
     }
 }
