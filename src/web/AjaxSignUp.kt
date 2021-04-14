@@ -19,6 +19,7 @@ class AjaxSignUp : HttpServlet() {
     override fun doPost(req: HttpServletRequest?, resp: HttpServletResponse?) {
 
         val time = SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(System.currentTimeMillis())
+        req?.characterEncoding = "utf-8"
         val identity = req?.getParameter("identity")
         val email = req?.getParameter("email")
         val name = req?.getParameter("name")
@@ -35,11 +36,13 @@ class AjaxSignUp : HttpServlet() {
                 val universityService = UniversityServiceImpl()
                 if (!universityService.checkUniversityEmail(email)) {
                     resp?.writer?.write("emailError")
-                    return
-                }
-                if (universityService.addUniversity(university)) {
-                    resp?.writer?.write("error")
-                    return
+                } else {
+                    if (universityService.addUniversity(university)) {
+                        resp?.writer?.write("error")
+                    } else {
+                        UserLogServiceImpl().logSignUp(time, identity, email, req.remoteAddr)
+                        resp?.writer?.write("succeed")
+                    }
                 }
             }
             "reviewer" -> {
@@ -52,15 +55,17 @@ class AjaxSignUp : HttpServlet() {
                 val reviewerService = ReviewerServiceImpl()
                 if (!reviewerService.checkReviewerEmail(email)) {
                     resp?.writer?.write("emailError")
-                    return
-                }
-                if (!reviewerService.checkReviewerMajor(major)) {
-                    resp?.writer?.write("majorError")
-                    return
-                }
-                if (reviewerService.addReviewer(reviewer)) {
-                    resp?.writer?.write("error")
-                    return
+                } else {
+                    if (!reviewerService.checkReviewerMajor(major)) {
+                        resp?.writer?.write("majorError")
+                    } else {
+                        if (reviewerService.addReviewer(reviewer)) {
+                            resp?.writer?.write("error")
+                        } else {
+                            UserLogServiceImpl().logSignUp(time, identity, email, req.remoteAddr)
+                            resp?.writer?.write("succeed")
+                        }
+                    }
                 }
             }
             "reader" -> {
@@ -72,21 +77,19 @@ class AjaxSignUp : HttpServlet() {
                 val readerService = ReaderServiceImpl()
                 if (!readerService.checkReaderEmail(email)) {
                     resp?.writer?.write("emailError")
-                    return
-                }
-                if (readerService.addReader(reader)) {
-                    resp?.writer?.write("error")
-                    return
+                } else {
+                    if (readerService.addReader(reader)) {
+                        resp?.writer?.write("error")
+                    } else {
+                        UserLogServiceImpl().logSignUp(time, identity, email, req.remoteAddr)
+                        resp?.writer?.write("succeed")
+                    }
                 }
             }
             else -> {
                 resp?.writer?.write("error")
-                return
             }
         }
-
-        resp?.writer?.write("succeed")
-        UserLogServiceImpl().logSignUp(time, identity, email, req.remoteAddr)
 
     }
 

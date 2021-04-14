@@ -29,31 +29,30 @@
                 <button id="reviewer_selector">As Reviewer</button>
                 <button id="reader_selector">As Reader</button>
             </div>
-            <form action="${pageContext.request.contextPath}/servlet/loginServlet" method="post" onsubmit="return checkSubmit();">
+            <form method="post" onsubmit="return false">
                 <input type="hidden" id="action" value="sign_in">
-                <input type="hidden" id="identity" name="identity" value="university">
+                <input type="hidden" id="identity" value="university">
                 <p>
                     <label for="email"></label>
-                    <input type="email" id="email" name="email" placeholder="Enter the email">
+                    <input type="email" id="email" placeholder="Enter the email">
                 </p>
                 <p id="input_name" style="display: none;">
                     <label for="name"></label>
-                    <input type="text" id="name" name="name" placeholder="Enter the user name">
+                    <input type="text" id="name" placeholder="Enter the user name">
                 </p>
                 <p>
                     <label for="raw_password"></label>
                     <input type="password" id="raw_password" placeholder="Enter the password">
-                    <input type="hidden" id="password" name="password">
                     <span class="material-icons vis" id="show_password">visibility_off</span>
                 </p>
                 <p id="input_major" style="display: none;">
                     <label for="major"></label>
-                    <input type="text" list="selectable_majors" id="major" name="major" placeholder="Select a major">
+                    <input type="text" list="selectable_majors" id="major" placeholder="Select a major">
                     <datalist id="selectable_majors" style="height: 200px">
                     </datalist>
                 </p>
                 <p>
-                    <button type="submit" id="submit">SIGN IN</button>
+                    <button type="submit" id="submit" onclick="checkSubmit()">SIGN IN</button>
                 </p>
             </form>
             <p style="text-align: center; padding-top: 12px;">

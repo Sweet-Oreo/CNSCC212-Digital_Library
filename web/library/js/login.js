@@ -127,21 +127,17 @@ function checkSubmit() {
     let identity = document.getElementById("identity")
     let name = document.getElementById("name")
     let rawPassword = document.getElementById("raw_password")
-    let password = document.getElementById("password")
     let email = document.getElementById("email")
     let major = document.getElementById("major")
 
     if (action.value === "sign_in") {
-        if (checkEmail(email, identity) && checkPassword(identity, email, rawPassword)) {
-            password.value = md5(rawPassword.value)
-            return true
+        if (checkEmail(email) && checkRawPassword(rawPassword)) {
+            signIn(identity, email, rawPassword)
         }
-        return false
     } else {
         if (checkEmail(email) && checkName(name) && checkRawPassword(rawPassword) && checkMajor(identity, major)) {
             signUp(identity, email, name, rawPassword, major)
         }
-        return false
     }
 
 }
@@ -192,37 +188,6 @@ function checkMajor(identity, major) {
 }
 
 
-function checkPassword(identity, email, rawPassword) {
-    if (rawPassword.value === "") {
-        timeoutContent = snackbarAlert("Please enter the password", timeoutContent)
-        rawPassword.style.color = "red"
-        rawPassword.style.borderBottomColor = "red"
-        return false
-    } else {
-        let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
-        xmlHttp.open("POST", "/servlet/AjaxCheckPassword", false)
-        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xmlHttp.send("identity=" + identity.value + "&email=" + email.value + "&password=" + md5(rawPassword.value))
-        while (xmlHttp.readyState !== 4) {
-        }
-        if (xmlHttp.status === 200) {
-            if (xmlHttp.responseText !== "succeed") {
-                timeoutContent = snackbarAlert("User not exist or wrong password", timeoutContent)
-                rawPassword.style.color = "red"
-                rawPassword.style.borderBottomColor = "red"
-                return false
-            }
-        } else {
-            timeoutContent = snackbarAlert("Failed to connect to server", timeoutContent)
-            rawPassword.style.color = "red"
-            rawPassword.style.borderBottomColor = "red"
-            return false
-        }
-    }
-    return true
-}
-
-
 function checkRawPassword(rawPassword) {
     if (rawPassword.value === "") {
         timeoutContent = snackbarAlert("Please enter the password", timeoutContent)
@@ -234,17 +199,42 @@ function checkRawPassword(rawPassword) {
 }
 
 
+function signIn(identity, email, rawPassword) {
+    let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
+    xmlHttp.withCredentials = true
+    xmlHttp.open("POST", "/servlet/AjaxSignIn", true)
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    xmlHttp.send("identity=" + identity.value + "&email=" + email.value + "&password=" + md5(rawPassword.value))
+    xmlHttp.onreadystatechange = () => {
+        if (xmlHttp.readyState === 4) {
+            if (xmlHttp.status === 200) {
+                switch (xmlHttp.responseText) {
+                    case "succeed": {
+                        window.location.href = "/library/"
+                        break
+                    }
+                    case "passwordError": {
+                        snackbarAlert("Wrong password or user not exist", timeoutContent)
+                        break
+                    }
+                    default: {
+                        timeoutContent = snackbarAlert("An unexpected error occurred", timeoutContent)
+                        break
+                    }
+                }
+            } else {
+                timeoutContent = snackbarAlert("Error on connecting to server", timeoutContent)
+            }
+        }
+    }
+}
+
+
 function signUp(identity, email, name, rawPassword, major) {
     let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
     xmlHttp.open("POST", "/servlet/AjaxSignUp", true)
     xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-    xmlHttp.send(
-        "identity=" + identity.value +
-        "&email=" + email.value +
-        "&name=" + name.value +
-        "&password=" + md5(rawPassword.value) +
-        "&major=" + major.value
-    )
+    xmlHttp.send("identity=" + identity.value + "&email=" + email.value + "&name=" + name.value + "&password=" + md5(rawPassword.value) + "&major=" + major.value)
     xmlHttp.onreadystatechange = () => {
         if (xmlHttp.readyState === 4) {
             if (xmlHttp.status === 200) {
