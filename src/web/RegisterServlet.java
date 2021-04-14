@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 @WebServlet("/servlet/registerServlet")
 public class RegisterServlet extends HttpServlet {
@@ -30,7 +31,7 @@ public class RegisterServlet extends HttpServlet {
         String email = (String) req.getAttribute("email");
         String password = (String) req.getAttribute("password");
         String identity = (String) req.getAttribute("identity");
-        Date time = new Date(System.currentTimeMillis());
+        String time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(System.currentTimeMillis());
 
         // Recognize the identity of the login user
         switch (identity) {
@@ -48,7 +49,7 @@ public class RegisterServlet extends HttpServlet {
                     writer.write("<script>alert('This email already exists');history.go(-1)</script>");
                     return;
                 }
-                new UserLogServiceImpl().logSignUp(time, identity, email);
+                new UserLogServiceImpl().logSignUp(time, identity, email, req.getRemoteAddr());
                 break;
             }
             case "reader": { // If login user is a reader
@@ -64,7 +65,7 @@ public class RegisterServlet extends HttpServlet {
                     writer.write("<script>alert('This email already exists');history.go(-1)</script>");
                     return;
                 }
-                new UserLogServiceImpl().logSignUp(time, identity, email);
+                new UserLogServiceImpl().logSignUp(time, identity, email, req.getRemoteAddr());
                 break;
             }
             case "reviewer": { // If login user is a reviewer
@@ -81,7 +82,7 @@ public class RegisterServlet extends HttpServlet {
                     writer.write("<script>alert('This email already exists');history.go(-1)</script>");
                     return;
                 }
-                new UserLogServiceImpl().logSignUp(time, identity, email);
+                new UserLogServiceImpl().logSignUp(time, identity, email, req.getRemoteAddr());
                 break;
             }
         }

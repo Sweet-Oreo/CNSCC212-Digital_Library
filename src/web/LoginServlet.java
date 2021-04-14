@@ -6,7 +6,6 @@ import domain.University;
 import service.ReaderService;
 import service.ReviewerService;
 import service.UniversityService;
-import service.UserLogService;
 import service.impl.ReaderServiceImpl;
 import service.impl.ReviewerServiceImpl;
 import service.impl.UniversityServiceImpl;
@@ -21,6 +20,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 @WebServlet("/servlet/loginServlet")
 public class LoginServlet extends HttpServlet {
@@ -35,7 +36,7 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String identity = req.getParameter("identity");
-        Date time = new Date(System.currentTimeMillis());
+        String time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(System.currentTimeMillis());
 
         // If user is signing up, forward to registerServlet
         if (action.equals("sign_up")) {
@@ -104,8 +105,8 @@ public class LoginServlet extends HttpServlet {
         this.doPost(req, resp);
     }
 
-    private void startSession(HttpServletRequest req, HttpServletResponse resp, Date time, String identity, String email) throws ServletException, IOException {
-        new UserLogServiceImpl().logSignIn(time, identity, email);
+    private void startSession(HttpServletRequest req, HttpServletResponse resp, String time, String identity, String email) throws ServletException, IOException {
+        new UserLogServiceImpl().logSignIn(time, identity, email, req.getRemoteAddr());
         // Set session for login reviewer
         HttpSession httpSession = req.getSession();
         httpSession.setAttribute("USER_SESSION", httpSession.getId());

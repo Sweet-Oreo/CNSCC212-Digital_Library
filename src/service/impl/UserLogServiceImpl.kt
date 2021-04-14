@@ -8,16 +8,16 @@ class UserLogServiceImpl : UserLogService {
 
     private val dao = UserLogDaoImpl()
 
-    override fun logSignIn(time: Date?, identity: String?, email: String?) {
-        dao.logSignIn(time, identity, email)
+    override fun logSignIn(time: String?, identity: String?, email: String?, ip: String?) {
+        dao.logSignIn(time, identity, email, ip)
     }
 
-    override fun logSignOut(time: Date?, identity: String?, email: String?) {
-        dao.logSignOut(time, identity, email)
+    override fun logSignOut(time: String?, identity: String?, email: String?, ip: String?) {
+        dao.logSignOut(time, identity, email, ip)
     }
 
-    override fun logSignUp(time: Date?, identity: String?, email: String?) {
-        dao.logSignUp(time, identity, email)
+    override fun logSignUp(time: String?, identity: String?, email: String?, ip: String?) {
+        dao.logSignUp(time, identity, email, ip)
     }
 
 }
