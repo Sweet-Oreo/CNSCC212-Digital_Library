@@ -65,5 +65,5 @@ public class ReviewerDaoImpl implements ReviewerDao {
         }
         return false;
     }
-    
+
 }
