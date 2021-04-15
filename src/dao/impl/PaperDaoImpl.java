@@ -18,4 +18,17 @@ public class PaperDaoImpl implements PaperDao {
         return template.query(sql, new BeanPropertyRowMapper<>(Paper.class));
     }
 
+    @Override
+    public int findTotalCount() {
+        String sql = "select count(*) from paper";
+        return template.queryForObject(sql, Integer.class);
+    }
+
+    @Override
+    public List<Paper> findByPage(int start, int rows) {
+        String sql = "select * from paper limit ?, ?";
+        return template.query(sql, new BeanPropertyRowMapper<Paper>(Paper.class),start, rows);
+
+    }
+
 }

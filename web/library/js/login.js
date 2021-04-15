@@ -210,7 +210,7 @@ function signIn(identity, email, rawPassword) {
             if (xmlHttp.status === 200) {
                 switch (xmlHttp.responseText) {
                     case "succeed": {
-                        window.location.href = "/library/"
+                        window.location.href = "/servlet/findPaperByPageServlet"
                         break
                     }
                     case "passwordError": {

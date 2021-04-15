@@ -9,6 +9,9 @@
     <meta charset="UTF-8">
     <title>Digital Library for Computer Science Research</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <script rel="script" type="text/javascript" src="js/index.js"></script>
     <script rel="script" type="text/javascript" src="js/logout.js"></script>
@@ -56,7 +59,7 @@
                     <th>keywords</th>
                     <th>Operation</th>
                 </tr>
-                <c:forEach items="${papers}" var="paper" varStatus="s">
+                <c:forEach items="${pb.list}" var="paper" varStatus="s">
                     <tr>
                         <td>${s.count}</td>
                         <td>${paper.title}</td>
@@ -67,6 +70,35 @@
                 </c:forEach>
             </table>
         </form>
+
+
+        <div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <c:forEach begin="1" end="${pb.totalPage}" var="i">
+                        <li><a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a></li>
+
+                    </c:forEach>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <span style="font-size: 25px;margin-left: 5px;">
+                        Total  ${pb.totalCount}  papers, ${pb.totalPage}  pages
+
+                    </span>
+                </ul>
+            </nav>
+        </div>
+
+
 
     </div>
 </main>
