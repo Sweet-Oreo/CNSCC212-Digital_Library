@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <script rel="script" type="text/javascript" src="js/index.js"></script>
+    <script rel="script" type="text/javascript" src="js/logout.js"></script>
 </head>
 
 
@@ -19,7 +20,7 @@
 <header class="dl4csr-header">
     <ul>
         <li style="float: left;"><a>DL4CSR</a></li>
-        <li><a href="${pageContext.request.contextPath}/servlet/logoutServlet">Logout</a></li>
+        <li><a id="logout">Logout</a></li>
         <li><a href="${pageContext.request.contextPath}/library/about.jsp">About</a></li>
         <li><a href="${pageContext.request.contextPath}/library/help.jsp">Help</a></li>
     </ul>

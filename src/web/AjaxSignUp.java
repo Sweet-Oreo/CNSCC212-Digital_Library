@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 public class AjaxSignUp extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         final String time = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(System.currentTimeMillis());
         req.setCharacterEncoding("utf-8");
