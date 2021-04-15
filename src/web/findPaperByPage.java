@@ -25,10 +25,12 @@ public class findPaperByPage extends HttpServlet {
         if (rows == null || "".equals(rows)) {
             rows = "5";
         }
+        // Obtain pageBean object
         PaperService paperService = new PaperServiceImpl();
         PageBean<Paper> pb = paperService.findPaperByPage(currentPage, rows);
-        req.setAttribute("pb", pb);
-        req.getRequestDispatcher("/library/index.jsp").forward(req, resp);
+        // Store pageBean object in session
+        req.getSession().setAttribute("pb", pb);
+        resp.sendRedirect(req.getContextPath() + "/library/index.jsp");
     }
 
     @Override

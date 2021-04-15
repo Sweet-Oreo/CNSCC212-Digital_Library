@@ -21,26 +21,31 @@ public class PaperServiceImpl implements PaperService {
     public PageBean<Paper> findPaperByPage(String _currentPage, String _rows) {
         int currentPage = Integer.parseInt(_currentPage);
         int rows = Integer.parseInt(_rows);
+        // Handle situation where user clicks "previous arrow" while in first page
+        if (currentPage <= 0) {
+            currentPage = 1;
+        }
         PageBean<Paper> pb = new PageBean<Paper>();
-        // Set current page and total numbers of papers each page
-        pb.setCurrentPage(currentPage);
+        // Set total numbers of papers each page
         pb.setRows(rows);
         // Query total amount of papers
         int totalCount = paperDao.findTotalCount();
         pb.setTotalCount(totalCount);
+        // Calculate numbers of pages
+        int totalPage = totalCount % rows == 0 ? totalCount / rows : (totalCount / rows) + 1;
+        pb.setTotalPage(totalPage);
+        // Handle situations where user clicks "next arrow" while in last page
+        if (currentPage >= totalPage) {
+            currentPage = totalPage;
+        }
         // Calculate the index of the head record for each page
         int start = (currentPage - 1) * rows;
         // Query list of papers for given page
         List<Paper> paperList = paperDao.findByPage(start, rows);
         pb.setList(paperList);
-        // Calculate numbers of pages
-        int totalPage = totalCount % rows == 0 ? totalCount / rows : (totalCount / rows) + 1;
-        pb.setTotalPage(totalPage);
+        // Set current page
+        pb.setCurrentPage(currentPage);
         return pb;
-
-
-
-
     }
 
 }
