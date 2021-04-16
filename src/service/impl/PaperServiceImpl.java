@@ -1,5 +1,6 @@
 package service.impl;
 
+import com.sun.tools.corba.se.idl.InterfaceGen;
 import dao.PaperDao;
 import dao.impl.PaperDaoImpl;
 import domain.PageBean;
@@ -56,6 +57,16 @@ public class PaperServiceImpl implements PaperService {
     @Override
     public int addPaper(Paper paper) {
         return paperDao.addPaper(paper);
+    }
+
+    @Override
+    public List<Paper> findMyPapers(Object email) {
+        return paperDao.findMyPapers(email);
+    }
+
+    @Override
+    public void deletePaper(String id) {
+        paperDao.delete(Integer.parseInt(id));
     }
 
 }
