@@ -25,7 +25,7 @@ public class PaperServiceImpl implements PaperService {
         if (currentPage <= 0) {
             currentPage = 1;
         }
-        PageBean<Paper> pb = new PageBean<Paper>();
+        PageBean<Paper> pb = new PageBean<>();
         // Set total numbers of papers each page
         pb.setRows(rows);
         // Query total amount of papers
@@ -46,6 +46,16 @@ public class PaperServiceImpl implements PaperService {
         // Set current page
         pb.setCurrentPage(currentPage);
         return pb;
+    }
+
+    @Override
+    public boolean checkPaperMajor(String major) {
+        return paperDao.checkPaperMajor(major);
+    }
+
+    @Override
+    public int addPaper(Paper paper) {
+        return paperDao.addPaper(paper);
     }
 
 }

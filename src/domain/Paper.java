@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.Date;
-
 public class Paper {
 
     private int id;
@@ -21,8 +19,8 @@ public class Paper {
     private int acceptance_2;
     private int acceptance_3;
     private int is_published;
-    private Date submit_date;
-    private Date publish_date;
+    private String submit_date;
+    private String publish_date;
 
     public int getId() {
         return id;
@@ -160,19 +158,19 @@ public class Paper {
         this.is_published = is_published;
     }
 
-    public Date getSubmit_date() {
+    public String getSubmit_date() {
         return submit_date;
     }
 
-    public void setSubmit_date(Date submit_date) {
+    public void setSubmit_date(String submit_date) {
         this.submit_date = submit_date;
     }
 
-    public Date getPublish_date() {
+    public String getPublish_date() {
         return publish_date;
     }
 
-    public void setPublish_date(Date publish_date) {
+    public void setPublish_date(String publish_date) {
         this.publish_date = publish_date;
     }
 
