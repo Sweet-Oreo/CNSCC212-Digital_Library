@@ -90,8 +90,6 @@ public class AjaxSignIn extends HttpServlet {
         session.setAttribute("USER_SESSION", session.getId());
         session.setAttribute("identity", identity);
         session.setAttribute("email", email);
-        // TODO: Find another way to get papers
-        session.setAttribute("papers", new PaperServiceImpl().findAll());
         // Response "succeed"
         writer.write("succeed");
 
