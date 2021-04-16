@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import util.JDBCUtils;
 
+import java.util.List;
 import java.util.Map;
 
 public class UniversityDaoImpl implements UniversityDao {
@@ -54,6 +55,12 @@ public class UniversityDaoImpl implements UniversityDao {
             return false;
         }
         return false;
+    }
+
+    @Override
+    public String findNameByEmail(String email) {
+        final String query = "SELECT `name` FROM `university` WHERE `email` = ?";
+        return template.queryForList(query, email).get(0).get("name").toString();
     }
 
 }

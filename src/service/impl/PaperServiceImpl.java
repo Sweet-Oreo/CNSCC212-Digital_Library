@@ -1,6 +1,5 @@
 package service.impl;
 
-import com.sun.tools.corba.se.idl.InterfaceGen;
 import dao.PaperDao;
 import dao.impl.PaperDaoImpl;
 import domain.PageBean;

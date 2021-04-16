@@ -3,6 +3,7 @@ package web;
 import domain.Paper;
 import service.PaperService;
 import service.impl.PaperServiceImpl;
+import service.impl.UniversityServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +27,7 @@ public class AjaxAddPaper extends HttpServlet {
         Paper paper = new Paper();
         paper.setTitle(req.getParameter("title"));
         paper.setAuthor(req.getParameter("author"));
-        paper.setUniversity(req.getParameter("university"));
+        paper.setUniversity(new UniversityServiceImpl().findNameByEmail(req.getParameter("email")));
         paper.setOutline(req.getParameter("outline"));
         paper.setKeyword(req.getParameter("keyword"));
         paper.setMajor(req.getParameter("major"));

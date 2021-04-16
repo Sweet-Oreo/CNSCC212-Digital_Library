@@ -24,4 +24,8 @@ public class UniversityServiceImpl implements UniversityService {
         return dao.addUniversity(university);
     }
 
+    @Override
+    public String findNameByEmail(String email) {
+        return dao.findNameByEmail(email);
+    }
 }

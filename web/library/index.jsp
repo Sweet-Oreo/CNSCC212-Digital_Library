@@ -8,10 +8,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Digital Library for Computer Science Research</title>
+    <link rel="stylesheet" type="text/css" href="css/public.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <script rel="script" type="text/javascript" src="js/index.js"></script>
     <script rel="script" type="text/javascript" src="js/logout.js"></script>
@@ -24,8 +22,10 @@
     <ul>
         <li style="float: left;"><a>DL4CSR</a></li>
         <li><a id="logout">Logout</a></li>
-        <li><a href="${pageContext.request.contextPath}/library/about.jsp">About</a></li>
-        <li><a href="${pageContext.request.contextPath}/library/help.jsp">Help</a></li>
+        <c:if test="${identity == 'university'}">
+            <li><a href="${pageContext.request.contextPath}/servlet/findMyPapersServlet">Manage</a></li>
+            <li><a href="${pageContext.request.contextPath}/library/upload.jsp">Upload</a></li>
+        </c:if>
     </ul>
 </header>
 
@@ -49,7 +49,6 @@
             <button type="submit" class="material-icons">search</button>
         </form>
 
-        <!-- Display papers-->
         <form id="form" action="${pageContext.request.contextPath}/servlet/downloadServlet" method="post">
             <table border="1" class="table table-bordered table-hover">
                 <tr class="success">
@@ -71,44 +70,40 @@
             </table>
         </form>
 
-
         <div>
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li>
-                        <a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage - 1}&rows=5" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
+                        <a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage - 1}&rows=5"
+                           aria-label="Previous">
+                            <span aria-hidden="true" class="material-icons">chevron_left</span>
                         </a>
                     </li>
 
                     <c:forEach begin="1" end="${pb.totalPage}" var="i">
                         <c:if test="${pb.currentPage == i}">
-                            <li class="active"><a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a></li>
+                            <li class="active"><a
+                                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
+                            </li>
                         </c:if>
                         <c:if test="${pb.currentPage != i}">
-                            <li><a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a></li>
+                            <li><a
+                                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
+                            </li>
                         </c:if>
                     </c:forEach>
                     <li>
-                        <a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage + 1}&rows=5" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
+                        <a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage + 1}&rows=5"
+                           aria-label="Next">
+                            <span aria-hidden="true" class="material-icons">chevron_right</span>
                         </a>
                     </li>
                     <span style="font-size: 25px;margin-left: 5px;">
                         Total  ${pb.totalCount}  papers, ${pb.totalPage}  pages
-
                     </span>
                 </ul>
             </nav>
         </div>
-
-    <div>
-        <c:if test="${identity == 'university'}">
-            <a href="${pageContext.request.contextPath}/servlet/findMyPapersServlet">My Papers</a>
-        </c:if>
-    </div>
-
-
 
     </div>
 </main>

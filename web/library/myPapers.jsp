@@ -1,11 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: miracle
-  Date: 2021/4/16
-  Time: 8:16 下午
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
@@ -15,11 +8,12 @@
     <script>
         function deletePaper(id) {
             if (confirm("Are you sure to delete the paper? ")) {
-                location.href="${pageContext.request.contextPath}/servlet/deletePaperServlet?id=" + id;
+                location.href = "${pageContext.request.contextPath}/servlet/deletePaperServlet?id=" + id;
             }
         }
     </script>
 </head>
+
 <body>
 <div>
     <form id="form" action="${pageContext.request.contextPath}/servlet/findMyPapers" method="post">
