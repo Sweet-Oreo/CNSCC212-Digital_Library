@@ -62,4 +62,16 @@ public class PaperDaoImpl implements PaperDao {
         return 1;
     }
 
+    @Override
+    public List<Paper> findMyPapers(Object email) {
+        // Query university name for given email
+        String queryName = "select name from university where email = ?";
+        Map<String, Object> universityName = template.queryForMap(queryName, email);
+        // Query papers for given university
+        String sql = "select * from paper where university = ?";
+        List<Paper> myPapers = template.query(sql, new BeanPropertyRowMapper<Paper>(Paper.class), universityName.get("name"));
+        return myPapers;
+
+    }
+
 }

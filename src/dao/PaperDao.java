@@ -10,4 +10,6 @@ public interface PaperDao {
     List<Paper> findByPage(int start, int rows);
     boolean checkPaperMajor(String major);
     int addPaper(Paper paper);
+
+    List<Paper> findMyPapers(Object email);
 }

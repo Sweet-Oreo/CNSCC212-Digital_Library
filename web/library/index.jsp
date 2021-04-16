@@ -102,6 +102,12 @@
             </nav>
         </div>
 
+    <div>
+        <c:if test="${identity == 'university'}">
+            <a href="${pageContext.request.contextPath}/servlet/findMyPapersServlet">My Papers</a>
+        </c:if>
+    </div>
+
 
 
     </div>

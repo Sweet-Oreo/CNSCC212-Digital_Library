@@ -58,4 +58,9 @@ public class PaperServiceImpl implements PaperService {
         return paperDao.addPaper(paper);
     }
 
+    @Override
+    public List<Paper> findMyPapers(Object email) {
+        return paperDao.findMyPapers(email);
+    }
+
 }
