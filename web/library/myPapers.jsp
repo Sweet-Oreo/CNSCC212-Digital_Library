@@ -15,7 +15,7 @@
     <script>
         function deletePaper(id) {
             if (confirm("Are you sure to delete the paper? ")) {
-                location.href="${pageContext.request.contextPath}/delelePaperServlet?id=" + id;
+                location.href="${pageContext.request.contextPath}/servlet/deletePaperServlet?id=" + id;
             }
         }
     </script>

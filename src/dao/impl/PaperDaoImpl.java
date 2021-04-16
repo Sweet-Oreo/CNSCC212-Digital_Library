@@ -74,4 +74,11 @@ public class PaperDaoImpl implements PaperDao {
 
     }
 
+    @Override
+    public void delete(int id) {
+        // Delete paper with given id
+        String sql = "delete from paper where id = ?";
+        template.update(sql, id);
+    }
+
 }

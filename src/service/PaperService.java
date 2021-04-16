@@ -12,4 +12,6 @@ public interface PaperService {
     int addPaper(Paper paper);
 
     List<Paper> findMyPapers(Object email);
+
+    void deletePaper(String id);
 }
