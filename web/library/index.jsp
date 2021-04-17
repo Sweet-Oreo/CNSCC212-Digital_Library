@@ -53,7 +53,7 @@
                 <p>Keywords: <i>${paper.keyword}</i></p>
                 <p>Major: <i>${paper.major}</i></p>
                 <!--p>Published on ${paper.publish_date}</p-->
-                <p><a href="${pageContext.request.contextPath}/servlet/downloadServlet">Download</a></p>
+                <p><a href="${pageContext.request.contextPath}/servlet/downloadServlet?filename=${paper.id}.pdf">Download</a></p>
             </div>
         </c:forEach>
     </div>
