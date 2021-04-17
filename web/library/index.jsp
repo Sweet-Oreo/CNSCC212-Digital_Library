@@ -7,6 +7,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta content="#2196F3" name="theme-color">
     <title>Digital Library for Computer Science Research</title>
     <link rel="stylesheet" type="text/css" href="css/public.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">

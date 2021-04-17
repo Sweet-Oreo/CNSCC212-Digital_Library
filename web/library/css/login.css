@@ -66,17 +66,20 @@ body {
 
 .dl4csr-main--content--right button {
     cursor: pointer;
-    background-color: white;
+    color: white;
+    background-color: #2196F3;
     width: 100%;
     font-size: 16px;
     padding: 6px;
     outline: none;
-    border: 1px solid #E0E0E0;
+    border: none;
+    border-radius: 3px;
     transition: all 0.2s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24), 0 1px 6px rgba(0, 0, 0, 0.12);
 }
 
 .dl4csr-main--content--right button:active {
-    background-color: #E0E0E0;
+    background-color: #42A5F5;
 }
 
 .dl4csr-main--content--right a {
@@ -93,13 +96,17 @@ body {
 }
 
 .dl4csr-main--selector button {
+    color: black;
+    background-color: white;
     border: none;
     border-bottom: 2px solid white;
     width: 100%;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .dl4csr-main--selector button:active {
-    background-color: #EAEAEA;
+    background-color: #EEEEEE;
 }
 
 .dl4csr-main--copyright {
@@ -139,12 +146,11 @@ body {
 }
 
 .dl4csr-snackbar #snackbar_close {
-    color: orange;
+    color: #2196F3;
     font-size: 18px;
     font-weight: bold;
     width: available;
     text-decoration: underline;
-    border: deepskyblue;
     cursor: pointer;
 }
 

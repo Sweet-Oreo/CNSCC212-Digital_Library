@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta content="#FFFFFF" name="theme-color">
+    <meta content="#2196F3" name="theme-color">
     <title>Digital Library for Computer Science Research</title>
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
@@ -25,7 +25,7 @@
         <div class="dl4csr-main--content--right">
             <h1 id="title">Sign in</h1>
             <div class="dl4csr-main--selector">
-                <button id="university_selector" style="border-bottom-color: #212121;">As University</button>
+                <button id="university_selector" style="border-bottom-color: #1E88E5;">As University</button>
                 <button id="reviewer_selector">As Reviewer</button>
                 <button id="reader_selector">As Reader</button>
             </div>

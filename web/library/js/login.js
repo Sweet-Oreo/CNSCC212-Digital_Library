@@ -31,14 +31,14 @@ window.onload = () => {
 
     uniSelector.onclick = () => {
         identity.value = "university"
-        uniSelector.style.borderBottomColor = "#212121"
+        uniSelector.style.borderBottomColor = "#1E88E5"
         revSelector.style.borderBottomColor = reaSelector.style.borderBottomColor = "white"
         inputMajor.style.display = "none"
     }
 
     revSelector.onclick = () => {
         identity.value = "reviewer"
-        revSelector.style.borderBottomColor = "#212121"
+        revSelector.style.borderBottomColor = "#1E88E5"
         uniSelector.style.borderBottomColor = reaSelector.style.borderBottomColor = "white"
         if (action.value === "sign_up") {
             inputMajor.style.display = "inherit"
@@ -50,7 +50,7 @@ window.onload = () => {
 
     reaSelector.onclick = () => {
         identity.value = "reader"
-        reaSelector.style.borderBottomColor = "#212121"
+        reaSelector.style.borderBottomColor = "#1E88E5"
         uniSelector.style.borderBottomColor = revSelector.style.borderBottomColor = "white"
         inputMajor.style.display = "none"
     }
