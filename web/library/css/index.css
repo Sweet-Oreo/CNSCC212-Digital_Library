@@ -1,0 +1,29 @@
+.dl4csr-main--paper.title {
+    font-size: 32px;
+    padding-bottom: 16px;
+}
+
+.dl4csr-main--paper.item {
+    text-align: left;
+    line-height: 1.5;
+    padding: 8px;
+    margin: 16px 0;
+    border: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24), 0 1px 6px rgba(0, 0, 0, 0.12);
+}
+
+.dl4csr-main--paper.item:active {
+    background-color: #F4F4F4;
+}
+
+.dl4csr-nav {
+    padding: 0 15% 12px;
+    margin: 0 12px;
+    text-align: center;
+}
+
+.dl4csr-nav ul li {
+    list-style-type: none;
+    display: inline;
+}

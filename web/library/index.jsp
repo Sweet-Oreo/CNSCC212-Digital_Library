@@ -18,9 +18,12 @@
 
 <body>
 
+<!-- TODO: A back-to-top button -->
+
 <header class="dl4csr-header">
     <ul>
         <li style="float: left;"><a>DL4CSR</a></li>
+        <li><a class="material-icons md-24" id="search_btn">search</a></li>
         <li><a id="logout">Logout</a></li>
         <c:if test="${identity == 'university'}">
             <li><a href="${pageContext.request.contextPath}/servlet/findMyPapersServlet">Manage</a></li>
@@ -29,86 +32,66 @@
     </ul>
 </header>
 
+<!-- TODO: Add selectable constraints for searching -->
+<div id="search_bar" class="dl4csr-search">
+    <form action="${pageContext.request.contextPath}/servlet/search" method="get" onsubmit="return checkSearch()">
+        <label for="search_input" class="title">DL4CSR</label>
+        <button type="submit" class="material-icons md-24">search</button>
+        <input type="text" id="search_input" placeholder="Search anything in the library">
+        <button type="button" id="search_close" class="material-icons md-24">close</button>
+    </form>
+</div>
+
+<!-- TODO: Display more details of the paper and design the button of download -->
 <main class="dl4csr-main">
-    <div class="dl4csr-main--search">
-        <h1>Search papers</h1>
-
-        <form action="${pageContext.request.contextPath}/library/search.jsp" method="get" onsubmit="return false;">
-            <div class="dl4csr-main--search--option">
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" placeholder="Enter the title">
+    <div class="dl4csr-main--paper">
+        <h1 class="dl4csr-main--paper title">All Published Papers</h1>
+        <c:forEach items="${pb.list}" var="paper" varStatus="s">
+            <div class="dl4csr-main--paper item" id="item_${s.count}">
+                <h2 style="border-bottom: 1px solid #E0E0E0">${paper.title}</h2>
+                <p>Written by <i>${paper.author}</i> (${paper.university})</p>
+                <p>Keywords: <i>${paper.keyword}</i></p>
+                <p>Major: <i>${paper.major}</i></p>
+                <!--p>Published on ${paper.publish_date}</p-->
+                <p><a href="${pageContext.request.contextPath}/servlet/downloadServlet">Download</a></p>
             </div>
-            <div>
-                <label for="author">Author</label>
-                <input type="text" id="author" name="author" placeholder="Enter the author">
-            </div>
-            <div>
-                <label for="keyword">Keyword</label>
-                <input type="text" id="keyword" name="keyword" placeholder="Enter the keyword">
-            </div>
-            <button type="submit" class="material-icons">search</button>
-        </form>
-
-        <form id="form" action="${pageContext.request.contextPath}/servlet/downloadServlet" method="post">
-            <table border="1" class="table table-bordered table-hover">
-                <tr class="success">
-                    <th>No.</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>keywords</th>
-                    <th>Operation</th>
-                </tr>
-                <c:forEach items="${pb.list}" var="paper" varStatus="s">
-                    <tr>
-                        <td>${s.count}</td>
-                        <td>${paper.title}</td>
-                        <td>${paper.author}</td>
-                        <td>${paper.keyword}</td>
-                        <td><a href="">Download</a></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </form>
-
-        <div>
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage - 1}&rows=5"
-                           aria-label="Previous">
-                            <span aria-hidden="true" class="material-icons">chevron_left</span>
-                        </a>
-                    </li>
-
-                    <c:forEach begin="1" end="${pb.totalPage}" var="i">
-                        <c:if test="${pb.currentPage == i}">
-                            <li class="active"><a
-                                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
-                            </li>
-                        </c:if>
-                        <c:if test="${pb.currentPage != i}">
-                            <li><a
-                                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
-                            </li>
-                        </c:if>
-                    </c:forEach>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage + 1}&rows=5"
-                           aria-label="Next">
-                            <span aria-hidden="true" class="material-icons">chevron_right</span>
-                        </a>
-                    </li>
-                    <span style="font-size: 25px;margin-left: 5px;">
-                        Total  ${pb.totalCount}  papers, ${pb.totalPage}  pages
-                    </span>
-                </ul>
-            </nav>
-        </div>
-
+        </c:forEach>
     </div>
 </main>
 
+<!-- TODO: Stylesheet of this part is undone -->
+<nav class="dl4csr-nav">
+    <ul>
+        <li>
+            <a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage - 1}&rows=5">
+                <span aria-hidden="true" class="material-icons">chevron_left</span>
+            </a>
+        </li>
+        <c:forEach begin="1" end="${pb.totalPage}" var="i">
+            <c:if test="${pb.currentPage == i}">
+                <li class="active"><a
+                    href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
+                </li>
+            </c:if>
+            <c:if test="${pb.currentPage != i}">
+                <li><a
+                    href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
+                </li>
+            </c:if>
+        </c:forEach>
+        <li>
+            <a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage + 1}&rows=5">
+                <span aria-hidden="true" class="material-icons">chevron_right</span>
+            </a>
+        </li>
+        <br>
+        <span>Total ${pb.totalCount} papers, ${pb.totalPage} pages</span>
+    </ul>
+</nav>
+
 <footer class="dl4csr-footer">
+    <p class="dl4csr-footer--title">Digital Library for Computer Science Research</p>
+    <p class="dl4csr-footer--content">Copyright &copy; 2021 CNSCC.212 Group 5. All rights reserved.</p>
 </footer>
 
 </body>
