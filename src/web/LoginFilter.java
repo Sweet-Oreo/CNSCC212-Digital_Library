@@ -19,12 +19,12 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
+        // If the user has not login, redirect to login page
         if (session.getAttribute("USER_SESSION") == null) {
             response.sendRedirect(request.getContextPath() + "/library/login.jsp");
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
-
     @Override
     public void destroy() {
     }

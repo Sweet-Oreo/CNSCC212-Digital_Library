@@ -20,6 +20,7 @@ public class PaperFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
         String referer = request.getHeader("Referer");
+        // If user access paper while not through "Download" button, redirect
         if (referer == null || "".equals(referer) || !referer.startsWith("http://localhost:8080/library/index.jsp")) {
             response.sendRedirect(request.getContextPath() + "/library/index.jsp");
         }

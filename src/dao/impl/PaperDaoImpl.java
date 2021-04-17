@@ -14,12 +14,6 @@ public class PaperDaoImpl implements PaperDao {
     private final JdbcTemplate template = new JdbcTemplate((JDBCUtils.getDataSource()));
 
     @Override
-    public List<Paper> findAll() {
-        String sql = "SELECT * FROM `paper`;";
-        return template.query(sql, new BeanPropertyRowMapper<>(Paper.class));
-    }
-
-    @Override
     public int findTotalCount() {
         String sql = "SELECT COUNT(*) FROM `paper`;";
         return template.queryForObject(sql, Integer.class);

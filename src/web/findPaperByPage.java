@@ -16,6 +16,7 @@ import java.io.IOException;
 public class findPaperByPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Obtain parameters from browser
         String currentPage = req.getParameter("currentPage"); // Current page
         String rows = req.getParameter("rows"); // Total number of papers each page
         // Handle situations where parameters from browsers are null
