@@ -46,10 +46,12 @@
         <h1 class="dl4csr-main--paper title">All Published Papers</h1>
         <c:forEach items="${pb.list}" var="paper" varStatus="s">
             <div class="dl4csr-main--paper item" id="item_${s.count}">
-                <h2 style="border-bottom: 1px solid #E0E0E0">${paper.title}</h2>
+                <h2>${paper.title}</h2>
                 <div class="dl4csr-main--paper details">
                     <p class="dl4csr-main--paper key">Author</p>
                     <p class="dl4csr-main--paper value">${paper.author}</p>
+                    <p class="dl4csr-main--paper key">University</p>
+                    <p class="dl4csr-main--paper value">${paper.university}</p>
                     <p class="dl4csr-main--paper key">Major</p>
                     <p class="dl4csr-main--paper value">${paper.major}</p>
                     <p class="dl4csr-main--paper key">Keywords</p>
@@ -59,40 +61,36 @@
                     <p class="dl4csr-main--paper key">Date</p>
                     <p class="dl4csr-main--paper value">${paper.publish_date}</p>
                 </div>
-                <p style="text-align: right; padding: 8px">
-                    <a class="dl4csr-main--paper download" href="${pageContext.request.contextPath}/servlet/downloadServlet?filename=${paper.id}.pdf">Download</a>
+                <p style="text-align: right; padding-bottom: 8px">
+                    <a class="dl4csr-main--paper download"
+                       href="${pageContext.request.contextPath}/servlet/downloadServlet?filename=${paper.id}.pdf">Download</a>
                 </p>
             </div>
         </c:forEach>
     </div>
 </main>
 
-<!-- TODO: Stylesheet of this part is undone -->
 <nav class="dl4csr-nav">
-    <ul>
-        <li>
-            <a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage - 1}&rows=5">
-                <span aria-hidden="true" class="material-icons">chevron_left</span>
-            </a>
-        </li>
+    <div class="dl4csr-nav--pages">
+        <a class="material-icons btn"
+            <c:if test="${pb.currentPage != 1}">
+                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage - 1}&rows=5"
+            </c:if>>chevron_left</a>
         <c:forEach begin="1" end="${pb.totalPage}" var="i">
             <c:if test="${pb.currentPage == i}">
-                <li class="active"><a
-                    href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
-                </li>
+                <a class="dl4csr-nav--num active"
+                   href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
             </c:if>
             <c:if test="${pb.currentPage != i}">
-                <li><a
-                    href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
-                </li>
+                <a class="dl4csr-nav--num"
+                   href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
             </c:if>
         </c:forEach>
-        <li>
-            <a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage + 1}&rows=5">
-                <span aria-hidden="true" class="material-icons">chevron_right</span>
-            </a>
-        </li>
-    </ul>
+        <a class="material-icons btn"
+            <c:if test="${pb.currentPage != pb.totalPage}">
+                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage + 1}&rows=5"
+            </c:if>>chevron_right</a>
+    </div>
     <span>Total ${pb.totalCount} papers found in the library</span>
 </nav>
 

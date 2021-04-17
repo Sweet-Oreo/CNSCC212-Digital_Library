@@ -1,16 +1,21 @@
 .dl4csr-main--paper.title {
     font-size: 32px;
-    padding-bottom: 16px;
+    padding-bottom: 8px;
 }
 
 .dl4csr-main--paper.item {
     text-align: left;
     line-height: 1.5;
-    padding: 8px;
+    padding: 16px;
     margin: 16px 0;
     border: none;
     transition: all 0.2s ease;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24), 0 1px 6px rgba(0, 0, 0, 0.12);
+}
+
+.dl4csr-main--paper.item h2 {
+    border-bottom: 1px solid #E0E0E0;
+    padding-bottom: 6px;
 }
 
 .dl4csr-main--paper.details {
@@ -53,9 +58,40 @@
     padding: 0 15% 12px;
     margin: 0 12px;
     text-align: center;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
 }
 
-.dl4csr-nav ul li {
-    list-style-type: none;
-    display: inline;
+.dl4csr-nav--pages {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    padding: 12px;
 }
+
+.dl4csr-nav--pages a {
+    display: inline-block;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid #E0E0E0;
+    padding: 3px;
+    width: 30px;
+    height: 32px;
+    line-height: 32px;
+}
+
+.material-icons.btn {
+    font-size: 24px;
+}
+
+.dl4csr-nav--num {
+    font-size: 20px;
+}
+
+.dl4csr-nav--num.active {
+    background-color: #EAEAEA;
+}
+
