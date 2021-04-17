@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/upload.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <script rel="script" type="text/javascript" src="js/upload.js"></script>
+    <script rel="script" type="text/javascript" src="js/public.js"></script>
 </head>
 
 
@@ -18,7 +19,7 @@
 <header class="dl4csr-header">
     <ul>
         <li style="float: left;"><a href="${pageContext.request.contextPath}/library/">DL4CSR</a></li>
-        <li><a class="material-icons md-24">search</a></li>
+        <li><a class="material-icons md-24" id="search_btn">search</a></li>
         <li><a id="logout">Logout</a></li>
         <c:if test="${identity == 'university'}">
             <li><a href="${pageContext.request.contextPath}/servlet/findMyPapersServlet">Manage</a></li>
@@ -26,6 +27,15 @@
         </c:if>
     </ul>
 </header>
+
+<div id="search_bar" class="dl4csr-search">
+    <form action="${pageContext.request.contextPath}/servlet/search" method="get" onsubmit="return checkSearch()">
+        <label for="search_input" class="title">DL4CSR</label>
+        <button type="submit" class="material-icons md-24">search</button>
+        <input type="text" id="search_input" placeholder="Search anything in the library">
+        <button type="button" id="search_close" class="material-icons md-24">close</button>
+    </form>
+</div>
 
 <main class="dl4csr-main">
     <div>
