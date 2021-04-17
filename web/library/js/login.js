@@ -215,6 +215,8 @@ function signIn(identity, email, rawPassword) {
                     }
                     case "passwordError": {
                         snackbarAlert("Wrong password or user not exist", timeoutContent)
+                        rawPassword.style.color = "red"
+                        rawPassword.style.borderBottomColor = "red"
                         break
                     }
                     default: {

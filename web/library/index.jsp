@@ -18,7 +18,7 @@
 
 <body>
 
-<!-- TODO: A back-to-top button -->
+<button class="back-to-top" id="back_to_top"><span class="material-icons">arrow_upward</span></button>
 
 <header class="dl4csr-header">
     <ul>
