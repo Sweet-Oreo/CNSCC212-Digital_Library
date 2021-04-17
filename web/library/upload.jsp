@@ -16,6 +16,8 @@
 
 <body>
 
+<button class="back-to-top" id="back_to_top"><span class="material-icons">arrow_upward</span></button>
+
 <header class="dl4csr-header">
     <ul>
         <li style="float: left;"><a href="${pageContext.request.contextPath}/library/">DL4CSR</a></li>
@@ -23,7 +25,7 @@
         <li><a id="logout">Logout</a></li>
         <c:if test="${identity == 'university'}">
             <li><a href="${pageContext.request.contextPath}/servlet/findMyPapersServlet">Manage</a></li>
-            <li><a href="${pageContext.request.contextPath}/library/upload.jsp">Upload</a></li>
+            <li><a>Upload</a></li>
         </c:if>
     </ul>
 </header>

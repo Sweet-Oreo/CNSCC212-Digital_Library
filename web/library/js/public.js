@@ -36,6 +36,21 @@ function listenSearch(searchBar, searchBtn, closeBtn) {
     }
 }
 
+// This function should be added into window.onload of the page
+function listenBackToTop(backToTopBtn) {
+    backToTopBtn.style.bottom = -backToTopBtn.offsetHeight + "px"
+    window.onscroll = () => {
+        if (document.body.onscroll > 500 || document.documentElement.scrollTop > 500) {
+            backToTopBtn.style.bottom = "3%"
+        } else {
+            backToTopBtn.style.bottom = -backToTopBtn.offsetHeight + "px"
+        }
+    }
+    backToTopBtn.onclick = () => {
+        window.scrollTo({top: 0, behavior: "smooth"})
+    }
+}
+
 // This function can be called directly
 function checkSearch() {
     let input = document.getElementById("search_input")
