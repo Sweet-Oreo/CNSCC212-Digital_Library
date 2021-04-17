@@ -13,11 +13,6 @@ public class PaperServiceImpl implements PaperService {
     private final PaperDao paperDao = new PaperDaoImpl();
 
     @Override
-    public List<Paper> findAll() {
-        return paperDao.findAll();
-    }
-
-    @Override
     public PageBean<Paper> findPaperByPage(String _currentPage, String _rows) {
         int currentPage = Integer.parseInt(_currentPage);
         int rows = Integer.parseInt(_rows);

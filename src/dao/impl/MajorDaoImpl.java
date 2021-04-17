@@ -15,6 +15,7 @@ public class MajorDaoImpl implements MajorDao {
     @Override
     public List<String> findMajors() {
         List<String> majors = new ArrayList<>();
+        // Find all majors
         String sql = "SELECT `name` FROM `major`;";
         List<Map<String, Object>> majorMaps = template.queryForList(sql);
         for (Map<String, Object> majorMap : majorMaps) {
