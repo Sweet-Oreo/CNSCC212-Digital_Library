@@ -32,7 +32,6 @@
     </ul>
 </header>
 
-<!-- TODO: Add selectable constraints for searching -->
 <div id="search_bar" class="dl4csr-search">
     <form action="${pageContext.request.contextPath}/servlet/search" method="get" onsubmit="return checkSearch()">
         <label for="search_input" class="title">DL4CSR</label>
@@ -42,18 +41,27 @@
     </form>
 </div>
 
-<!-- TODO: Display more details of the paper and design the button of download -->
 <main class="dl4csr-main">
     <div class="dl4csr-main--paper">
         <h1 class="dl4csr-main--paper title">All Published Papers</h1>
         <c:forEach items="${pb.list}" var="paper" varStatus="s">
             <div class="dl4csr-main--paper item" id="item_${s.count}">
                 <h2 style="border-bottom: 1px solid #E0E0E0">${paper.title}</h2>
-                <p>Written by <i>${paper.author}</i> (${paper.university})</p>
-                <p>Keywords: <i>${paper.keyword}</i></p>
-                <p>Major: <i>${paper.major}</i></p>
-                <!--p>Published on ${paper.publish_date}</p-->
-                <p><a href="${pageContext.request.contextPath}/servlet/downloadServlet?filename=${paper.id}.pdf">Download</a></p>
+                <div class="dl4csr-main--paper details">
+                    <p class="dl4csr-main--paper key">Author</p>
+                    <p class="dl4csr-main--paper value">${paper.author}</p>
+                    <p class="dl4csr-main--paper key">Major</p>
+                    <p class="dl4csr-main--paper value">${paper.major}</p>
+                    <p class="dl4csr-main--paper key">Keywords</p>
+                    <p class="dl4csr-main--paper value">${paper.keyword}</p>
+                    <p class="dl4csr-main--paper key">Outline</p>
+                    <p class="dl4csr-main--paper value">${paper.outline}</p>
+                    <p class="dl4csr-main--paper key">Date</p>
+                    <p class="dl4csr-main--paper value">${paper.publish_date}</p>
+                </div>
+                <p style="text-align: right; padding: 8px">
+                    <a class="dl4csr-main--paper download" href="${pageContext.request.contextPath}/servlet/downloadServlet?filename=${paper.id}.pdf">Download</a>
+                </p>
             </div>
         </c:forEach>
     </div>
@@ -84,9 +92,8 @@
                 <span aria-hidden="true" class="material-icons">chevron_right</span>
             </a>
         </li>
-        <br>
-        <span>Total ${pb.totalCount} papers, ${pb.totalPage} pages</span>
     </ul>
+    <span>Total ${pb.totalCount} papers found in the library</span>
 </nav>
 
 <footer class="dl4csr-footer">

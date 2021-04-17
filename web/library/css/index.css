@@ -13,8 +13,40 @@
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24), 0 1px 6px rgba(0, 0, 0, 0.12);
 }
 
-.dl4csr-main--paper.item:active {
-    background-color: #F4F4F4;
+.dl4csr-main--paper.details {
+    display: grid;
+    grid-template-columns: 88px auto;
+}
+
+.dl4csr-main--paper.key {
+    text-align: left;
+    padding: 6px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dl4csr-main--paper.value {
+    text-align: justify;
+    padding: 6px 0;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.dl4csr-main--paper.download {
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    background-color: white;
+    width: 100%;
+    font-size: 16px;
+    padding: 8px 12px;
+    outline: none;
+    border: 1px solid #E0E0E0;
+    transition: all 0.2s ease;
+}
+
+.dl4csr-main--paper.download:active {
+    background-color: #E0E0E0;
 }
 
 .dl4csr-nav {
