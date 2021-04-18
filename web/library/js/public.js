@@ -56,3 +56,15 @@ function checkSearch() {
     let input = document.getElementById("search_input")
     return input.value !== ""
 }
+
+// This function can be called directly
+function snackbarAlert(content, timeoutContent) {
+    clearTimeout(timeoutContent)
+    let snackbar = document.getElementById("snackbar")
+    let snackbarInfo = document.getElementById("snackbar_info")
+    snackbarInfo.innerHTML = content
+    snackbar.style.bottom = "0"
+    return setTimeout(() => {
+        snackbar.style.bottom = -snackbar.offsetHeight + "px"
+    }, 4000)
+}

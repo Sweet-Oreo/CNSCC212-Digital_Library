@@ -45,7 +45,7 @@
 <main class="dl4csr-main">
     <div class="dl4csr-main--upload">
         <h1 class="dl4csr-main--upload title">Upload Papers</h1>
-        <form onsubmit="return checkUpload();">
+        <form onsubmit="return false;" method="post" id="form">
             <div class="dl4csr-main--form">
                 <label for="title">Title</label>
                 <input type="text" id="title" placeholder="Enter the title">
@@ -58,16 +58,22 @@
                 <label for="outline">Outline</label>
                 <textarea id="outline" placeholder="Enter the outline"></textarea>
             </div>
+            <input type="hidden" id="email" value="${email}">
             <datalist id="selectable_majors" style="height: 200px"></datalist>
             <p>
-                <a class="dl4csr-button" href="javascript:">
+                <a id="file_btn" class="dl4csr-button" href="javascript:">
                     <input type="file" accept="application/pdf" id="file">SELECT FILE
                 </a>
-                <button class="dl4csr-button" type="submit" id="add-paper">ADD PAPER</button>
+                <button onclick="checkUpload()" class="dl4csr-button" type="submit">ADD PAPER</button>
             </p>
         </form>
     </div>
 </main>
+
+<div class="dl4csr-snackbar" id="snackbar">
+    <p id="snackbar_info">Unset</p>
+    <div style="text-align: right"><a id="snackbar_close">Okay</a></div>
+</div>
 
 </body>
 

@@ -28,4 +28,5 @@ public class UniversityServiceImpl implements UniversityService {
     public String findNameByEmail(String email) {
         return dao.findNameByEmail(email);
     }
+
 }

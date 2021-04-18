@@ -160,3 +160,31 @@ body {
     font-style: normal;
     font-weight: normal;
 }
+
+.dl4csr-snackbar {
+    display: grid;
+    grid-template-columns: 60% 10%;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    background-color: #212121;
+    bottom: -100%;
+    padding: 18px 16%;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24), 0 1px 6px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease-in-out;
+}
+
+.dl4csr-snackbar #snackbar_info {
+    color: white;
+    font-size: 18px;
+    text-align: left;
+}
+
+.dl4csr-snackbar #snackbar_close {
+    color: #2196F3;
+    font-size: 18px;
+    font-weight: bold;
+    width: available;
+    text-decoration: underline;
+    cursor: pointer;
+}
