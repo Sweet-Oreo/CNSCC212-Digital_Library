@@ -1,4 +1,7 @@
+<!-- TODO: Make this page better -->
 <%@ page contentType="text/html;charset=UTF-8" %>
+
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -40,39 +43,27 @@
 </div>
 
 <main class="dl4csr-main">
-    <div>
-        <form onsubmit="return false;">
-            <input type="hidden" id="email" value="${pageContext.request.session.getAttribute("email")}">
-            <p>
+    <div class="dl4csr-main--upload">
+        <h1 class="dl4csr-main--upload title">Upload Papers</h1>
+        <form onsubmit="return checkUpload();">
+            <div class="dl4csr-main--form">
                 <label for="title">Title</label>
                 <input type="text" id="title" placeholder="Enter the title">
-            </p>
-            <p>
                 <label for="author">Author</label>
                 <input type="text" id="author" placeholder="Enter the author">
-            </p>
-            <p>
-                <label for="outline">Outline</label>
-            </p>
-            <p>
-                <textarea id="outline" placeholder="Enter the outline"></textarea>
-            </p>
-            <p>
                 <label for="keyword">Keyword</label>
                 <input type="text" id="keyword" placeholder="Enter the keyword">
-            </p>
-            <p>
                 <label for="major">Major</label>
                 <input type="text" list="selectable_majors" id="major" placeholder="Select a major">
-                <datalist id="selectable_majors" style="height: 200px">
-                </datalist>
-            </p>
+                <label for="outline">Outline</label>
+                <textarea id="outline" placeholder="Enter the outline"></textarea>
+            </div>
+            <datalist id="selectable_majors" style="height: 200px"></datalist>
             <p>
-                <label for="file">File</label>
-                <input type="file" accept="application/pdf" id="file" placeholder="Select a pdf file">
-            </p>
-            <p>
-                <button type="submit" id="add-paper">ADD PAPER</button>
+                <a class="dl4csr-button" href="javascript:">
+                    <input type="file" accept="application/pdf" id="file">SELECT FILE
+                </a>
+                <button class="dl4csr-button" type="submit" id="add-paper">ADD PAPER</button>
             </p>
         </form>
     </div>
