@@ -1,6 +1,10 @@
 package web;
 
 import domain.Paper;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import service.PaperService;
 import service.impl.PaperServiceImpl;
 import service.impl.UniversityServiceImpl;
@@ -14,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @WebServlet("/servlet/AjaxUploadPaperServlet")
 public class AjaxUploadPaper extends HttpServlet {
@@ -27,14 +32,42 @@ public class AjaxUploadPaper extends HttpServlet {
 
         // TODO: To get the type of multipart/form-data, getParameter() is not available. Must find another way
 
+        DiskFileItemFactory factory=new DiskFileItemFactory();
+        ServletFileUpload upload=new ServletFileUpload(factory);
+        req.setCharacterEncoding("utf-8");
+
         Paper paper = new Paper();
+        paper.setSubmit_date(date);
+        try {
+            List<FileItem> list = upload.parseRequest(req);
+            for (FileItem fileItem : list) {
+                switch (fileItem.getFieldName()) {
+                    case "title":
+                        paper.setTitle(fileItem.getString());
+                        break;
+                    case "author":
+                        paper.setAuthor(fileItem.getString());
+                        break;
+                    case "email":
+                        paper.setUniversity(new UniversityServiceImpl().findNameByEmail(fileItem.getString()));
+                        break;
+                    case "outline":
+                        paper.setOutline(fileItem.getString());
+                        break;
+                    case "keyword":
+                        paper.setKeyword(fileItem.getString());
+                        break;
+                    case "major":
+                        paper.setMajor(fileItem.getString());
+                        break;
+                }
+            }
 
+        } catch (FileUploadException e) {
+            e.printStackTrace();
+        }
 
-
-
-
-
-
+/*
         paper.setTitle(req.getParameter("title"));
         paper.setAuthor(req.getParameter("author"));
         paper.setUniversity(new UniversityServiceImpl().findNameByEmail(req.getParameter("email")));
@@ -42,6 +75,8 @@ public class AjaxUploadPaper extends HttpServlet {
         paper.setKeyword(req.getParameter("keyword"));
         paper.setMajor(req.getParameter("major"));
         paper.setSubmit_date(date);
+
+ */
 
         PaperService paperService = new PaperServiceImpl();
         if (!paperService.checkPaperMajor(paper.getMajor())) {
