@@ -143,18 +143,6 @@ function checkSubmit() {
 }
 
 
-function snackbarAlert(content, timeoutContent) {
-    clearTimeout(timeoutContent)
-    let snackbar = document.getElementById("snackbar")
-    let snackbarInfo = document.getElementById("snackbar_info")
-    snackbarInfo.innerHTML = content
-    snackbar.style.bottom = "0"
-    return setTimeout(() => {
-        snackbar.style.bottom = -snackbar.offsetHeight + "px"
-    }, 4000)
-}
-
-
 function checkEmail(email) {
     if (email.value === "") {
         timeoutContent = snackbarAlert("Please enter the email", timeoutContent)

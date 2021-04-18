@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <script rel="script" type="text/javascript" src="js/login.js"></script>
+    <script rel="script" type="text/javascript" src="js/public.js"></script>
     <script rel="script" type="text/javascript" src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
 </head>
 
