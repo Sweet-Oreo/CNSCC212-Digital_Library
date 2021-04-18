@@ -9,15 +9,13 @@ import service.PaperService;
 import service.impl.PaperServiceImpl;
 import service.impl.UniversityServiceImpl;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
@@ -37,14 +35,34 @@ public class AjaxUploadPaper extends HttpServlet {
         ServletFileUpload upload=new ServletFileUpload(factory);
         // Solving encoding/decoding problem
         req.setCharacterEncoding("utf-8");
-
-        Paper paper = new Paper(); // Paper object that will be added into database
+        // Get file upload path
+        ServletContext servletContext = this.getServletContext();
+        String uploadPath = servletContext.getRealPath("/papers");
+        // Set buffer size
+        factory.setSizeThreshold(1024*1024*10);
+        // Set single file size limit
+        upload.setFileSizeMax(1024*1024*10*10*10);
+        // Paper object that will be added into database
+        Paper paper = new Paper();
         paper.setSubmit_date(date);
+
         try {
             // Obtain all elements in request
             List<FileItem> list = upload.parseRequest(req);
-            // Set the attributes of uploaded paper
             for (FileItem fileItem : list) {
+                // If there's file in the form, store this file
+                if (!fileItem.isFormField() && fileItem.getName()!=null && !"".equals(fileItem.getName())){
+                    String filName=fileItem.getName();
+                    // Get the file suffix
+                    String suffix=filName.substring(filName.lastIndexOf("."));
+                    // Obtain the id of uploaded paper
+                    PaperService paperService = new PaperServiceImpl();
+                    int id = paperService.findLastId();
+                    // Write file into disk
+                    fileItem.write(new File(uploadPath,id + suffix));
+                }
+
+                // Handle ordinary form field and set the attributes of uploaded paper
                 switch (fileItem.getFieldName()) {
                     case "title":
                         paper.setTitle(fileItem.getString());
@@ -69,6 +87,8 @@ public class AjaxUploadPaper extends HttpServlet {
 
         } catch (FileUploadException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         // Add uploaded paper into database
@@ -85,39 +105,6 @@ public class AjaxUploadPaper extends HttpServlet {
                 writer.write("error");
             }
         }
-
-        // Store uploaded paper in given directory
-        // Set buffer size
-        factory.setSizeThreshold(1024*1024*10);
-        // Set single file size limit
-        upload.setFileSizeMax(1024*1024*10);
-
-        try {
-            // Obtain all elements in request
-            List<FileItem> list = upload.parseRequest(req);
-            for (FileItem fileItem : list) {
-                if (!fileItem.isFormField()&&fileItem.getName()!=null&&!"".equals(fileItem.getName())){
-                    String filName=fileItem.getName();
-                    System.out.println(filName);
-                    String uuid= UUID.randomUUID().toString();
-                    //获取文件后缀名
-                    String suffix=filName.substring(filName.lastIndexOf("."));
-
-                    //获取文件上传目录路径，在项目部署路径下的upload目录里。若想让浏览器不能直接访问到图片，可以放在WEB-INF下
-                    String uploadPath=req.getSession().getServletContext().getRealPath("/papers");
-
-                    File file=new File(uploadPath);
-                    file.mkdirs();
-                    //写入文件到磁盘，该行执行完毕后，若有该临时文件，将会自动删除
-                    fileItem.write(new File(uploadPath,uuid+suffix));
-                }
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
 
     }
 

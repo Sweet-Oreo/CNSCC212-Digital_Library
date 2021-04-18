@@ -63,4 +63,9 @@ public class PaperServiceImpl implements PaperService {
         paperDao.delete(Integer.parseInt(id));
     }
 
+    @Override
+    public int findLastId() {
+        return paperDao.findLastId();
+    }
+
 }

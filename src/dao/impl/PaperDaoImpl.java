@@ -75,4 +75,13 @@ public class PaperDaoImpl implements PaperDao {
         template.update(sql, id);
     }
 
+    @Override
+    public int findLastId() {
+        // Find the id of the last record
+        String sql = "select id from paper order by id desc limit 1";
+        Map<String, Object> map = template.queryForMap(sql);
+        Number id = (Number) map.get("id");
+        return id.intValue();
+    }
+
 }

@@ -13,4 +13,6 @@ public interface PaperService {
     List<Paper> findMyPapers(Object email);
 
     void deletePaper(String id);
+
+    int findLastId();
 }
