@@ -69,12 +69,11 @@ function checkUpload() {
     let outline = document.getElementById("outline")
     let file = document.getElementById("file")
     let fileBtn = document.getElementById("file_btn")
-    let email = document.getElementById("email")
 
     if (checkTitle(title) && checkAuthor(author) && checkKeyword(keyword) && checkMajor(major) && checkOutline(outline) && checkFile(file, fileBtn)) {
         let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
         let formData = new FormData(form)
-        xmlHttp.open("POST", "/servlet/AjaxAddPaper", false)
+        xmlHttp.open("POST", "/servlet/AjaxUploadPaperServlet", false)
         xmlHttp.send(formData)
         while (xmlHttp.readyState !== 4) {
         }

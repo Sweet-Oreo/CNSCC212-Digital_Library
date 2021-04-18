@@ -15,8 +15,8 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 
-@WebServlet("/servlet/AjaxAddPaper")
-public class AjaxAddPaper extends HttpServlet {
+@WebServlet("/servlet/AjaxUploadPaperServlet")
+public class AjaxUploadPaper extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -28,6 +28,13 @@ public class AjaxAddPaper extends HttpServlet {
         // TODO: To get the type of multipart/form-data, getParameter() is not available. Must find another way
 
         Paper paper = new Paper();
+
+
+
+
+
+
+
         paper.setTitle(req.getParameter("title"));
         paper.setAuthor(req.getParameter("author"));
         paper.setUniversity(new UniversityServiceImpl().findNameByEmail(req.getParameter("email")));
