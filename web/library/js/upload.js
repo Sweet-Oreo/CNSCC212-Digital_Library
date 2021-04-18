@@ -5,3 +5,9 @@ window.onload = () => {
     listenLogout(document.getElementById("logout"))
 
 }
+
+
+// TODO: Check if there empty inputs in the form
+function checkUpload() {
+    return true
+}

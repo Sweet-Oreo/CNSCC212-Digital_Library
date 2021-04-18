@@ -1,0 +1,70 @@
+.dl4csr-main--upload {
+    text-align: center;
+}
+
+.dl4csr-main--upload.title {
+    font-size: 32px;
+    padding-bottom: 8px;
+}
+
+.dl4csr-main--form {
+    text-align: left;
+    display: grid;
+    grid-template-columns: 100px auto;
+}
+
+.dl4csr-main--form label {
+    padding: 3px 0;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.dl4csr-main--form input {
+    padding: 3px 0;
+    margin-bottom: 12px;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #E0E0E0;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.dl4csr-main--form input:focus {
+    border-bottom-color: #212121;
+}
+
+.dl4csr-main--form textarea {
+    margin-bottom: 12px;
+    font-size: 16px;
+    outline: none;
+}
+
+.dl4csr-button {
+    margin: 12px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    background-color: #2196F3;
+    width: auto;
+    font-size: 16px;
+    padding: 8px 12px;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.dl4csr-button:active {
+    background-color: #42A5F5;
+}
+
+.dl4csr-button input {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
