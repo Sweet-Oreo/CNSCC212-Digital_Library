@@ -14,11 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
 
 @WebServlet("/servlet/AjaxUploadPaperServlet")
 public class AjaxUploadPaper extends HttpServlet {
@@ -35,8 +37,8 @@ public class AjaxUploadPaper extends HttpServlet {
         ServletFileUpload upload=new ServletFileUpload(factory);
         // Solving encoding/decoding problem
         req.setCharacterEncoding("utf-8");
-        // Paper object that will be added into database
-        Paper paper = new Paper();
+
+        Paper paper = new Paper(); // Paper object that will be added into database
         paper.setSubmit_date(date);
         try {
             // Obtain all elements in request
@@ -83,6 +85,39 @@ public class AjaxUploadPaper extends HttpServlet {
                 writer.write("error");
             }
         }
+
+        // Store uploaded paper in given directory
+        // Set buffer size
+        factory.setSizeThreshold(1024*1024*10);
+        // Set single file size limit
+        upload.setFileSizeMax(1024*1024*10);
+
+        try {
+            // Obtain all elements in request
+            List<FileItem> list = upload.parseRequest(req);
+            for (FileItem fileItem : list) {
+                if (!fileItem.isFormField()&&fileItem.getName()!=null&&!"".equals(fileItem.getName())){
+                    String filName=fileItem.getName();
+                    System.out.println(filName);
+                    String uuid= UUID.randomUUID().toString();
+                    //获取文件后缀名
+                    String suffix=filName.substring(filName.lastIndexOf("."));
+
+                    //获取文件上传目录路径，在项目部署路径下的upload目录里。若想让浏览器不能直接访问到图片，可以放在WEB-INF下
+                    String uploadPath=req.getSession().getServletContext().getRealPath("/papers");
+
+                    File file=new File(uploadPath);
+                    file.mkdirs();
+                    //写入文件到磁盘，该行执行完毕后，若有该临时文件，将会自动删除
+                    fileItem.write(new File(uploadPath,uuid+suffix));
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 
