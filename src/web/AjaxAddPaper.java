@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 
@@ -23,6 +24,8 @@ public class AjaxAddPaper extends HttpServlet {
         final String date = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
         req.setCharacterEncoding("utf-8");
         final PrintWriter writer = resp.getWriter();
+
+        // TODO: To get the type of multipart/form-data, getParameter() is not available. Must find another way
 
         Paper paper = new Paper();
         paper.setTitle(req.getParameter("title"));
@@ -47,11 +50,6 @@ public class AjaxAddPaper extends HttpServlet {
             }
         }
 
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        this.doPost(req, resp);
     }
 
 }

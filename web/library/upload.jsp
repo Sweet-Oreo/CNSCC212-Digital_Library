@@ -45,24 +45,24 @@
 <main class="dl4csr-main">
     <div class="dl4csr-main--upload">
         <h1 class="dl4csr-main--upload title">Upload Papers</h1>
-        <form onsubmit="return false;" method="post" id="form">
+        <form onsubmit="return false;" method="post" id="form" enctype="multipart/form-data">
             <div class="dl4csr-main--form">
                 <label for="title">Title</label>
-                <input type="text" id="title" placeholder="Enter the title">
+                <input type="text" name="title" id="title" placeholder="Enter the title">
                 <label for="author">Author</label>
-                <input type="text" id="author" placeholder="Enter the author">
+                <input type="text" name="author" id="author" placeholder="Enter the author">
                 <label for="keyword">Keyword</label>
-                <input type="text" id="keyword" placeholder="Enter the keyword">
+                <input type="text" name="keyword" id="keyword" placeholder="Enter the keyword">
                 <label for="major">Major</label>
-                <input type="text" list="selectable_majors" id="major" placeholder="Select a major">
+                <input type="text" name="major" list="selectable_majors" id="major" placeholder="Select a major">
                 <label for="outline">Outline</label>
-                <textarea id="outline" placeholder="Enter the outline"></textarea>
+                <textarea id="outline" name="outline" placeholder="Enter the outline"></textarea>
             </div>
-            <input type="hidden" id="email" value="${email}">
+            <input type="hidden" name="email" id="email" value="${email}">
             <datalist id="selectable_majors" style="height: 200px"></datalist>
             <p>
                 <a id="file_btn" class="dl4csr-button" href="javascript:">
-                    <input type="file" accept="application/pdf" id="file">SELECT FILE
+                    <input type="file" name="file" accept="application/pdf" id="file">SELECT FILE
                 </a>
                 <button onclick="checkUpload()" class="dl4csr-button" type="submit">ADD PAPER</button>
             </p>

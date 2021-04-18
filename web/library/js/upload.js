@@ -73,16 +73,9 @@ function checkUpload() {
 
     if (checkTitle(title) && checkAuthor(author) && checkKeyword(keyword) && checkMajor(major) && checkOutline(outline) && checkFile(file, fileBtn)) {
         let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
+        let formData = new FormData(form)
         xmlHttp.open("POST", "/servlet/AjaxAddPaper", false)
-        xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
-        xmlHttp.send(
-            "title=" + title.value +
-            "&author=" + author.value +
-            "&keyword=" + keyword.value +
-            "&major=" + major.value +
-            "&outline=" + outline.value +
-            "&email=" + email.value
-        )
+        xmlHttp.send(formData)
         while (xmlHttp.readyState !== 4) {
         }
         if (xmlHttp.status === 200) {
