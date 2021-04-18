@@ -27,19 +27,21 @@ public class AjaxUploadPaper extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         final String date = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
-        req.setCharacterEncoding("utf-8");
         final PrintWriter writer = resp.getWriter();
 
-        // TODO: To get the type of multipart/form-data, getParameter() is not available. Must find another way
-
+        //Instantiate the disk file list factory
         DiskFileItemFactory factory=new DiskFileItemFactory();
+        // Get the file upload object from the factory
         ServletFileUpload upload=new ServletFileUpload(factory);
+        // Solving encoding/decoding problem
         req.setCharacterEncoding("utf-8");
-
+        // Paper object that will be added into database
         Paper paper = new Paper();
         paper.setSubmit_date(date);
         try {
+            // Obtain all elements in request
             List<FileItem> list = upload.parseRequest(req);
+            // Set the attributes of uploaded paper
             for (FileItem fileItem : list) {
                 switch (fileItem.getFieldName()) {
                     case "title":
@@ -67,17 +69,7 @@ public class AjaxUploadPaper extends HttpServlet {
             e.printStackTrace();
         }
 
-/*
-        paper.setTitle(req.getParameter("title"));
-        paper.setAuthor(req.getParameter("author"));
-        paper.setUniversity(new UniversityServiceImpl().findNameByEmail(req.getParameter("email")));
-        paper.setOutline(req.getParameter("outline"));
-        paper.setKeyword(req.getParameter("keyword"));
-        paper.setMajor(req.getParameter("major"));
-        paper.setSubmit_date(date);
-
- */
-
+        // Add uploaded paper into database
         PaperService paperService = new PaperServiceImpl();
         if (!paperService.checkPaperMajor(paper.getMajor())) {
             writer.write("majorError");
@@ -94,4 +86,8 @@ public class AjaxUploadPaper extends HttpServlet {
 
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
 }
