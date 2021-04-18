@@ -59,7 +59,7 @@ public class AjaxUploadPaper extends HttpServlet {
                     PaperService paperService = new PaperServiceImpl();
                     int id = paperService.findLastId();
                     // Write file into disk
-                    fileItem.write(new File(uploadPath,id + suffix));
+                    fileItem.write(new File(uploadPath,(id + 1) + suffix));
                 }
 
                 // Handle ordinary form field and set the attributes of uploaded paper
