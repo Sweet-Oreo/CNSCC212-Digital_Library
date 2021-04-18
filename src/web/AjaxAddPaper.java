@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 public class AjaxAddPaper extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         final String date = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
         req.setCharacterEncoding("utf-8");
@@ -47,10 +47,12 @@ public class AjaxAddPaper extends HttpServlet {
             }
         }
 
+       // req.getRequestDispatcher("/servlet/uploadServlet").forward(req, resp);
+
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         this.doPost(req, resp);
     }
 
