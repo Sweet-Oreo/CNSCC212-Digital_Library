@@ -14,8 +14,9 @@ import java.io.IOException;
 
 @WebServlet("/servlet/findPaperByPageServlet")
 public class findPaperByPage extends HttpServlet {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         // Obtain parameters from browser
         String currentPage = req.getParameter("currentPage"); // Current page
         String rows = req.getParameter("rows"); // Total number of papers each page
@@ -36,7 +37,8 @@ public class findPaperByPage extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        this.doPost(req, resp);
     }
+
 }

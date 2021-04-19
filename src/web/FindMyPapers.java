@@ -14,18 +14,20 @@ import java.util.List;
 
 @WebServlet("/servlet/findMyPapersServlet")
 public class FindMyPapers extends HttpServlet {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         // Query papers corresponding to the login university
         PaperService paperService = new PaperServiceImpl();
         List<Paper> myPapers = paperService.findMyPapers(req.getSession().getAttribute("email"));
         // Store papers in session and redirect
         req.getSession().setAttribute("myPapers", myPapers);
-        resp.sendRedirect(req.getContextPath() + "/library/myPapers.jsp");
+        resp.sendRedirect(req.getContextPath() + "/library/manage.jsp");
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        this.doPost(req, resp);
     }
+
 }
