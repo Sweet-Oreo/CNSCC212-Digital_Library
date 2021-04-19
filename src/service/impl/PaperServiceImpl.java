@@ -13,7 +13,7 @@ public class PaperServiceImpl implements PaperService {
     private final PaperDao paperDao = new PaperDaoImpl();
 
     @Override
-    public PageBean<Paper> findPaperByPage(String _currentPage, String _rows) {
+    public PageBean<Paper> findPaperByPage(String _currentPage, String _rows, String condition) {
         int currentPage = Integer.parseInt(_currentPage);
         int rows = Integer.parseInt(_rows);
         // Handle situation where user clicks "previous arrow" while in first page

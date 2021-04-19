@@ -6,7 +6,7 @@ import domain.Paper;
 import java.util.List;
 
 public interface PaperService {
-    PageBean<Paper> findPaperByPage(String currentPage, String rows);
+    PageBean<Paper> findPaperByPage(String currentPage, String rows, String condition);
     boolean checkPaperMajor(String major);
     int addPaper(Paper paper);
 

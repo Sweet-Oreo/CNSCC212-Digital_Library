@@ -19,6 +19,7 @@ public class findPaperByPage extends HttpServlet {
         // Obtain parameters from browser
         String currentPage = req.getParameter("currentPage"); // Current page
         String rows = req.getParameter("rows"); // Total number of papers each page
+        String condition = req.getParameter("w");
         // Handle situations where parameters from browsers are null
         if (currentPage == null || "".equals(currentPage)) {
             currentPage = "1";
@@ -28,7 +29,7 @@ public class findPaperByPage extends HttpServlet {
         }
         // Obtain pageBean object
         PaperService paperService = new PaperServiceImpl();
-        PageBean<Paper> pb = paperService.findPaperByPage(currentPage, rows);
+        PageBean<Paper> pb = paperService.findPaperByPage(currentPage, rows, condition);
         // Store pageBean object in session
         req.getSession().setAttribute("pb", pb);
         resp.sendRedirect(req.getContextPath() + "/library/index.jsp");
