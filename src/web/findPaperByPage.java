@@ -21,6 +21,7 @@ public class findPaperByPage extends HttpServlet {
         String currentPage = req.getParameter("currentPage"); // Current page
         String rows = req.getParameter("rows"); // Total number of papers each page
         String condition = req.getParameter("w");
+        System.out.println(condition);
         // Handle situations where parameters from browsers are null
         if (currentPage == null || "".equals(currentPage)) {
             currentPage = "1";

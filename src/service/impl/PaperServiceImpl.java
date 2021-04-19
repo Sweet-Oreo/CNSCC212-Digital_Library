@@ -25,7 +25,6 @@ public class PaperServiceImpl implements PaperService {
         pb.setRows(rows);
         // Query total amount of papers
         int totalCount = paperDao.findTotalCount(condition);
-        System.out.println("total" + totalCount);
         pb.setTotalCount(totalCount);
         // Calculate numbers of pages
         int totalPage = totalCount % rows == 0 ? totalCount / rows : (totalCount / rows) + 1;
@@ -35,8 +34,6 @@ public class PaperServiceImpl implements PaperService {
             currentPage = totalPage;
         }
         // Calculate the index of the head record for each page
-        System.out.println(currentPage);
-        // Set the start of query
         int start = 0;
         if (totalCount != 0) {
             start = (currentPage - 1) * rows;
