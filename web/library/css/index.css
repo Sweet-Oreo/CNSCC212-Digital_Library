@@ -20,7 +20,7 @@
 
 .dl4csr-main--paper.details {
     display: grid;
-    grid-template-columns: 88px auto;
+    grid-template-columns: 120px auto;
 }
 
 .dl4csr-main--paper.key {

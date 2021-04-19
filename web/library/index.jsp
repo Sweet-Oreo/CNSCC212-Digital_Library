@@ -59,7 +59,7 @@
                     <p class="dl4csr-main--paper value">${paper.keyword}</p>
                     <p class="dl4csr-main--paper key">Outline</p>
                     <p class="dl4csr-main--paper value">${paper.outline}</p>
-                    <p class="dl4csr-main--paper key">Date</p>
+                    <p class="dl4csr-main--paper key">Publish date</p>
                     <p class="dl4csr-main--paper value">${paper.publish_date}</p>
                 </div>
                 <p style="text-align: right; padding-bottom: 8px">
