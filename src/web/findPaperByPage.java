@@ -32,8 +32,9 @@ public class findPaperByPage extends HttpServlet {
         // Obtain pageBean object
         PaperService paperService = new PaperServiceImpl();
         PageBean<Paper> pb = paperService.findPaperByPage(currentPage, rows, condition);
-        // Store pageBean object in session
+        // Store pageBean object and search condition in session, then redirect
         req.getSession().setAttribute("pb", pb);
+        req.getSession().setAttribute("condition", condition);
         resp.sendRedirect(req.getContextPath() + "/library/index.jsp");
     }
 
