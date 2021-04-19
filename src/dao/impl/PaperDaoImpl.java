@@ -15,35 +15,27 @@ public class PaperDaoImpl implements PaperDao {
 
     @Override
     public int findTotalCount(String condition) {
-
+        // If user is NOT searching papers with conditions
         if (condition == null || "".equals(condition)) {
             String sql = "SELECT COUNT(*) FROM `paper`";
             return template.queryForObject(sql, Integer.class);
-        } else {
+        } else { // If user is searching papers with conditions
             String sqlCondition = "SELECT COUNT(*) FROM `paper` WHERE `title` like ? or `author` like ? or `keyword` like ?;";
+            // Fuzzy search
             String likeCondition = "%" + condition + "%";
             return template.queryForObject(sqlCondition, Integer.class, likeCondition, likeCondition, likeCondition);
         }
-        /*
-        String sql = "SELECT COUNT(*) FROM `paper` WHERE 1 = 1;";
-        StringBuilder stringBuilder = new StringBuilder(sql);
-        // If the search box is non-empty, consider the condition in the box
-        if (condition != null && !"".equals(condition)) {
-            stringBuilder.append(" and (title like ? or author like ? or keyword like ?);");
-        }
-        System.out.println(stringBuilder.toString());
-        return template.queryForObject(stringBuilder.toString(), Integer.class, condition);
-
-         */
     }
 
     @Override
     public List<Paper> findByPage(int start, int rows, String condition) {
+        // If user is NOT searching papers with conditions
         if (condition == null || "".equals(condition)) {
             String sql = "SELECT * FROM `paper` LIMIT ?, ?;";
             return template.query(sql, new BeanPropertyRowMapper<>(Paper.class), start, rows);
-        } else {
-            String sqlCondition = "SELECT COUNT(*) FROM `paper` WHERE `title` like ? or `author` like ? or `keyword` like ? limit ?, ?;";
+        } else { // If user is searching papers with conditions
+            String sqlCondition = "SELECT * FROM `paper` WHERE `title` like ? or `author` like ? or `keyword` like ? limit ?, ?;";
+            // Fuzzy search
             String likeCondition = "%" + condition + "%";
             return template.query(sqlCondition, new BeanPropertyRowMapper<Paper>(Paper.class), likeCondition, likeCondition, likeCondition, start, rows);
         }
