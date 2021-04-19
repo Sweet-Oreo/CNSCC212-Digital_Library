@@ -37,7 +37,7 @@
     <form action="${pageContext.request.contextPath}/servlet/search" method="get" onsubmit="return checkSearch()">
         <label for="search_input" class="title">DL4CSR</label>
         <button type="submit" class="material-icons md-24">search</button>
-        <input type="text" id="search_input" placeholder="Search anything in the library">
+        <input type="text" id="search_input" name="w" placeholder="Search anything in the library">
         <button type="button" id="search_close" class="material-icons md-24">close</button>
     </form>
 </div>
