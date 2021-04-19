@@ -89,21 +89,13 @@ window.onload = () => {
         }
     }
 
-    email.onclick = () => {
-        email.style = null
-    }
+    email.onclick = () => resetStyle(email)
 
-    rawPassword.onclick = () => {
-        rawPassword.style = null
-    }
+    rawPassword.onclick = () => resetStyle(rawPassword)
 
-    name.onclick = () => {
-        name.style = null
-    }
+    name.onclick = () => resetStyle(name)
 
-    major.onclick = () => {
-        major.style = null
-    }
+    major.onclick = () => resetStyle(major)
 
 }
 

@@ -25,36 +25,22 @@ window.onload = () => {
     xmlHttp.send()
 
     let title = document.getElementById("title")
+    title.onclick = () => resetStyle(title)
+
     let author = document.getElementById("author")
+    author.onclick = () => resetStyle(author)
+
     let keyword = document.getElementById("keyword")
+    keyword.onclick = () => resetStyle(keyword)
+
     let major = document.getElementById("major")
+    major.onclick = () => resetStyle(major)
+
     let outline = document.getElementById("outline")
-    let file = document.getElementById("file")
+    outline.onclick = () => resetStyle(outline)
+
     let fileBtn = document.getElementById("file_btn")
-
-    title.onclick = () => {
-        title.style = null
-    }
-
-    author.onclick = () => {
-        author.style = null
-    }
-
-    keyword.onclick = () => {
-        keyword.style = null
-    }
-
-    major.onclick = () => {
-        major.style = null
-    }
-
-    outline.onclick = () => {
-        outline.style = null
-    }
-
-    fileBtn.onclick = () => {
-        fileBtn.style = null
-    }
+    fileBtn.onclick = () => resetStyle(fileBtn)
 
 }
 
@@ -92,6 +78,10 @@ function checkUpload() {
                     timeoutContent = snackbarAlert("Major " + major.value + " is not available", timeoutContent)
                     major.style.color = "red"
                     major.style.borderBottomColor = "red"
+                    break
+                }
+                case "uploadError": {
+                    timeoutContent = snackbarAlert("An error occurred when uploading file", timeoutContent)
                     break
                 }
                 default: {

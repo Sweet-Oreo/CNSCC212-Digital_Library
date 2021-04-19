@@ -36,9 +36,4 @@ public class AjaxSignOut extends HttpServlet {
 
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        this.doPost(req, resp);
-    }
-
 }

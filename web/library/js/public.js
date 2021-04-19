@@ -51,6 +51,11 @@ function listenBackToTop(backToTopBtn) {
     }
 }
 
+// This function should be added into window.onload of the page
+function resetStyle(item) {
+    item.style = null
+}
+
 // This function can be called directly
 function checkSearch() {
     let input = document.getElementById("search_input")
