@@ -14,15 +14,31 @@ public class PaperDaoImpl implements PaperDao {
     private final JdbcTemplate template = new JdbcTemplate((JDBCUtils.getDataSource()));
 
     @Override
-    public int findTotalCount() {
-        String sql = "SELECT COUNT(*) FROM `paper`;";
-        return template.queryForObject(sql, Integer.class);
+    public int findTotalCount(String condition) {
+        // If user is NOT searching papers with conditions
+        if (condition == null || "".equals(condition)) {
+            String sql = "SELECT COUNT(*) FROM `paper`";
+            return template.queryForObject(sql, Integer.class);
+        } else { // If user is searching papers with conditions
+            String sqlCondition = "SELECT COUNT(*) FROM `paper` WHERE `title` like ? or `author` like ? or `keyword` like ?;";
+            // Fuzzy search
+            String likeCondition = "%" + condition + "%";
+            return template.queryForObject(sqlCondition, Integer.class, likeCondition, likeCondition, likeCondition);
+        }
     }
 
     @Override
-    public List<Paper> findByPage(int start, int rows) {
-        String sql = "SELECT * FROM `paper` LIMIT ?, ?;";
-        return template.query(sql, new BeanPropertyRowMapper<>(Paper.class), start, rows);
+    public List<Paper> findByPage(int start, int rows, String condition) {
+        // If user is NOT searching papers with conditions
+        if (condition == null || "".equals(condition)) {
+            String sql = "SELECT * FROM `paper` LIMIT ?, ?;";
+            return template.query(sql, new BeanPropertyRowMapper<>(Paper.class), start, rows);
+        } else { // If user is searching papers with conditions
+            String sqlCondition = "SELECT * FROM `paper` WHERE `title` like ? or `author` like ? or `keyword` like ? limit ?, ?;";
+            // Fuzzy search
+            String likeCondition = "%" + condition + "%";
+            return template.query(sqlCondition, new BeanPropertyRowMapper<Paper>(Paper.class), likeCondition, likeCondition, likeCondition, start, rows);
+        }
     }
 
     @Override

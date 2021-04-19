@@ -34,10 +34,10 @@
 </header>
 
 <div id="search_bar" class="dl4csr-search">
-    <form action="${pageContext.request.contextPath}/servlet/search" method="get" onsubmit="return checkSearch()">
+    <form action="${pageContext.request.contextPath}/servlet/findPaperByPageServlet" method="get" onsubmit="return checkSearch()">
         <label for="search_input" class="title">DL4CSR</label>
         <button type="submit" class="material-icons md-24">search</button>
-        <input type="text" id="search_input" name="w" placeholder="Search anything in the library">
+        <input type="text" id="search_input" name="w" value="${condition}" placeholder="Search anything in the library">
         <button type="button" id="search_close" class="material-icons md-24">close</button>
     </form>
 </div>
@@ -75,21 +75,21 @@
     <div class="dl4csr-nav--pages">
         <a class="material-icons btn"
             <c:if test="${pb.currentPage != 1}">
-                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage - 1}&rows=5"
+                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage - 1}&rows=5&w=${condition}"
             </c:if>>chevron_left</a>
         <c:forEach begin="1" end="${pb.totalPage}" var="i">
             <c:if test="${pb.currentPage == i}">
                 <a class="dl4csr-nav--num active"
-                   href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
+                   href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5&w=${condition}">${i}</a>
             </c:if>
             <c:if test="${pb.currentPage != i}">
                 <a class="dl4csr-nav--num"
-                   href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5">${i}</a>
+                   href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5&w=${condition}">${i}</a>
             </c:if>
         </c:forEach>
         <a class="material-icons btn"
             <c:if test="${pb.currentPage != pb.totalPage}">
-                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage + 1}&rows=5"
+                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage + 1}&rows=5&w=${condition}"
             </c:if>>chevron_right</a>
     </div>
     <span>Total ${pb.totalCount} papers found in the library</span>

@@ -13,7 +13,7 @@ public class PaperServiceImpl implements PaperService {
     private final PaperDao paperDao = new PaperDaoImpl();
 
     @Override
-    public PageBean<Paper> findPaperByPage(String _currentPage, String _rows) {
+    public PageBean<Paper> findPaperByPage(String _currentPage, String _rows, String condition) {
         int currentPage = Integer.parseInt(_currentPage);
         int rows = Integer.parseInt(_rows);
         // Handle situation where user clicks "previous arrow" while in first page
@@ -24,7 +24,7 @@ public class PaperServiceImpl implements PaperService {
         // Set total numbers of papers each page
         pb.setRows(rows);
         // Query total amount of papers
-        int totalCount = paperDao.findTotalCount();
+        int totalCount = paperDao.findTotalCount(condition);
         pb.setTotalCount(totalCount);
         // Calculate numbers of pages
         int totalPage = totalCount % rows == 0 ? totalCount / rows : (totalCount / rows) + 1;
@@ -34,9 +34,12 @@ public class PaperServiceImpl implements PaperService {
             currentPage = totalPage;
         }
         // Calculate the index of the head record for each page
-        int start = (currentPage - 1) * rows;
+        int start = 0;
+        if (totalCount != 0) {
+            start = (currentPage - 1) * rows;
+        }
         // Query list of papers for given page
-        List<Paper> paperList = paperDao.findByPage(start, rows);
+        List<Paper> paperList = paperDao.findByPage(start, rows, condition);
         pb.setList(paperList);
         // Set current page
         pb.setCurrentPage(currentPage);
