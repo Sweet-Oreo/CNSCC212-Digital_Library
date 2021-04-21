@@ -30,6 +30,9 @@
             <li><a href="${pageContext.request.contextPath}/servlet/findMyPapersServlet">Manage</a></li>
             <li><a href="${pageContext.request.contextPath}/library/upload.jsp">Upload</a></li>
         </c:if>
+        <c:if test="${identity == 'reviewer'}">
+            <li><a href="${pageContext.request.contextPath}/library/review.jsp">Review</a></li>
+        </c:if>
     </ul>
 </header>
 
@@ -64,7 +67,7 @@
                 </div>
                 <p style="text-align: right; padding-bottom: 8px">
                     <a class="dl4csr-main--paper download"
-                       href="${pageContext.request.contextPath}/servlet/downloadServlet?filename=${paper.id}.pdf">Download</a>
+                       href="${pageContext.request.contextPath}/servlet/downloadServlet?filename=${paper.id}.pdf">DOWNLOAD</a>
                 </p>
             </div>
         </c:forEach>
