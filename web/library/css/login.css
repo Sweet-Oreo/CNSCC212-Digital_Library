@@ -52,16 +52,20 @@ body {
 
 .dl4csr-main--content--right input {
     width: 100%;
-    padding: 2px 0;
+    padding: 6px 3px;
     font-size: 16px;
-    border: none;
-    border-bottom: 1px solid #E0E0E0;
+    border: 1px solid #E0E0E0;
     outline: none;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease;
+    border-radius: 3px;
+}
+
+.dl4csr-main--content--right input:hover {
+    border-color: #CDCDCD;
 }
 
 .dl4csr-main--content--right input:focus {
-    border-bottom-color: #212121;
+    border-color: #42A5F5;
 }
 
 .dl4csr-main--content--right button {
@@ -78,7 +82,7 @@ body {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24), 0 1px 6px rgba(0, 0, 0, 0.12);
 }
 
-.dl4csr-main--content--right button:active {
+.dl4csr-main--content--right button:hover {
     background-color: #42A5F5;
 }
 
@@ -105,7 +109,7 @@ body {
     box-shadow: none;
 }
 
-.dl4csr-main--selector button:active {
+.dl4csr-main--selector button:hover {
     background-color: #EEEEEE;
 }
 
@@ -122,8 +126,9 @@ body {
 .material-icons.vis {
     position: absolute;
     cursor: pointer;
-    right: 54px;
+    right: 50px;
     font-size: 18px;
+    padding: 8px;
 }
 
 .dl4csr-snackbar {

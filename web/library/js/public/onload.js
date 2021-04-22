@@ -1,4 +1,4 @@
-// This function should be added into window.onload of the page
+// This function listens the logout button. As the logout button is clicked, sign out by AJAX and refresh page
 function listenLogout(logoutBtn) {
     logoutBtn.onclick = () => {
         // Create XMLHTTP object according to the browser
@@ -23,53 +23,65 @@ function listenLogout(logoutBtn) {
     }
 }
 
-// This function should be added into window.onload of the page
+
+// This function listens the search button and its close button to control the display of the search bar
 function listenSearch(searchBar, searchBtn, closeBtn) {
+    // Initialize the position of the search bar
     searchBar.style.top = -searchBar.offsetHeight + "px"
+    // When the search button is clicked
     searchBtn.onclick = () => {
         searchBar.style.top = "0"
         closeBtn.style.transform = "rotate(180deg)"
     }
+    // When the close button is clicked
     closeBtn.onclick = () => {
         searchBar.style.top = -searchBar.offsetHeight + "px"
         closeBtn.style.transform = "rotate(0)"
     }
 }
 
-// This function should be added into window.onload of the page
+
+// This function listens the display of snack bar
+function listenSnackbarCloseBtn(snackbar, snackbarClose) {
+    // Initialize the position of the snackbar
+    snackbar.style.bottom = -snackbar.offsetHeight + "px"
+    // When the close button of the snackbar is clicked
+    snackbarClose.onclick = () => {
+        clearTimeout(timeoutContent)
+        snackbar.style.bottom = -snackbar.offsetHeight + "px"
+    }
+}
+
+
+// This function uses AJAX to initialize the list of available majors
+function initMajorList(majorList) {
+    let xmlHttp = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
+    xmlHttp.onreadystatechange = () => {
+        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+            majorList.innerHTML = xmlHttp.responseText
+        }
+    }
+    xmlHttp.open("POST", "/servlet/AjaxGetMajors", true)
+    xmlHttp.send()
+}
+
+
+// This function listens the back-to-top button
 function listenBackToTop(backToTopBtn) {
+    // Initialize the position of the back-to-top button
     backToTopBtn.style.bottom = -backToTopBtn.offsetHeight + "px"
+    // When the page is being scrolling
     window.onscroll = () => {
+        // When the vertical offset is greater than 500, display the button; else hide it
         if (document.body.onscroll > 500 || document.documentElement.scrollTop > 500) {
             backToTopBtn.style.bottom = "3%"
         } else {
             backToTopBtn.style.bottom = -backToTopBtn.offsetHeight + "px"
         }
     }
+    // When the back-to-top button is clicked
     backToTopBtn.onclick = () => {
         window.scrollTo({top: 0, behavior: "smooth"})
     }
 }
 
-// This function should be added into window.onload of the page
-function resetStyle(item) {
-    item.style = null
-}
-
-// This function can be called directly
-function checkSearch() {
-    let input = document.getElementById("search_input")
-    return input.value !== ""
-}
-
-// This function can be called directly
-function snackbarAlert(content, timeoutContent) {
-    clearTimeout(timeoutContent)
-    let snackbar = document.getElementById("snackbar")
-    let snackbarInfo = document.getElementById("snackbar_info")
-    snackbarInfo.innerHTML = content
-    snackbar.style.bottom = "0"
-    return setTimeout(() => {
-        snackbar.style.bottom = -snackbar.offsetHeight + "px"
-    }, 4000)
-}

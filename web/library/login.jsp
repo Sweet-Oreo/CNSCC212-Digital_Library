@@ -11,7 +11,8 @@
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <script rel="script" type="text/javascript" src="js/login.js"></script>
-    <script rel="script" type="text/javascript" src="js/public.js"></script>
+    <script rel="script" type="text/javascript" src="js/public/onload.js"></script>
+    <script rel="script" type="text/javascript" src="js/public/function.js"></script>
     <script rel="script" type="text/javascript" src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
 </head>
 
@@ -33,7 +34,7 @@
             <form method="post" onsubmit="return false">
                 <input type="hidden" id="action" value="sign_in">
                 <input type="hidden" id="identity" value="university">
-                <p>
+                <p id="input_email" style="display: flex">
                     <label for="email"></label>
                     <input type="email" id="email" placeholder="Enter the email">
                 </p>
@@ -41,9 +42,9 @@
                     <label for="name"></label>
                     <input type="text" id="name" placeholder="Enter the user name">
                 </p>
-                <p>
-                    <label for="raw_password"></label>
-                    <input type="password" id="raw_password" placeholder="Enter the password">
+                <p id="input_password" style="display: flex">
+                    <label for="password"></label>
+                    <input type="password" id="password" placeholder="Enter the password">
                     <span class="material-icons vis" id="show_password">visibility_off</span>
                 </p>
                 <p id="input_major" style="display: none;">
@@ -53,7 +54,7 @@
                     </datalist>
                 </p>
                 <p>
-                    <button type="submit" id="submit" onclick="checkSubmit()">SIGN IN</button>
+                    <button type="submit" id="submit" onclick="handleSubmit()">SIGN IN</button>
                 </p>
             </form>
             <p style="text-align: center; padding-top: 12px;">

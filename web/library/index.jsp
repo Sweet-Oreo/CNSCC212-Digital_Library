@@ -13,7 +13,8 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <script rel="script" type="text/javascript" src="js/index.js"></script>
-    <script rel="script" type="text/javascript" src="js/public.js"></script>
+    <script rel="script" type="text/javascript" src="js/public/onload.js"></script>
+    <script rel="script" type="text/javascript" src="js/public/function.js"></script>
 </head>
 
 

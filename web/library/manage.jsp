@@ -13,14 +13,8 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <script rel="script" type="text/javascript" src="js/manage.js"></script>
-    <script rel="script" type="text/javascript" src="js/public.js"></script>
-    <script>
-        function deletePaper(id) {
-            if (confirm("Are you sure to delete the paper? ")) {
-                location.href = "${pageContext.request.contextPath}/servlet/deletePaperServlet?id=" + id;
-            }
-        }
-    </script>
+    <script rel="script" type="text/javascript" src="js/public/onload.js"></script>
+    <script rel="script" type="text/javascript" src="js/public/function.js"></script>
 </head>
 
 
@@ -90,7 +84,7 @@
                     </div>
                     <p style="text-align: right">
                         <a class="dl4csr-main--paper download" href="${pageContext.request.contextPath}/servlet/downloadServlet?filename=${paper.id}.pdf">DOWNLOAD</a>
-                        <a class="dl4csr-main--paper delete" href="javascript:deletePaper(${paper.id});">DELETE</a>
+                        <a class="dl4csr-main--paper delete" href="javascript:confirmDelete(${paper.id});">DELETE</a>
                     </p>
                 </div>
             </c:forEach>

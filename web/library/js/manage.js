@@ -5,3 +5,11 @@ window.onload = () => {
     listenLogout(document.getElementById("logout"))
 
 }
+
+
+// This function is to let user confirm the deletion
+function confirmDelete(id) {
+    if (confirm("Are you sure to delete the paper?")) {
+        location.href = "${pageContext.request.contextPath}/servlet/deletePaperServlet?id=" + id;
+    }
+}
