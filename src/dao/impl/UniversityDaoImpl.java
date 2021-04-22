@@ -1,14 +1,12 @@
 package dao.impl;
 
 import dao.UniversityDao;
-import domain.Reader;
 import domain.University;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import util.JDBCUtils;
 
-import java.util.List;
 import java.util.Map;
 
 public class UniversityDaoImpl implements UniversityDao {

@@ -37,7 +37,7 @@ public class PaperDaoImpl implements PaperDao {
             String sqlCondition = "SELECT * FROM `paper` WHERE `title` like ? or `author` like ? or `keyword` like ? limit ?, ?;";
             // Fuzzy search
             String likeCondition = "%" + condition + "%";
-            return template.query(sqlCondition, new BeanPropertyRowMapper<Paper>(Paper.class), likeCondition, likeCondition, likeCondition, start, rows);
+            return template.query(sqlCondition, new BeanPropertyRowMapper<>(Paper.class), likeCondition, likeCondition, likeCondition, start, rows);
         }
     }
 
@@ -79,9 +79,7 @@ public class PaperDaoImpl implements PaperDao {
         Map<String, Object> universityName = template.queryForMap(queryName, email);
         // Query papers for given university
         String sql = "select * from paper where university = ? and is_published = ?";
-        List<Paper> myPapers = template.query(sql, new BeanPropertyRowMapper<Paper>(Paper.class), universityName.get("name"), 1);
-        return myPapers;
-
+        return template.query(sql, new BeanPropertyRowMapper<>(Paper.class), universityName.get("name"), 1);
     }
 
     @Override
@@ -107,10 +105,7 @@ public class PaperDaoImpl implements PaperDao {
         Map<String, Object> idMap = template.queryForMap(queryId, email);
         // Query papers with given reviewer id
         String sql = "select * from paper where rev_id_1 = ? or rev_id_2 = ? or rev_id_3 = ?";
-        List<Paper> reviewPapers = template.query(sql, new BeanPropertyRowMapper<Paper>(Paper.class), idMap.get("id"), idMap.get("id"), idMap.get("id"));
-        return reviewPapers;
-
-
+        return template.query(sql, new BeanPropertyRowMapper<>(Paper.class), idMap.get("id"), idMap.get("id"), idMap.get("id"));
     }
 
 }

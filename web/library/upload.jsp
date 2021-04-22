@@ -61,7 +61,7 @@
             <input type="hidden" name="email" id="email" value="${email}">
             <datalist id="selectable_majors" style="height: 200px"></datalist>
             <p>
-                <a id="file_btn" class="dl4csr-button" href="javascript:">
+                <a id="file_btn" class="dl4csr-button">
                     <input type="file" name="file" accept="application/pdf" id="file">SELECT FILE
                 </a>
                 <button onclick="checkUpload()" class="dl4csr-button" type="submit">ADD PAPER</button>

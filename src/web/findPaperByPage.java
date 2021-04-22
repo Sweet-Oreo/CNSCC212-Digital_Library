@@ -5,7 +5,6 @@ import domain.Paper;
 import service.PaperService;
 import service.impl.PaperServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,7 @@ public class findPaperByPage extends HttpServlet {
         // Store pageBean object and search condition in session, then redirect
         req.getSession().setAttribute("pb", pb);
         req.getSession().setAttribute("condition", condition);
-        resp.sendRedirect(req.getContextPath() + "/library/index.jsp");
+        resp.sendRedirect(req.getContextPath() + "/library/");
     }
 
     @Override

@@ -14,6 +14,7 @@ import java.util.List;
 
 @WebServlet("/servlet/findReviewServlet")
 public class FindReviewPapers extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Query papers waiting to be reviewed given reviewer email
@@ -28,4 +29,5 @@ public class FindReviewPapers extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
+
 }

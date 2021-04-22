@@ -1,7 +1,6 @@
 package dao.impl;
 
 import dao.ReviewerDao;
-import domain.Paper;
 import domain.Reviewer;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

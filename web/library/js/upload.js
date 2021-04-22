@@ -24,7 +24,7 @@ window.onload = () => {
     outline.onclick = () => resetStyle(outline)
 
     let fileBtn = document.getElementById("file_btn")
-    fileBtn.onclick = () => resetStyle(fileBtn)
+    fileBtn.onclick = () => fileBtn.className = "dl4csr-button"
 
 }
 
@@ -155,7 +155,7 @@ function checkOutline(outline) {
 function checkFile(file, fileBtn) {
     if (file.value === "") {
         timeoutContent = snackbarAlert("Please select a pdf file", timeoutContent)
-        fileBtn.style.backgroundColor = "red"
+        fileBtn.className = "dl4csr-button err"
         return false
     }
     return true

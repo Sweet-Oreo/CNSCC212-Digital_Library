@@ -10,7 +10,6 @@
     <title>Digital Library for Computer Science Research</title>
     <link rel="stylesheet" type="text/css" href="css/public.css">
     <link rel="stylesheet" type="text/css" href="css/manage.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
     <script rel="script" type="text/javascript" src="js/manage.js"></script>
     <script rel="script" type="text/javascript" src="js/public/onload.js"></script>
@@ -24,7 +23,7 @@
 
 <header class="dl4csr-header">
     <ul>
-        <li style="float: left;"><a href="${pageContext.request.contextPath}/library/">DL4CSR</a></li>
+        <li style="float: left;"><a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet">DL4CSR</a></li>
         <li><a class="material-icons md-24" id="search_btn">search</a></li>
         <li><a id="logout">Logout</a></li>
         <c:if test="${identity == 'university'}">
@@ -46,11 +45,12 @@
 <main class="dl4csr-main">
     <div class="dl4csr-main--paper">
         <c:if test="${myPapers.size() == 0}">
-            <h1 class="dl4csr-main--paper title">No Submitted Paper</h1>e
-            <a href="${pageContext.request.contextPath}/library/upload.jsp">Upload Now!</a>
+            <h1 class="dl4csr-main--paper title">No Submitted Paper</h1>
+            <br>
+            <a href="${pageContext.request.contextPath}/library/upload.jsp" class="dl4csr-main--paper download">Upload Now!</a>
         </c:if>
         <c:if test="${myPapers.size() != 0}">
-            <h1 class="dl4csr-main--paper title">All Papers</h1>
+            <h1 class="dl4csr-main--paper title">Manage Papers</h1>
             <c:forEach items="${myPapers}" var="paper" varStatus="s">
                 <div class="dl4csr-main--paper item">
                     <h2>${paper.title}</h2>
