@@ -32,7 +32,7 @@
             <li><a href="${pageContext.request.contextPath}/library/upload.jsp">Upload</a></li>
         </c:if>
         <c:if test="${identity == 'reviewer'}">
-            <li><a href="${pageContext.request.contextPath}/library/review.jsp">Review</a></li>
+            <li><a href="${pageContext.request.contextPath}/servlet/findReviewServlet">Review</a></li>
         </c:if>
     </ul>
 </header>

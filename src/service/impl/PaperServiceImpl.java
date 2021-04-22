@@ -71,4 +71,9 @@ public class PaperServiceImpl implements PaperService {
         return paperDao.findLastId();
     }
 
+    @Override
+    public List<Paper> findReviewPapers(Object email) {
+        return paperDao.findReviewPapers(email);
+    }
+
 }

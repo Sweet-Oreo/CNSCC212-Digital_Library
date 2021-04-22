@@ -15,4 +15,6 @@ public interface PaperDao {
     void delete(int id);
 
     int findLastId();
+
+    List<Paper> findReviewPapers(Object email);
 }
