@@ -1,3 +1,4 @@
+<!-- TODO: Improve the upload page -->
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <!DOCTYPE html>
