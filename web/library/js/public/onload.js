@@ -88,7 +88,6 @@ function listenBackToTop(backToTopBtn) {
 
 // This function is to make sure that the footer is on the bottom of the page
 function setFooter(footer) {
-    console.log(window.innerHeight + "\n" + document.body.scrollHeight)
     if (window.innerHeight > document.body.scrollHeight) {
         footer.className = "dl4csr-footer bottom"
     }

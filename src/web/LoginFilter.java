@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "LoginFilter", urlPatterns = {"/library/index.jsp", "/library/manage.jsp", "/library/upload.jsp"})
+@WebFilter(filterName = "LoginFilter", urlPatterns = {"/library/index.jsp", "/library/manage.jsp", "/library/upload.jsp", "/library/review.jsp"})
 public class LoginFilter implements Filter {
 
     @Override
