@@ -16,15 +16,6 @@ window.onload = () => {
 
 }
 
-function autoTextarea(area) {
-    resetStyle(area)
-    area.style.height = area.scrollHeight + "px"
-    area.oninput = area.oncut = () => {
-        area.style.height = "auto"
-        area.style.height = area.scrollHeight + "px"
-    }
-}
-
 function checkComment(i) {
     let comment = document.getElementById("comment_" + i)
     if (comment.value === "") {

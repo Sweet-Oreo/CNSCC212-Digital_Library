@@ -22,7 +22,8 @@ window.onload = () => {
     major.onclick = () => resetStyle(major)
 
     let outline = document.getElementById("outline")
-    outline.onclick = () => resetStyle(outline)
+    outline.onclick = () => autoTextarea(outline)
+    autoTextarea(outline)
 
     let fileBtn = document.getElementById("file_btn")
     fileBtn.onclick = () => fileBtn.className = "dl4csr-button"
@@ -71,7 +72,7 @@ function checkUpload() {
                     // so alert
                     timeoutContent = snackbarAlert("Major " + major.value + " is not available", timeoutContent)
                     major.style.color = "red"
-                    major.style.borderBottomColor = "red"
+                    major.style.borderColor = "red"
                     break
                 }
                 // "uploadError" means there are errors on uploading file
@@ -97,7 +98,7 @@ function checkTitle(title) {
     if (title.value === "") {
         timeoutContent = snackbarAlert("Please enter the title", timeoutContent)
         title.style.color = "red"
-        title.style.borderBottomColor = "red"
+        title.style.borderColor = "red"
         return false
     }
     return true
@@ -109,7 +110,7 @@ function checkAuthor(author) {
     if (author.value === "") {
         timeoutContent = snackbarAlert("Please enter the author", timeoutContent)
         author.style.color = "red"
-        author.style.borderBottomColor = "red"
+        author.style.borderColor = "red"
         return false
     }
     return true
@@ -121,7 +122,7 @@ function checkKeyword(keyword) {
     if (keyword.value === "") {
         timeoutContent = snackbarAlert("Please enter the keyword", timeoutContent)
         keyword.style.color = "red"
-        keyword.style.borderBottomColor = "red"
+        keyword.style.borderColor = "red"
         return false
     }
     return true
@@ -133,7 +134,7 @@ function checkMajor(major) {
     if (major.value === "") {
         timeoutContent = snackbarAlert("Please enter the major", timeoutContent)
         major.style.color = "red"
-        major.style.borderBottomColor = "red"
+        major.style.borderColor = "red"
         return false
     }
     return true

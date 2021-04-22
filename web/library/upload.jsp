@@ -1,4 +1,3 @@
-<!-- TODO: Improve the upload page -->
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <!DOCTYPE html>
@@ -24,7 +23,8 @@
 
 <header class="dl4csr-header" id="header">
     <ul>
-        <li style="float: left;"><a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet">DL4CSR</a></li>
+        <li style="float: left;"><a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet">DL4CSR</a>
+        </li>
         <li><a class="material-icons md-24" id="search_btn">search</a></li>
         <li><a id="logout">Logout</a></li>
         <c:if test="${identity == 'university'}">
@@ -35,7 +35,8 @@
 </header>
 
 <div id="search_bar" class="dl4csr-search">
-    <form action="${pageContext.request.contextPath}/servlet/findPaperByPageServlet" method="get" onsubmit="return checkSearch()">
+    <form action="${pageContext.request.contextPath}/servlet/findPaperByPageServlet" method="get"
+          onsubmit="return checkSearch()">
         <label for="search_input" class="title">DL4CSR</label>
         <button type="submit" class="material-icons md-24">search</button>
         <input type="text" id="search_input" name="w" placeholder="Search anything in the library">
@@ -44,30 +45,40 @@
 </div>
 
 <main class="dl4csr-main" id="main">
-    <div class="dl4csr-main--upload">
-        <h1 class="dl4csr-main--upload title">Upload Papers</h1>
-        <form onsubmit="return false;" method="post" id="form" enctype="multipart/form-data">
-            <div class="dl4csr-main--form">
-                <label for="title">Title</label>
-                <input type="text" name="title" id="title" placeholder="Enter the title">
-                <label for="author">Author</label>
-                <input type="text" name="author" id="author" placeholder="Enter the author">
-                <label for="keyword">Keyword</label>
-                <input type="text" name="keyword" id="keyword" placeholder="Enter the keyword">
-                <label for="major">Major</label>
-                <input type="text" name="major" list="selectable_majors" id="major" placeholder="Select a major">
-                <label for="outline">Outline</label>
-                <textarea id="outline" name="outline" placeholder="Enter the outline"></textarea>
-            </div>
-            <input type="hidden" name="email" id="email" value="${email}">
-            <datalist id="selectable_majors" style="height: 200px"></datalist>
-            <p>
-                <a id="file_btn" class="dl4csr-button">
-                    <input type="file" name="file" accept="application/pdf" id="file">SELECT FILE
-                </a>
-                <button onclick="checkUpload()" class="dl4csr-button" type="submit">ADD PAPER</button>
-            </p>
-        </form>
+    <div class="dl4csr-main--paper">
+        <h1 class="dl4csr-main--paper title">Upload Paper</h1>
+        <div class="dl4csr-main--paper upload">
+            <form onsubmit="return false;" method="post" id="form" enctype="multipart/form-data">
+                <p>
+                    <label for="title">Title</label>
+                    <input class="dl4csr-input" type="text" name="title" id="title" placeholder="Enter the title">
+                </p>
+                <p>
+                    <label for="author">Author</label>
+                    <input class="dl4csr-input" type="text" name="author" id="author" placeholder="Enter the author">
+                </p>
+                <p>
+                    <label for="keyword">Keyword</label>
+                    <input class="dl4csr-input" type="text" name="keyword" id="keyword" placeholder="Enter the keyword">
+                </p>
+                <p>
+                    <label for="major">Major</label>
+                    <input class="dl4csr-input" type="text" name="major" list="selectable_majors" id="major" placeholder="Select a major">
+                </p>
+                <p>
+                    <label for="outline">Outline</label>
+                    <textarea class="dl4csr-input" id="outline" name="outline" placeholder="Enter the outline"></textarea>
+                </p>
+                <input type="hidden" name="email" id="email" value="${email}">
+                <datalist id="selectable_majors" style="height: 200px"></datalist>
+                <p style="display: block; text-align: center; margin: 16px 0 0;">
+                    <a id="file_btn" class="dl4csr-button">
+                        <input type="file" name="file" accept="application/pdf" id="file">SELECT FILE
+                    </a>
+                    <button onclick="checkUpload()" class="dl4csr-button" type="submit">ADD PAPER</button>
+                </p>
+            </form>
+        </div>
     </div>
 </main>
 

@@ -93,3 +93,14 @@ function setFooter(footer) {
     }
 }
 
+
+// This function is to automatically resize the textarea
+function autoTextarea(area) {
+    resetStyle(area)
+    area.style.height = area.scrollHeight + "px"
+    area.oninput = area.oncut = () => {
+        area.style.height = "auto"
+        area.style.height = area.scrollHeight + "px"
+    }
+}
+
