@@ -1,8 +1,9 @@
-<!-- TODO: Frontend design -->
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<html>
+<!DOCTYPE html>
+
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -21,7 +22,7 @@
 
 <button class="back-to-top" id="back_to_top"><span class="material-icons">arrow_upward</span></button>
 
-<header class="dl4csr-header">
+<header class="dl4csr-header" id="header">
     <ul>
         <li style="float: left;"><a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet">DL4CSR</a></li>
         <li><a class="material-icons md-24" id="search_btn">search</a></li>
@@ -42,12 +43,11 @@
     </form>
 </div>
 
-<main class="dl4csr-main">
+<main class="dl4csr-main" id="main">
     <div class="dl4csr-main--paper">
         <c:if test="${myPapers.size() == 0}">
             <h1 class="dl4csr-main--paper title">No Submitted Paper</h1>
-            <br>
-            <a href="${pageContext.request.contextPath}/library/upload.jsp" class="dl4csr-main--paper download">Upload Now!</a>
+            <a href="${pageContext.request.contextPath}/library/upload.jsp">Upload Now!</a>
         </c:if>
         <c:if test="${myPapers.size() != 0}">
             <h1 class="dl4csr-main--paper title">Manage Papers</h1>
@@ -91,6 +91,11 @@
         </c:if>
     </div>
 </main>
+
+<footer class="dl4csr-footer" id="footer">
+    <p class="dl4csr-footer--title">Digital Library for Computer Science Research</p>
+    <p class="dl4csr-footer--content">Copyright &copy; 2021 CNSCC.212 Group 5. All rights reserved.</p>
+</footer>
 
 </body>
 

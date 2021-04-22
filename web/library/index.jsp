@@ -22,7 +22,7 @@
 
 <button class="back-to-top" id="back_to_top"><span class="material-icons">arrow_upward</span></button>
 
-<header class="dl4csr-header">
+<header class="dl4csr-header" id="header">
     <ul>
         <li style="float: left;"><a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet">DL4CSR</a></li>
         <li><a class="material-icons md-24" id="search_btn">search</a></li>
@@ -41,14 +41,20 @@
     <form action="${pageContext.request.contextPath}/servlet/findPaperByPageServlet" method="get" onsubmit="return checkSearch()">
         <label for="search_input" class="title">DL4CSR</label>
         <button type="submit" class="material-icons md-24">search</button>
-        <input type="text" id="search_input" name="w" value="${condition}" placeholder="Search anything in the library">
+        <input type="text" id="search_input" name="w" placeholder="Search anything in the library">
         <button type="button" id="search_close" class="material-icons md-24">close</button>
     </form>
 </div>
 
-<main class="dl4csr-main">
+<main class="dl4csr-main" id="main">
     <div class="dl4csr-main--paper">
-        <h1 class="dl4csr-main--paper title">All Published Papers</h1>
+        <h1 class="dl4csr-main--paper title">
+            <c:if test="${condition == null || condition == ''}">All Published Papers</c:if>
+            <c:if test="${condition != null && condition != ''}">
+                <c:if test="${pb.getTotalCount() == 0}">No Result of "${condition}" Found</c:if>
+                <c:if test="${pb.getTotalCount() != 0}">Search Result of "${condition}"</c:if>
+            </c:if>
+        </h1>
         <c:forEach items="${pb.list}" var="paper" varStatus="s">
             <div class="dl4csr-main--paper item" id="item_${s.count}">
                 <h2>${paper.title}</h2>
@@ -67,39 +73,37 @@
                     <p class="dl4csr-main--paper value">${paper.publish_date}</p>
                 </div>
                 <p style="text-align: right; padding-bottom: 8px">
-                    <a class="dl4csr-main--paper download"
-                       href="${pageContext.request.contextPath}/servlet/downloadServlet?filename=${paper.id}.pdf">DOWNLOAD</a>
+                    <a class="dl4csr-main--paper download" href="${pageContext.request.contextPath}/servlet/downloadServlet?filename=${paper.id}.pdf">DOWNLOAD</a>
                 </p>
             </div>
         </c:forEach>
     </div>
+    <c:if test="${pb.getTotalCount() != 0}">
+        <nav class="dl4csr-nav">
+            <div class="dl4csr-nav--pages">
+                <a class="material-icons btn"
+                    <c:if test="${pb.currentPage != 1}">
+                        href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage - 1}&rows=5&w=${condition}"
+                    </c:if>>chevron_left</a>
+                <c:forEach begin="1" end="${pb.totalPage}" var="i">
+                    <c:if test="${pb.currentPage == i}">
+                        <a class="dl4csr-nav--num active" href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5&w=${condition}">${i}</a>
+                    </c:if>
+                    <c:if test="${pb.currentPage != i}">
+                        <a class="dl4csr-nav--num" href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5&w=${condition}">${i}</a>
+                    </c:if>
+                </c:forEach>
+                <a class="material-icons btn"
+                    <c:if test="${pb.currentPage != pb.totalPage}">
+                        href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage + 1}&rows=5&w=${condition}"
+                    </c:if>>chevron_right</a>
+            </div>
+            <span>Total ${pb.totalCount} papers found in the library</span>
+        </nav>
+    </c:if>
 </main>
 
-<nav class="dl4csr-nav">
-    <div class="dl4csr-nav--pages">
-        <a class="material-icons btn"
-            <c:if test="${pb.currentPage != 1}">
-                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage - 1}&rows=5&w=${condition}"
-            </c:if>>chevron_left</a>
-        <c:forEach begin="1" end="${pb.totalPage}" var="i">
-            <c:if test="${pb.currentPage == i}">
-                <a class="dl4csr-nav--num active"
-                   href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5&w=${condition}">${i}</a>
-            </c:if>
-            <c:if test="${pb.currentPage != i}">
-                <a class="dl4csr-nav--num"
-                   href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${i}&rows=5&w=${condition}">${i}</a>
-            </c:if>
-        </c:forEach>
-        <a class="material-icons btn"
-            <c:if test="${pb.currentPage != pb.totalPage}">
-                href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet?currentPage=${pb.currentPage + 1}&rows=5&w=${condition}"
-            </c:if>>chevron_right</a>
-    </div>
-    <span>Total ${pb.totalCount} papers found in the library</span>
-</nav>
-
-<footer class="dl4csr-footer">
+<footer class="dl4csr-footer" id="footer">
     <p class="dl4csr-footer--title">Digital Library for Computer Science Research</p>
     <p class="dl4csr-footer--content">Copyright &copy; 2021 CNSCC.212 Group 5. All rights reserved.</p>
 </footer>

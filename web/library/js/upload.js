@@ -7,6 +7,7 @@ window.onload = () => {
     listenLogout(document.getElementById("logout"))
     listenSnackbarCloseBtn(document.getElementById("snackbar"), document.getElementById("snackbar_close"))
     initMajorList(document.getElementById("selectable_majors"))
+    setFooter(document.getElementById("footer"))
 
     let title = document.getElementById("title")
     title.onclick = () => resetStyle(title)

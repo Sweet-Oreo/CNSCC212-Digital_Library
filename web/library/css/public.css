@@ -252,12 +252,18 @@ body {
 
 
 .dl4csr-footer {
+    background-color: white;
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
     width: 100%;
     border-top: 1px solid #E0E0E0;
     line-height: 1.4;
+}
+
+.dl4csr-footer.bottom {
+    position: absolute;
+    bottom: 0;
 }
 
 .dl4csr-footer--title {

@@ -21,9 +21,9 @@
 
 <button class="back-to-top" id="back_to_top"><span class="material-icons">arrow_upward</span></button>
 
-<header class="dl4csr-header">
+<header class="dl4csr-header" id="header">
     <ul>
-        <li style="float: left;"><a href="${pageContext.request.contextPath}/library/">DL4CSR</a></li>
+        <li style="float: left;"><a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet">DL4CSR</a></li>
         <li><a class="material-icons md-24" id="search_btn">search</a></li>
         <li><a id="logout">Logout</a></li>
         <c:if test="${identity == 'university'}">
@@ -34,7 +34,7 @@
 </header>
 
 <div id="search_bar" class="dl4csr-search">
-    <form action="${pageContext.request.contextPath}/servlet/search" method="get" onsubmit="return checkSearch()">
+    <form action="${pageContext.request.contextPath}/servlet/findPaperByPageServlet" method="get" onsubmit="return checkSearch()">
         <label for="search_input" class="title">DL4CSR</label>
         <button type="submit" class="material-icons md-24">search</button>
         <input type="text" id="search_input" name="w" placeholder="Search anything in the library">
@@ -42,7 +42,7 @@
     </form>
 </div>
 
-<main class="dl4csr-main">
+<main class="dl4csr-main" id="main">
     <div class="dl4csr-main--upload">
         <h1 class="dl4csr-main--upload title">Upload Papers</h1>
         <form onsubmit="return false;" method="post" id="form" enctype="multipart/form-data">
@@ -69,6 +69,11 @@
         </form>
     </div>
 </main>
+
+<footer class="dl4csr-footer" id="footer">
+    <p class="dl4csr-footer--title">Digital Library for Computer Science Research</p>
+    <p class="dl4csr-footer--content">Copyright &copy; 2021 CNSCC.212 Group 5. All rights reserved.</p>
+</footer>
 
 <div class="dl4csr-snackbar" id="snackbar">
     <p id="snackbar_info">Unset</p>
