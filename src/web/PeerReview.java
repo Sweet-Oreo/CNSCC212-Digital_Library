@@ -18,9 +18,6 @@ public class PeerReview extends HttpServlet {
         String comment = req.getParameter("comment");
         String isAccept = req.getParameter("accept");
         String paperId = req.getParameter("id");
-        System.out.println(comment);
-        System.out.println(isAccept);
-        System.out.println(paperId);
         // Update the paper being reviewed in the database
         PaperService paperService = new PaperServiceImpl();
         paperService.reviewPaper(comment, isAccept, paperId, (String) req.getSession().getAttribute("email"));

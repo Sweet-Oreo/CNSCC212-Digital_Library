@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import util.JDBCUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -154,9 +155,10 @@ public class PaperDaoImpl implements PaperDao {
         int acceptance2 = acceptance_2.intValue();
         int acceptance3 = acceptance_3.intValue();
         // If at least two reviewers accept the paper, make the paper published
-        if ((acceptance1 + acceptance2 + acceptance3) >= 2) {
-            String accept = "update paper set is_published = ? where id = ?";
-            template.update(accept, 1, paperId);
+        if ((acceptance1 == 1 && acceptance2 == 1) || (acceptance1 == 1 && acceptance3 == 1) || (acceptance2 == 1 && acceptance3 == 1)) {
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
+            String acceptSql = "update paper set is_published = ?, publish_date = ? where id = ?";
+            template.update(acceptSql, 1, date, paperId);
         }
     }
 }
