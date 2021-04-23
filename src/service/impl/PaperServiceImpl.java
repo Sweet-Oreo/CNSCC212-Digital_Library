@@ -79,7 +79,7 @@ public class PaperServiceImpl implements PaperService {
     @Override
     public void reviewPaper(String comment, String is_accept, String paper_id, String reviewerEmail) {
         // Transform variables corresponding to the field in database
-        int isAccept = (is_accept == "true" ? 1 : 0);
+        int isAccept = (is_accept.equals("true") ? 1 : -1);
         int paperId = Integer.parseInt(paper_id);
         // Update paper being reviewed in the database
         paperDao.reviewPaper(comment, isAccept, paperId, reviewerEmail);

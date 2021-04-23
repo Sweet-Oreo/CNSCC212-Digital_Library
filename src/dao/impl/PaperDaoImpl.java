@@ -103,9 +103,11 @@ public class PaperDaoImpl implements PaperDao {
         // Query reviewer id for given email
         String queryId = "select id from reviewer where email = ?";
         Map<String, Object> idMap = template.queryForMap(queryId, email);
+        Number reviewer_id = (Number) idMap.get("id");
+        int reviewerId = reviewer_id.intValue();
         // Query papers with given reviewer id
-        String sql = "select * from paper where (rev_id_1 = ? or rev_id_2 = ? or rev_id_3 = ?) and is_published = ?";
-        return template.query(sql, new BeanPropertyRowMapper<>(Paper.class), idMap.get("id"), idMap.get("id"), idMap.get("id"), 0);
+        String sql = "select * from paper where ((rev_id_1 = ? and acceptance_1 = ?) or (rev_id_2 = ? and acceptance_2 = ?) or (rev_id_3 = ? and acceptance_3 = ?)) and is_published = ?";
+        return template.query(sql, new BeanPropertyRowMapper<>(Paper.class), reviewerId, 0, reviewerId, 0, reviewerId, 0, 0);
     }
 
     @Override
