@@ -17,13 +17,13 @@ public class PaperDaoImpl implements PaperDao {
     public int findTotalCount(String condition) {
         // If user is NOT searching papers with conditions
         if (condition == null || "".equals(condition)) {
-            String sql = "SELECT COUNT(*) FROM `paper`";
-            return template.queryForObject(sql, Integer.class);
+            String sql = "SELECT COUNT(*) FROM `paper` where `is_published` = ?";
+            return template.queryForObject(sql, Integer.class, 1);
         } else { // If user is searching papers with conditions
-            String sqlCondition = "SELECT COUNT(*) FROM `paper` WHERE `title` like ? or `author` like ? or `keyword` like ?;";
+            String sqlCondition = "SELECT COUNT(*) FROM `paper` WHERE (`title` like ? or `author` like ? or `keyword` like ?) and `is_published` = ?;";
             // Fuzzy search
             String likeCondition = "%" + condition + "%";
-            return template.queryForObject(sqlCondition, Integer.class, likeCondition, likeCondition, likeCondition);
+            return template.queryForObject(sqlCondition, Integer.class, likeCondition, likeCondition, likeCondition, 1);
         }
     }
 
@@ -31,13 +31,13 @@ public class PaperDaoImpl implements PaperDao {
     public List<Paper> findByPage(int start, int rows, String condition) {
         // If user is NOT searching papers with conditions
         if (condition == null || "".equals(condition)) {
-            String sql = "SELECT * FROM `paper` LIMIT ?, ?;";
-            return template.query(sql, new BeanPropertyRowMapper<>(Paper.class), start, rows);
+            String sql = "SELECT * FROM `paper` where is_published = ? LIMIT ?, ?;";
+            return template.query(sql, new BeanPropertyRowMapper<>(Paper.class), 1, start, rows);
         } else { // If user is searching papers with conditions
-            String sqlCondition = "SELECT * FROM `paper` WHERE `title` like ? or `author` like ? or `keyword` like ? limit ?, ?;";
+            String sqlCondition = "SELECT * FROM `paper` WHERE (`title` like ? or `author` like ? or `keyword` like ?) and is_published = ? limit ?, ?;";
             // Fuzzy search
             String likeCondition = "%" + condition + "%";
-            return template.query(sqlCondition, new BeanPropertyRowMapper<>(Paper.class), likeCondition, likeCondition, likeCondition, start, rows);
+            return template.query(sqlCondition, new BeanPropertyRowMapper<>(Paper.class), likeCondition, likeCondition, likeCondition, 1, start, rows);
         }
     }
 
@@ -104,8 +104,57 @@ public class PaperDaoImpl implements PaperDao {
         String queryId = "select id from reviewer where email = ?";
         Map<String, Object> idMap = template.queryForMap(queryId, email);
         // Query papers with given reviewer id
-        String sql = "select * from paper where rev_id_1 = ? or rev_id_2 = ? or rev_id_3 = ?";
-        return template.query(sql, new BeanPropertyRowMapper<>(Paper.class), idMap.get("id"), idMap.get("id"), idMap.get("id"));
+        String sql = "select * from paper where (rev_id_1 = ? or rev_id_2 = ? or rev_id_3 = ?) and is_published = ?";
+        return template.query(sql, new BeanPropertyRowMapper<>(Paper.class), idMap.get("id"), idMap.get("id"), idMap.get("id"), 0);
     }
 
+    @Override
+    public void reviewPaper(String comment, int isAccept, int paperId, String reviewerEmail) {
+        // Query reviewer id for given reviewer email
+        String queryReviewerId = "select id from reviewer where email = ?";
+        Map<String, Object> reviewerIdMap = template.queryForMap(queryReviewerId, reviewerEmail);
+        Number reviewer_id = (Number)reviewerIdMap.get("id");
+        int reviewerId = reviewer_id.intValue();
+        // Reduce the count of task of this reviewer
+        String countTaskQuery = "select count_task from reviewer where id = ?";
+        Map<String, Object> countTaskMap = template.queryForMap(countTaskQuery, reviewerId);
+        Number count_task = (Number) countTaskMap.get("count_task");
+        int countTask = count_task.intValue();
+        String reduceCountQuery = "update reviewer set count_task = ? where id = ?";
+        template.update(reduceCountQuery, countTask - 1, reviewerId);
+        // Query three reviewer id for given paper id
+        String queryPaperReviewer = "select rev_id_1, rev_id_2, rev_id_3 from paper where id = ?";
+        Map<String, Object> paperReviewerMap = template.queryForMap(queryPaperReviewer, paperId);
+        Number reviewer_1 = (Number) paperReviewerMap.get("rev_id_1");
+        Number reviewer_2 = (Number) paperReviewerMap.get("rev_id_2");
+        Number reviewer_3 = (Number) paperReviewerMap.get("rev_id_3");
+        int reviewer1 = reviewer_1.intValue();
+        int reviewer2 = reviewer_2.intValue();
+        int reviewer3 = reviewer_3.intValue();
+        // Update the paper being reviewed in the database
+        if (reviewerId == reviewer1) {
+            String sql = "update paper set comment_1 = ?, acceptance_1 = ? where id = ?";
+            template.update(sql, comment, isAccept, paperId);
+        } else if (reviewerId == reviewer2) {
+            String sql = "update paper set comment_2 = ?, acceptance_2 = ? where id = ?";
+            template.update(sql, comment, isAccept, paperId);
+        } else if (reviewerId == reviewer3) {
+            String sql = "update paper set comment_3 = ?, acceptance_3 = ? where id = ?";
+            template.update(sql, comment, isAccept, paperId);
+        }
+        // Check whether paper is allowed to publish
+        String checkPaper = "select acceptance_1, acceptance_2, acceptance_3 from paper where id = ?";
+        Map<String, Object> checkPaperMap = template.queryForMap(checkPaper, paperId);
+        Number acceptance_1 = (Number) checkPaperMap.get("acceptance_1");
+        Number acceptance_2 = (Number) checkPaperMap.get("acceptance_2");
+        Number acceptance_3 = (Number) checkPaperMap.get("acceptance_3");
+        int acceptance1 = acceptance_1.intValue();
+        int acceptance2 = acceptance_2.intValue();
+        int acceptance3 = acceptance_3.intValue();
+        // If at least two reviewers accept the paper, make the paper published
+        if ((acceptance1 + acceptance2 + acceptance3) >= 2) {
+            String accept = "update paper set is_published = ? where id = ?";
+            template.update(accept, 1, paperId);
+        }
+    }
 }

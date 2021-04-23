@@ -17,4 +17,6 @@ public interface PaperService {
     int findLastId();
 
     List<Paper> findReviewPapers(Object email);
+
+    void reviewPaper(String comment, String isAccept, String paperId, String reviewerEmail);
 }

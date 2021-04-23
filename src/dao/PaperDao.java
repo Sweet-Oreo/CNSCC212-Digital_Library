@@ -20,4 +20,6 @@ public interface PaperDao {
     int findLastId();
 
     List<Paper> findReviewPapers(Object email);
+
+    void reviewPaper(String comment, int isAccept, int paperId, String reviewerEmail);
 }
