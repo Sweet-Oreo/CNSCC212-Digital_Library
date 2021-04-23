@@ -95,10 +95,15 @@ function setFooter(footer) {
 
 
 // This function is to automatically resize the textarea
-function autoTextarea(area) {
+function autoTextarea(area, footer) {
     resetStyle(area)
     area.style.height = area.scrollHeight + "px"
     area.oninput = area.oncut = () => {
+        if (window.innerHeight > document.body.scrollHeight) {
+            footer.className = "dl4csr-footer bottom"
+        } else {
+            footer.className = "dl4csr-footer"
+        }
         area.style.height = "auto"
         area.style.height = area.scrollHeight + "px"
     }

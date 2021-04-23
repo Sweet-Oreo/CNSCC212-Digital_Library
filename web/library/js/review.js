@@ -10,8 +10,8 @@ window.onload = () => {
 
     for (let i = 1; i <= document.getElementById("count_item").value; i++) {
         let comment = document.getElementById("comment_" + i)
-        comment.onclick = () => autoTextarea(comment)
-        autoTextarea(comment)
+        comment.onclick = () => autoTextarea(comment, document.getElementById("footer"))
+        autoTextarea(comment, document.getElementById("footer"))
     }
 
 }

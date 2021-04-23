@@ -22,8 +22,8 @@ window.onload = () => {
     major.onclick = () => resetStyle(major)
 
     let outline = document.getElementById("outline")
-    outline.onclick = () => autoTextarea(outline)
-    autoTextarea(outline)
+    outline.onclick = () => autoTextarea(outline, document.getElementById("footer"))
+    autoTextarea(outline, document.getElementById("footer"))
 
     let fileBtn = document.getElementById("file_btn")
     fileBtn.onclick = () => fileBtn.className = "dl4csr-button"

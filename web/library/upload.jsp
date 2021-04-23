@@ -23,8 +23,7 @@
 
 <header class="dl4csr-header" id="header">
     <ul>
-        <li style="float: left;"><a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet">DL4CSR</a>
-        </li>
+        <li style="float: left;"><a href="${pageContext.request.contextPath}/servlet/findPaperByPageServlet">DL4CSR</a></li>
         <li><a class="material-icons md-24" id="search_btn">search</a></li>
         <li><a id="logout">Logout</a></li>
         <c:if test="${identity == 'university'}">
