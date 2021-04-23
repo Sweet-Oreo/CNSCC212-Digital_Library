@@ -133,14 +133,14 @@ public class PaperDaoImpl implements PaperDao {
         int reviewer3 = reviewer_3.intValue();
         // Update the paper being reviewed in the database
         if (reviewerId == reviewer1) {
-            String sql = "update paper set comment_1 = ?, acceptance_1 = ? where id = ?";
-            template.update(sql, comment, isAccept, paperId);
+            String updateSql = "update paper set comment_1 = ?, acceptance_1 = ? where id = ?";
+            template.update(updateSql, comment, isAccept, paperId);
         } else if (reviewerId == reviewer2) {
-            String sql = "update paper set comment_2 = ?, acceptance_2 = ? where id = ?";
-            template.update(sql, comment, isAccept, paperId);
+            String updateSql = "update paper set comment_2 = ?, acceptance_2 = ? where id = ?";
+            template.update(updateSql, comment, isAccept, paperId);
         } else if (reviewerId == reviewer3) {
-            String sql = "update paper set comment_3 = ?, acceptance_3 = ? where id = ?";
-            template.update(sql, comment, isAccept, paperId);
+            String updateSql = "update paper set comment_3 = ?, acceptance_3 = ? where id = ?";
+            template.update(updateSql, comment, isAccept, paperId);
         }
         // Check whether paper is allowed to publish
         String checkPaper = "select acceptance_1, acceptance_2, acceptance_3 from paper where id = ?";
