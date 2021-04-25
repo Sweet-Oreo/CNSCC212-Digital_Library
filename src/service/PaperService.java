@@ -3,6 +3,7 @@ package service;
 import domain.PageBean;
 import domain.Paper;
 
+import javax.servlet.ServletContext;
 import java.util.List;
 
 public interface PaperService {
@@ -18,5 +19,5 @@ public interface PaperService {
 
     List<Paper> findReviewPapers(Object email);
 
-    void reviewPaper(String comment, String isAccept, String paperId, String reviewerEmail);
+    void reviewPaper(String comment, String isAccept, String paperId, String reviewerEmail, ServletContext servletContext);
 }

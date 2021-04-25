@@ -3,6 +3,7 @@ package web;
 import service.PaperService;
 import service.impl.PaperServiceImpl;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +19,11 @@ public class PeerReview extends HttpServlet {
         String comment = req.getParameter("comment");
         String isAccept = req.getParameter("accept");
         String paperId = req.getParameter("id");
+        // Find the servlet context
+        ServletContext servletContext = this.getServletContext();
         // Update the paper being reviewed in the database
         PaperService paperService = new PaperServiceImpl();
-        paperService.reviewPaper(comment, isAccept, paperId, (String) req.getSession().getAttribute("email"));
+        paperService.reviewPaper(comment, isAccept, paperId, (String) req.getSession().getAttribute("email"), servletContext);
         // Forward
         req.getRequestDispatcher("/servlet/findReviewServlet").forward(req, resp);
     }

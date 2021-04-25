@@ -1,11 +1,16 @@
 package dao.impl;
 
+import com.google.zxing.WriterException;
 import dao.PaperDao;
 import domain.Paper;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import util.JDBCUtils;
+import util.QRUtils;
 
+import javax.servlet.ServletContext;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
@@ -112,7 +117,7 @@ public class PaperDaoImpl implements PaperDao {
     }
 
     @Override
-    public void reviewPaper(String comment, int isAccept, int paperId, String reviewerEmail) {
+    public void reviewPaper(String comment, int isAccept, int paperId, String reviewerEmail, ServletContext servletContext) {
         // Query reviewer id for given reviewer email
         String queryReviewerId = "select id from reviewer where email = ?";
         Map<String, Object> reviewerIdMap = template.queryForMap(queryReviewerId, reviewerEmail);
@@ -159,6 +164,22 @@ public class PaperDaoImpl implements PaperDao {
             String date = new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
             String acceptSql = "update paper set is_published = ?, publish_date = ? where id = ?";
             template.update(acceptSql, 1, date, paperId);
+            // Add digital signature on paper
+            // First query the paper needed to be added with digital signature
+            String sql = "select * from paper where id = ?";
+            List<Paper> paperList = template.query(sql, new BeanPropertyRowMapper<>(Paper.class), paperId);
+            // Set parameters and call function
+            File pdf = new File(servletContext + "/papers/" + paperId + ".pdf");
+            File img = new File(servletContext + "/QRCode/" + paperId + ".png");
+            try {
+                QRUtils.AddInfoToPDF(paperList.get(0), pdf, img);
+            } catch (WriterException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
         }
     }
 }

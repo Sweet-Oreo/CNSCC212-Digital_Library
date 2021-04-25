@@ -6,6 +6,7 @@ import domain.PageBean;
 import domain.Paper;
 import service.PaperService;
 
+import javax.servlet.ServletContext;
 import java.util.List;
 
 public class PaperServiceImpl implements PaperService {
@@ -77,12 +78,12 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public void reviewPaper(String comment, String is_accept, String paper_id, String reviewerEmail) {
+    public void reviewPaper(String comment, String is_accept, String paper_id, String reviewerEmail, ServletContext servletContext) {
         // Transform variables corresponding to the field in database
         int isAccept = (is_accept.equals("true") ? 1 : -1);
         int paperId = Integer.parseInt(paper_id);
         // Update paper being reviewed in the database
-        paperDao.reviewPaper(comment, isAccept, paperId, reviewerEmail);
+        paperDao.reviewPaper(comment, isAccept, paperId, reviewerEmail, servletContext);
     }
 
 }
