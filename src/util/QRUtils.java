@@ -11,13 +11,11 @@ import domain.Paper;
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-import org.apache.pdfbox.pdmodel.interactive.digitalsignature.PDSignature;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Path;
 import java.util.HashMap;
 
 public class QRUtils {
