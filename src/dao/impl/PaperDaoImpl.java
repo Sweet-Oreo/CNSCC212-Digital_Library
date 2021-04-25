@@ -167,10 +167,11 @@ public class PaperDaoImpl implements PaperDao {
             // First query the paper needed to be added with digital signature
             String sql = "select * from paper where id = ?";
             List<Paper> paperList = template.query(sql, new BeanPropertyRowMapper<>(Paper.class), paperId);
-            // Set parameters and call function
+            // Set parameters
             File pdf = new File(realpath + "/papers/" + paperId + ".pdf");
             File img = new File(realpath + "/QRCode/" + paperId + ".png");
             try {
+                // Call function and add digital signature
                 QRUtils.AddInfoToPDF(paperList.get(0), pdf, img);
             } catch (WriterException e) {
                 e.printStackTrace();
