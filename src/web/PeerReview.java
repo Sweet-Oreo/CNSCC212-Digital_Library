@@ -21,9 +21,10 @@ public class PeerReview extends HttpServlet {
         String paperId = req.getParameter("id");
         // Find the servlet context
         ServletContext servletContext = this.getServletContext();
+        String realPath=servletContext.getRealPath("/");
         // Update the paper being reviewed in the database
         PaperService paperService = new PaperServiceImpl();
-        paperService.reviewPaper(comment, isAccept, paperId, (String) req.getSession().getAttribute("email"), servletContext);
+        paperService.reviewPaper(comment, isAccept, paperId, (String) req.getSession().getAttribute("email"), realPath);
         // Forward
         req.getRequestDispatcher("/servlet/findReviewServlet").forward(req, resp);
     }

@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import util.JDBCUtils;
 import util.QRUtils;
 
-import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -117,7 +116,7 @@ public class PaperDaoImpl implements PaperDao {
     }
 
     @Override
-    public void reviewPaper(String comment, int isAccept, int paperId, String reviewerEmail, ServletContext servletContext) {
+    public void reviewPaper(String comment, int isAccept, int paperId, String reviewerEmail, String realpath) {
         // Query reviewer id for given reviewer email
         String queryReviewerId = "select id from reviewer where email = ?";
         Map<String, Object> reviewerIdMap = template.queryForMap(queryReviewerId, reviewerEmail);
@@ -169,8 +168,8 @@ public class PaperDaoImpl implements PaperDao {
             String sql = "select * from paper where id = ?";
             List<Paper> paperList = template.query(sql, new BeanPropertyRowMapper<>(Paper.class), paperId);
             // Set parameters and call function
-            File pdf = new File(servletContext + "/papers/" + paperId + ".pdf");
-            File img = new File(servletContext + "/QRCode/" + paperId + ".png");
+            File pdf = new File(realpath + "/papers/" + paperId + ".pdf");
+            File img = new File(realpath + "/QRCode/" + paperId + ".png");
             try {
                 QRUtils.AddInfoToPDF(paperList.get(0), pdf, img);
             } catch (WriterException e) {

@@ -2,7 +2,6 @@ package dao;
 
 import domain.Paper;
 
-import javax.servlet.ServletContext;
 import java.util.List;
 
 public interface PaperDao {
@@ -22,5 +21,5 @@ public interface PaperDao {
 
     List<Paper> findReviewPapers(Object email);
 
-    void reviewPaper(String comment, int isAccept, int paperId, String reviewerEmail, ServletContext servletContext);
+    void reviewPaper(String comment, int isAccept, int paperId, String reviewerEmail, String realPath);
 }
