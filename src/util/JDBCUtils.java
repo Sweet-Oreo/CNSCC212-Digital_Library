@@ -8,10 +8,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-// TODO: Javadoc
-
 /**
- * JDBC Tool class uses druid connection pool.
+ * JDBC Tool class using druid connection pool.
  */
 public class JDBCUtils {
 
@@ -28,10 +26,21 @@ public class JDBCUtils {
         }
     }
 
+    /**
+     * Obtain data source.
+     *
+     * @return Datasource.
+     */
     public static DataSource getDataSource() {
         return ds;
     }
 
+    /**
+     * Get connection to database.
+     *
+     * @return Connection to database.
+     * @throws SQLException
+     */
     public static Connection getConnection() throws SQLException {
         return ds.getConnection();
     }
