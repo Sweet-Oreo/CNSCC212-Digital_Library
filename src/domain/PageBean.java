@@ -2,6 +2,11 @@ package domain;
 
 import java.util.List;
 
+/**
+ * Class that encapsulates the information and method for pagination function.
+ *
+ * @param <T> Type of elements that will be displayed on the web page.
+ */
 public class PageBean <T> {
     private int totalCount; // Total numbers of papers
     private int totalPage; // Total numbers of pages

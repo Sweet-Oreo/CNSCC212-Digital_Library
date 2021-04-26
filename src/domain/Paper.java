@@ -1,5 +1,8 @@
 package domain;
 
+/**
+ * Class that represents paper.
+ */
 public class Paper {
 
     private int id;

@@ -1,5 +1,11 @@
 package domain;
 
+/**
+ * Class that represents university, a type of user who may log in to the system.
+ *
+ * <p>Universities log in with permissions including reading papers, downloading
+ * papers, uploading papers and deleting papers.</p>
+ */
 public class University {
 
     private int id;

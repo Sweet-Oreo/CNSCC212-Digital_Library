@@ -1,5 +1,11 @@
 package domain;
 
+/**
+ * Class that represents reader, a type of user who may log in to the system.
+ *
+ * <p>Readers log in with only basic permissions such as reading papers and
+ * downloading papers.</p>
+ */
 public class Reader {
 
     private int id;

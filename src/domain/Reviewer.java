@@ -1,5 +1,11 @@
 package domain;
 
+/**
+ * Class that represents reviewer, a type of user who may log in to the system.
+ *
+ * <p>Reviewers log in with permissions including reading papers, downloading papers
+ * and reviewing papers.</p>
+ */
 public class Reviewer {
 
     private int id;

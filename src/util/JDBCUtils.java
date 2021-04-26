@@ -9,7 +9,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-// JDBC Tool class uses druid connection pool
+/**
+ * JDBC Tool class uses druid connection pool.
+ */
+
 public class JDBCUtils {
 
     private static DataSource ds;
