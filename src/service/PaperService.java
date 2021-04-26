@@ -13,15 +13,26 @@ public interface PaperService {
      * Find papers being displayed on given page.
      *
      * @param currentPage Current page the user is on the website.
-     * @param rows Number of papers displayed in each page.
-     * @param condition Search conditions that user inputs in the search box.
+     * @param rows        Number of papers displayed in each page.
+     * @param condition   Search conditions that user inputs in the search box.
      * @return Pagination information.
      */
     PageBean<Paper> findPaperByPage(String currentPage, String rows, String condition);
 
+    /**
+     * Check if the major of the paper is available.
+     *
+     * @param major The major of the paper to be checked.
+     * @return True if the major is available.
+     */
     boolean checkPaperMajor(String major);
 
-
+    /**
+     * Insert paper information and set reviewers to database.
+     *
+     * @param paper The paper to be added.
+     * @return 1 if no available reviewers found, else 0.
+     */
     int addPaper(Paper paper);
 
     /**
@@ -57,11 +68,11 @@ public interface PaperService {
     /**
      * Provide operations for reviewer to reviewer paper.
      *
-     * @param comment Comment written by the reviewer.
-     * @param isAccept Whether reviewer passed the paper.
-     * @param paperId Id of paper being reviewed.
+     * @param comment       Comment written by the reviewer.
+     * @param isAccept      Whether reviewer passed the paper.
+     * @param paperId       Id of paper being reviewed.
      * @param reviewerEmail Email of the reviewer.
-     * @param realPath Path of directory that stores QR code and PDF files.
+     * @param realPath      Path of directory that stores QR code and PDF files.
      */
     void reviewPaper(String comment, String isAccept, String paperId, String reviewerEmail, String realPath);
 }

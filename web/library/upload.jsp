@@ -34,8 +34,7 @@
 </header>
 
 <div id="search_bar" class="dl4csr-search">
-    <form action="${pageContext.request.contextPath}/servlet/findPaperByPageServlet" method="get"
-          onsubmit="return checkSearch()">
+    <form action="${pageContext.request.contextPath}/servlet/findPaperByPageServlet" method="get" onsubmit="return checkSearch()">
         <label for="search_input" class="title">DL4CSR</label>
         <button type="submit" class="material-icons md-24">search</button>
         <input type="text" id="search_input" name="w" placeholder="Search anything in the library">

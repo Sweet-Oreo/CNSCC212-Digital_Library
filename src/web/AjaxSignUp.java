@@ -11,7 +11,6 @@ import service.impl.ReviewerServiceImpl;
 import service.impl.UniversityServiceImpl;
 import service.impl.UserLogServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +19,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 
-// This servlet is used for sign up
-// It returns "succeed" only when the account has been created successfully
-// Otherwise, it responses "emailError" or "majorError" or "error" according to the invalidations
+/**
+ * This servlet is used for sign up.
+ * It returns "succeed" only when the account has been created successfully.
+ * Otherwise, it responses "emailError" or "majorError" or "error" according to the invalidations.
+ */
 @WebServlet("/servlet/AjaxSignUp")
 public class AjaxSignUp extends HttpServlet {
 

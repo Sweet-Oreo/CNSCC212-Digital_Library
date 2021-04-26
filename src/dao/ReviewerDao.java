@@ -1,6 +1,5 @@
 package dao;
 
-import domain.Paper;
 import domain.Reviewer;
 
 /**
@@ -23,15 +22,23 @@ public interface ReviewerDao {
      */
     boolean checkReviewerEmail(String email);
 
+    /**
+     * Check if the major is available by searching in the database.
+     *
+     * @param major The major of the reviewer to be checked.
+     * @return True if the major is available.
+     */
     boolean checkReviewerMajor(String major);
 
     /**
      * Query reviewer by given email and password.
      *
-     * @param email Email of reviewer being searched.
+     * @param email    Email of reviewer being searched.
      * @param password Password of reviewer being searched.
      * @return Return reviewer object if corresponding reviewed is found.
      */
     Reviewer findReviewerByEmailAndPassword(String email, String password);
+
+    // TODO: Javadoc
     boolean evaluatePaper(String email, String paperId, String comment, int isAccept);
 }

@@ -7,7 +7,7 @@ import domain.Reviewer;
  */
 public interface ReviewerService {
     /**
-     * Add reviewer
+     * Add reviewer.
      *
      * @param reviewer Reviewer that will be added.
      * @return true if the reviewer is added successfully.
@@ -22,6 +22,12 @@ public interface ReviewerService {
      */
     boolean checkReviewerEmail(String email);
 
+    /**
+     * Check if the major is available by searching in database.
+     *
+     * @param major The major of the reviewer to be checked.
+     * @return True if the major is available.
+     */
     boolean checkReviewerMajor(String major);
 
     /**
@@ -31,5 +37,7 @@ public interface ReviewerService {
      * @return Return a reviewer object if login successfully, otherwise return null.
      */
     Reviewer login(Reviewer reviewer);
+
+    // TODO: Javadoc
     boolean evaluatePaper(String email, String paperId, String comment, int isAccept);
 }

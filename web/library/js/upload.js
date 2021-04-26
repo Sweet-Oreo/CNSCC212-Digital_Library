@@ -162,4 +162,3 @@ function checkFile(file, fileBtn) {
     }
     return true
 }
-

@@ -13,6 +13,7 @@ import java.net.HttpCookie;
 
 @WebServlet("/servlet/deletePaperServlet")
 public class DeletePaper extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Obtain paper id from browser
@@ -28,4 +29,5 @@ public class DeletePaper extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
+
 }

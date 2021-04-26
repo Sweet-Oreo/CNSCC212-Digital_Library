@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @param <T> Type of elements that will be displayed on the web page.
  */
-public class PageBean <T> {
+public class PageBean<T> {
     private int totalCount; // Total numbers of papers
     private int totalPage; // Total numbers of pages
     private List<T> list; // Papers in each page

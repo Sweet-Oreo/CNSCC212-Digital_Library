@@ -12,6 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/servlet/downloadServlet")
 public class Download extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Obtain the parameter from browser (file name)
@@ -23,8 +24,8 @@ public class Download extends HttpServlet {
         FileInputStream fileInputStream = new FileInputStream(realPath);
         // Set response header
         String mimeType = servletContext.getMimeType(filename);
-        resp.setHeader("content-type", mimeType);
-        resp.setHeader("content-disposition", "attachment;filename=" + filename);
+        resp.setHeader("Content-Type", mimeType);
+        resp.setHeader("Content-Disposition", "attachment;filename=" + filename);
         // Write data in input stream into output stream
         ServletOutputStream outputStream = resp.getOutputStream();
         byte[] buffer = new byte[1024 * 8];
@@ -40,4 +41,5 @@ public class Download extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
+
 }

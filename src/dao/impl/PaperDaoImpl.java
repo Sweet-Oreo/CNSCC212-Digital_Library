@@ -173,13 +173,10 @@ public class PaperDaoImpl implements PaperDao {
             try {
                 // Call function and add digital signature
                 QRUtils.AddInfoToPDF(paperList.get(0), pdf, img);
-            } catch (WriterException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (WriterException | IOException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
+
 }

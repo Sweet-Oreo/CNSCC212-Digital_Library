@@ -108,4 +108,3 @@ function autoTextarea(area, footer) {
         area.style.height = area.scrollHeight + "px"
     }
 }
-

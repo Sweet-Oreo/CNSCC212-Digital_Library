@@ -1,7 +1,6 @@
 package dao;
 
 import domain.Reader;
-import domain.University;
 
 /**
  * Handle interactions with database associated with reader.
@@ -26,7 +25,7 @@ public interface ReaderDao {
     /**
      * Query reader by given email and password.
      *
-     * @param email Email of reader being searched.
+     * @param email    Email of reader being searched.
      * @param password Password of reader being searched.
      * @return Return reader object if corresponding reader is found.
      */

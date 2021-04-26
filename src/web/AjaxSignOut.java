@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 
-// This servlet is used for user sign in
-// The response text of the servlet is always nothing
+/**
+ * This servlet is used for user sign in.
+ * The response text of the servlet is always nothing.
+ */
 @WebServlet("/servlet/AjaxSignOut")
 public class AjaxSignOut extends HttpServlet {
 

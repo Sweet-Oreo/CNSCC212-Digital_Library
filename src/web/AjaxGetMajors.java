@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-// This servlet is used for getting available majors by AJAX from the database
-// It response HTML code as: <option>major0</option><option>major1</option>
+/**
+ * This servlet is used for getting available majors by AJAX from the database
+ * It response HTML code as: <option>major0</option><option>major1</option>
+ */
 @WebServlet("/servlet/AjaxGetMajors")
 public class AjaxGetMajors extends HttpServlet {
 

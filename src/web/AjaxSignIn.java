@@ -3,9 +3,11 @@ package web;
 import domain.Reader;
 import domain.Reviewer;
 import domain.University;
-import service.impl.*;
+import service.impl.ReaderServiceImpl;
+import service.impl.ReviewerServiceImpl;
+import service.impl.UniversityServiceImpl;
+import service.impl.UserLogServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +17,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 
-// This servlet is used for user sign in
-// It configures session and returns "succeed" when the email and password are correct
-// Otherwise, it responses "passwordError" or "error" when the sign in information is invalid
+/**
+ * This servlet is used for user sign in.
+ * It configures session and returns "succeed" when the email and password are correct.
+ * Otherwise, it responses "passwordError" or "error" when the sign in information is invalid
+ */
 @WebServlet("/servlet/AjaxSignIn")
 public class AjaxSignIn extends HttpServlet {
 

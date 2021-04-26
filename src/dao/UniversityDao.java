@@ -25,7 +25,7 @@ public interface UniversityDao {
     /**
      * Query university by given email and password.
      *
-     * @param email Email of university being searched.
+     * @param email    Email of university being searched.
      * @param password Password of university being searched.
      * @return Return university object if corresponding university is found.
      */

@@ -3,16 +3,16 @@ package util;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 import javax.sql.DataSource;
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
+// TODO: Javadoc
+
 /**
  * JDBC Tool class uses druid connection pool.
  */
-
 public class JDBCUtils {
 
     private static DataSource ds;
@@ -35,5 +35,5 @@ public class JDBCUtils {
     public static Connection getConnection() throws SQLException {
         return ds.getConnection();
     }
-    
+
 }

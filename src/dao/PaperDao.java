@@ -19,15 +19,27 @@ public interface PaperDao {
     /**
      * Query papers in particular page on the website.
      *
-     * @param start Starting point of query in the database.
-     * @param rows Number of papers in each page.
+     * @param start     Starting point of query in the database.
+     * @param rows      Number of papers in each page.
      * @param condition Search condition in the search box.
      * @return List of papers being found.
      */
     List<Paper> findByPage(int start, int rows, String condition);
 
+    /**
+     * Check if the major is available.
+     *
+     * @param major The major of the paper to be checked.
+     * @return True if the major is available.
+     */
     boolean checkPaperMajor(String major);
 
+    /**
+     * Insert paper information and automatically set reviewers to the database.
+     *
+     * @param paper Paper to be added into the database.
+     * @return 1 if no proper reviewers found, else 0.
+     */
     int addPaper(Paper paper);
 
     /**
@@ -50,7 +62,6 @@ public interface PaperDao {
      *
      * @return Id of the last paper in database.
      */
-
     int findLastId();
 
     /**
@@ -64,11 +75,11 @@ public interface PaperDao {
     /**
      * Provide operations for reviewing paper.
      *
-     * @param comment Comment written by reviewer for the paper.
-     * @param isAccept Whether paper is accepted by reviewer.
-     * @param paperId Id of paper being reviewed.
+     * @param comment       Comment written by reviewer for the paper.
+     * @param isAccept      Whether paper is accepted by reviewer.
+     * @param paperId       Id of paper being reviewed.
      * @param reviewerEmail Email of reviewer who reviews the paper.
-     * @param realPath Path of directory that stores QR code and PDF files.
+     * @param realPath      Path of directory that stores QR code and PDF files.
      */
     void reviewPaper(String comment, int isAccept, int paperId, String reviewerEmail, String realPath);
 }

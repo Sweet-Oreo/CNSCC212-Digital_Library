@@ -18,11 +18,25 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 
+/**
+ * QR code generator and PDF tool class.
+ */
 public class QRUtils {
 
     private static final String CHARSET = "utf-8", FORMAT = "png";
     private static final int WIDTH = 128, HEIGHT = 128, MARGIN = 0, FONTSIZE = 12;
 
+    /**
+     * Generate a QR code which contains information of the paper,
+     * then add a new page with the QR code and texts there,
+     * modify PDF attributes according to the paper information finally.
+     *
+     * @param paper The paper object.
+     * @param pdf   The PDF file object to be modified. (Must exist)
+     * @param img   The image file object to be generated. (Don't need to exist)
+     * @throws WriterException If error occurred when generating QR code.
+     * @throws IOException     If the file not found.
+     */
     public static void AddInfoToPDF(Paper paper, File pdf, File img) throws WriterException, IOException {
 
         // Assemble the content that the QR code will store
