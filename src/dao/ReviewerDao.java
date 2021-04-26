@@ -38,7 +38,4 @@ public interface ReviewerDao {
      * @return Return reviewer object if corresponding reviewed is found.
      */
     Reviewer findReviewerByEmailAndPassword(String email, String password);
-
-    // TODO: Javadoc
-    boolean evaluatePaper(String email, String paperId, String comment, int isAccept);
 }

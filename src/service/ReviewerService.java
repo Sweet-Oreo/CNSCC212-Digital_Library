@@ -37,7 +37,4 @@ public interface ReviewerService {
      * @return Return a reviewer object if login successfully, otherwise return null.
      */
     Reviewer login(Reviewer reviewer);
-
-    // TODO: Javadoc
-    boolean evaluatePaper(String email, String paperId, String comment, int isAccept);
 }
