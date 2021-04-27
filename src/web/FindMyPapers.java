@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This servlet is for finding and displaying papers for login university.
+ */
 @WebServlet("/servlet/findMyPapersServlet")
 public class FindMyPapers extends HttpServlet {
 

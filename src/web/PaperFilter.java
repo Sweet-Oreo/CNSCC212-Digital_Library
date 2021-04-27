@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This servlet is for filtering requests and if the user is trying to access papers without login,
+ * the user will be redirected.
+ */
 @WebFilter(filterName = "PaperFilter", urlPatterns = {"/papers/*"})
 public class PaperFilter implements Filter {
 

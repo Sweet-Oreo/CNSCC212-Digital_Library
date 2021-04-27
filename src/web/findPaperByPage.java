@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This servlet is for finding and displaying papers in each page on the website.
+ */
 @WebServlet("/servlet/findPaperByPageServlet")
 public class findPaperByPage extends HttpServlet {
 

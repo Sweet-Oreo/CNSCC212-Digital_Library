@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This servlet is for handling evaluation and review of paper by login reviewer.
+ */
 @WebServlet("/servlet/peerReviewServlet")
 public class PeerReview extends HttpServlet {
 

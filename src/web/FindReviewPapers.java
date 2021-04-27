@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This servlet if for finding and displaying papers waiting to be reviewed for login reviewer.
+ */
 @WebServlet("/servlet/findReviewServlet")
 public class FindReviewPapers extends HttpServlet {
 

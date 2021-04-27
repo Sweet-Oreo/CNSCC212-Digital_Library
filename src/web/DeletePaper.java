@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.HttpCookie;
 
+/**
+ * This servlet is for deleting papers by university.
+ */
 @WebServlet("/servlet/deletePaperServlet")
 public class DeletePaper extends HttpServlet {
 

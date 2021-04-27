@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * This servlet is for downloading papers.
+ */
 @WebServlet("/servlet/downloadServlet")
 public class Download extends HttpServlet {
 

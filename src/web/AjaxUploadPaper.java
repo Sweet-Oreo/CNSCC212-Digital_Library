@@ -20,6 +20,9 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * This servlet is for uploading paper by university.
+ */
 @WebServlet("/servlet/AjaxUploadPaperServlet")
 public class AjaxUploadPaper extends HttpServlet {
 

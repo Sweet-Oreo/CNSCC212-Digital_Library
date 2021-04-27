@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * This filter is for filtering requests and if user is trying to access webpages without login,
+ * user will be redirected.
+ */
 @WebFilter(filterName = "LoginFilter", urlPatterns = {"/library/index.jsp", "/library/manage.jsp", "/library/upload.jsp", "/library/review.jsp"})
 public class LoginFilter implements Filter {
 
