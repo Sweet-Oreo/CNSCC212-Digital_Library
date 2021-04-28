@@ -39,7 +39,7 @@ public class JDBCUtils {
      * Get connection to database.
      *
      * @return Connection to database.
-     * @throws SQLException
+     * @throws SQLException Get Connection failed.
      */
     public static Connection getConnection() throws SQLException {
         return ds.getConnection();
