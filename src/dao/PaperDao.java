@@ -1,7 +1,6 @@
 package dao;
 
 import domain.Paper;
-
 import java.util.List;
 
 /**

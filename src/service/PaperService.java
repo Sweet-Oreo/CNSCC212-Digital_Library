@@ -2,7 +2,6 @@ package service;
 
 import domain.PageBean;
 import domain.Paper;
-
 import java.util.List;
 
 /**

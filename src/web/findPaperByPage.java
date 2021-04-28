@@ -4,7 +4,6 @@ import domain.PageBean;
 import domain.Paper;
 import service.PaperService;
 import service.impl.PaperServiceImpl;
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -2,7 +2,6 @@ package web;
 
 import service.PaperService;
 import service.impl.PaperServiceImpl;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
