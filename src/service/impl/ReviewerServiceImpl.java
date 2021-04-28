@@ -29,9 +29,4 @@ public class ReviewerServiceImpl implements ReviewerService {
         return dao.addReviewer(reviewer);
     }
 
-    @Override
-    public boolean evaluatePaper(String email, String paperId, String comment, int isAccept) {
-        return dao.evaluatePaper(email, paperId, comment, isAccept);
-    }
-
 }
