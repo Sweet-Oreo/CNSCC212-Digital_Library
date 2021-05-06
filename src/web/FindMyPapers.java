@@ -23,8 +23,10 @@ public class FindMyPapers extends HttpServlet {
         PaperService paperService = new PaperServiceImpl();
         List<Paper> myPapers = paperService.findMyPapers(req.getSession().getAttribute("email"));
         // Store papers in session and redirect
+        System.out.println(req.getContextPath()+"sss");
         req.getSession().setAttribute("myPapers", myPapers);
         resp.sendRedirect(req.getContextPath() + "/library/manage.jsp");
+
     }
 
     @Override
