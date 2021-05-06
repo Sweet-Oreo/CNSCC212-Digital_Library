@@ -104,7 +104,7 @@ function handleSubmit() {
         }
     } else { // When the acton is sign up
         // Check that the email, name, password (and major if sign up as reviewer) are non-empty
-        if (checkEmail(email) && checkName(name) && checkpassword(password) && checkMajor(identity, major)) {
+        if (checkEmail(email) && checkName(name) && checkPassword(password) && checkMajor(identity, major)) {
             // Try to sign up
             signUp(identity, email, name, password, major)
         }
